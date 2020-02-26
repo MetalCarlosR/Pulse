@@ -25,8 +25,7 @@ public class PulseMal : MonoBehaviour
             {
                 Debug.LogError("Warning no PostProcessLayer found in " + cam);
                 post = null;
-            }
-           
+            }  
         }
         else
         {
