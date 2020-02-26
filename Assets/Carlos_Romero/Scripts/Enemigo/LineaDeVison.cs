@@ -12,17 +12,24 @@ public class LineaDeVison : MonoBehaviour
     public LayerMask jugador;
     public LayerMask obstaculo;
 
+    public Transform targetPos;
+
+    public bool detected;
+
+    public float resolucion;
+
     private void Start()
     {
+        detected = false;
         StartCoroutine(CheckTimeFix(0.1f));
     }
 
 
-    public Vector3 ApuntarAngulo(float angulo)
-    {
-        angulo += transform.eulerAngles.z;
-        return new Vector3(Mathf.Sin(angulo * Mathf.Deg2Rad), Mathf.Cos(angulo * Mathf.Deg2Rad), 0);
-    }
+    //public Vector3 ApuntarAngulo(float angulo)
+    //{
+    //    angulo += transform.eulerAngles.z;
+    //    return new Vector3(Mathf.Sin(angulo * Mathf.Deg2Rad), Mathf.Cos(angulo * Mathf.Deg2Rad), 0);
+    //}
 
     IEnumerator CheckTimeFix(float timeFix)
     {
@@ -33,6 +40,12 @@ public class LineaDeVison : MonoBehaviour
         }
     }
 
+
+    void DibujarLineaDeVision()
+    {
+        int steps = Mathf.RoundToInt(anguloVision * resolucion);
+        float anguloStep = anguloVision / steps;
+    }
     void CheckLineaDeVison()
     {
         Collider2D target = Physics2D.OverlapCircle(transform.position, radioVision,jugador);
@@ -40,13 +53,22 @@ public class LineaDeVison : MonoBehaviour
         
         if (target != null)
         {
-            Transform targetPos = target.transform;
+            targetPos = target.transform;
             Vector3 dir = (targetPos.position - transform.position).normalized;
 
-            if(Vector3.Angle(transform.up , dir)  < anguloVision / 2){
+            if(Vector3.Angle(transform.up , dir)  < anguloVision / 2 ){
+                detected = true;
                 transform.up = dir;
             }
+            else
+            {
+                detected = false;
+            }
 
+        }
+        else
+        {
+            detected = false;
         }
        
     }
