@@ -14,7 +14,7 @@ public class PulseMal : MonoBehaviour
 
     void Start()
     {
-        if (GetComponent<PlayerControllerMal>())
+        if (GetComponent<PlayerControllerMal>() && cam != null)
         {
             player = GetComponent<PlayerControllerMal>();
             speed = player.speed;
@@ -30,7 +30,7 @@ public class PulseMal : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Warning non PlayerController found on " + this);
+            Debug.LogError("Warning non PlayerController or Camera found on " + this);
             GetComponent<PulseMal>().enabled = false;
         }
     }
