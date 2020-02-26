@@ -20,6 +20,7 @@ public class LineaDeVison : MonoBehaviour
 
     public Vector3 ApuntarAngulo(float angulo)
     {
+        angulo += transform.eulerAngles.z;
         return new Vector3(Mathf.Sin(angulo * Mathf.Deg2Rad), Mathf.Cos(angulo * Mathf.Deg2Rad), 0);
     }
 

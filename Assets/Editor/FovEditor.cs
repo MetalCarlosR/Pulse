@@ -16,7 +16,7 @@ public class FovEditor : Editor
         Vector3 AnguloIz = FOV.ApuntarAngulo(-FOV.anguloVision / 2);
 
         Handles.color = Color.red;
-        Handles.DrawLine(FOV.transform.position, FOV.transform.position + AnguloDer * FOV.radioVision);
-        Handles.DrawLine(FOV.transform.position, FOV.transform.position + AnguloIz * FOV.radioVision);
+        Handles.DrawLine(FOV.transform.position, (FOV.transform.position + AnguloDer) * FOV.radioVision);
+        Handles.DrawLine(FOV.transform.position, (FOV.transform.position + AnguloIz) * FOV.radioVision);
     }
 }
