@@ -189,25 +189,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3965165858023814638, guid: 92210dc51b465ca4f813d301c99a842b,
         type: 3}
-      propertyPath: radioVision
-      value: 4
+      propertyPath: meshFilter
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3965165858023814638, guid: 92210dc51b465ca4f813d301c99a842b,
         type: 3}
       propertyPath: anguloVision
-      value: 67
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 3965165858023814638, guid: 92210dc51b465ca4f813d301c99a842b,
         type: 3}
-      propertyPath: jugador.m_Bits
-      value: 1024
+      propertyPath: resolution
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3965165858023814638, guid: 92210dc51b465ca4f813d301c99a842b,
+    - target: {fileID: 4007368013787823866, guid: 92210dc51b465ca4f813d301c99a842b,
         type: 3}
-      propertyPath: obstaculo.m_Bits
-      value: 512
+      propertyPath: m_Name
+      value: ViewCone
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3965165858023814638, guid: 92210dc51b465ca4f813d301c99a842b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 92210dc51b465ca4f813d301c99a842b, type: 3}
 --- !u!1 &1375288133
 GameObject:
