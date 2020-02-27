@@ -19,7 +19,7 @@ public class Bala : MonoBehaviour
             Destroy(this.gameObject);
         }
         if (bounces == 0)   Destroy(this.gameObject);
-
+    
         bounces--;
     }
 }
