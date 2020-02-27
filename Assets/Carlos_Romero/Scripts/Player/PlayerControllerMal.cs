@@ -18,9 +18,8 @@ public class PlayerControllerMal : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        FOV = Instantiate(FOV, Vector3.zero, Quaternion.identity);
-        FOV.name = "FieldOfView" + this.name;
-        fov = FOV.GetComponent<FieldOfView>();
+        fov = Instantiate(FOV, Vector3.zero, Quaternion.identity).GetComponent<FieldOfView>();
+        fov.name = "FieldOfView" + this.name;
         fov.SetFov(fovSet);
         fov.SetLimit(limit);
            

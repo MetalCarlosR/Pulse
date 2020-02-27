@@ -330,6 +330,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5668069761844117316, guid: 106736dc44b77614a912095aed9cf61f,
+        type: 3}
+      propertyPath: fovSet
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668069761844117316, guid: 106736dc44b77614a912095aed9cf61f,
+        type: 3}
+      propertyPath: limit
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5668069761844117323, guid: 106736dc44b77614a912095aed9cf61f,
         type: 3}
       propertyPath: cam

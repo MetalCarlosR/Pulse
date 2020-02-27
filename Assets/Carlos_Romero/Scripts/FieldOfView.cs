@@ -6,17 +6,9 @@ public class FieldOfView : MonoBehaviour
 {
     private Mesh mesh;
 
-    private float angleIncrease, startAngle = 0;
+    private float angleIncrease, startAngle = 0, fov = 90f, viewDistance = 10f;
 
-    [SerializeField]
-    [Range(0f, 360f)]
-    private float fov = 90f;
-    [SerializeField]
-    [Range(0f, 20f)]
-    private float viewDistance = 10f;
-    [SerializeField]
-    [Range(2, 100)]
-    private int rayCount = 70 ;
+    private int rayCount = 100 ;
 
     private Vector3 origin_ = Vector3.zero;
 
@@ -77,6 +69,7 @@ public class FieldOfView : MonoBehaviour
         mesh.vertices = vertices;
         //mesh.uv = uv;
         mesh.triangles = triangles;
+        mesh.bounds = new Bounds(origin_ , Vector3.one * 1000f);
     }
 
     private Vector3 Vec3FromAngle(float angle)

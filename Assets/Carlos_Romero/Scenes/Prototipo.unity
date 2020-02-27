@@ -190,7 +190,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 887381793}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.35, y: 2.18, z: -11.6875}
+  m_LocalPosition: {x: 0.34999996, y: 2.18, z: -11.6875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1186932447}
@@ -468,16 +468,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5668069761844117323, guid: 106736dc44b77614a912095aed9cf61f,
-        type: 3}
-      propertyPath: cam
-      value: 
-      objectReference: {fileID: 519420031}
     - target: {fileID: 5668069761844117316, guid: 106736dc44b77614a912095aed9cf61f,
         type: 3}
       propertyPath: fovSet
       value: 360
       objectReference: {fileID: 0}
+    - target: {fileID: 5668069761844117323, guid: 106736dc44b77614a912095aed9cf61f,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 519420031}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 106736dc44b77614a912095aed9cf61f, type: 3}
 --- !u!1001 &1576395805
@@ -491,11 +491,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemigo
-      objectReference: {fileID: 0}
-    - target: {fileID: 3270135627175731410, guid: 92210dc51b465ca4f813d301c99a842b,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3270135627175731373, guid: 92210dc51b465ca4f813d301c99a842b,
         type: 3}
