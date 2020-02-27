@@ -6,8 +6,16 @@ public class FieldOfView : MonoBehaviour
 {
     private Mesh mesh;
 
-    private float fov = 90f, viewDistance = 5f, angleIncrease, startAngle = 0;
+    private float angleIncrease, startAngle = 0;
 
+    [SerializeField]
+    [Range(0f, 360f)]
+    private float fov = 90f;
+    [SerializeField]
+    [Range(0f, 20f)]
+    private float viewDistance = 10f;
+    [SerializeField]
+    [Range(2, 100)]
     private int rayCount = 70 ;
 
     private Vector3 origin_ = Vector3.zero;
@@ -25,7 +33,7 @@ public class FieldOfView : MonoBehaviour
         GetComponent<MeshFilter>().mesh = mesh;
         angleIncrease = fov / rayCount;
         vertices = new Vector3[rayCount + 2];
-       // uv = new Vector2[vertices.Length];
+        // uv = new Vector2[vertices.Length];
         triangles = new int[rayCount * 3];
     }
 
@@ -34,6 +42,8 @@ public class FieldOfView : MonoBehaviour
         float angle = startAngle;
         int verIndex = 1;
         int triaIndex = 0;
+
+        
 
         vertices[0] = origin_;
 

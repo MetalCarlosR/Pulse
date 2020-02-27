@@ -12,13 +12,14 @@ public class PlayerControllerMal : MonoBehaviour
     private GameObject FOV;
     private FieldOfView fov;
     [SerializeField]
-    private float fovSet, limit;
+    private float fovSet = 0, limit = 0;
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         FOV = Instantiate(FOV, Vector3.zero, Quaternion.identity);
+        FOV.name = "FieldOfView" + this.name;
         fov = FOV.GetComponent<FieldOfView>();
         fov.SetFov(fovSet);
         fov.SetLimit(limit);
