@@ -39,7 +39,7 @@ public class FieldOfView : MonoBehaviour
 
         for (int i = 0; i <= rayCount; i++)
         {
-            Vector3 ver = origin_ + Vec3FromAngle(angle) * viewDistance;
+            Vector3 ver;
             RaycastHit2D hit = Physics2D.Raycast(origin_, Vec3FromAngle(angle), viewDistance , mask);
 
             if (hit.collider == null)
