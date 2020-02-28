@@ -20,7 +20,7 @@ public class Bala2 : MonoBehaviour
         }
         else if (collision.gameObject.tag.Equals("Player"))
         {
-            GameManager.Die();
+            GameObject.Find("GameManager").GetComponent<GameManager>().Die();
             Destroy(this.gameObject);
         }
         if (bounces == 0)   Destroy(this.gameObject);

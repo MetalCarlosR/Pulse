@@ -6,6 +6,7 @@ public class PlayerControllerMal2 : MonoBehaviour
 {
     Rigidbody2D rb;
     Vector2 MouseDir;
+    private bool dead = false;
 
     public int speed;
     [SerializeField]
@@ -28,7 +29,10 @@ public class PlayerControllerMal2 : MonoBehaviour
     void Update()
     {
         Debug.DrawRay(transform.position, transform.up * 2, Color.red);
-        LookAtMouse();
+        if (!dead)
+        {
+            LookAtMouse();
+        }
         if (fov != null) {
             if (fovSet != 360)
             {
@@ -52,10 +56,11 @@ public class PlayerControllerMal2 : MonoBehaviour
 
     public void Die()
     {
-        Debug.Log("got here");
-        Time.timeScale = 0;
+        this.gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
         Destroy(fov);
-        Destroy(this.gameObject);
+        dead = true;
+        
+        //this.gameObject.SetActive(false);
     }
 
 }
