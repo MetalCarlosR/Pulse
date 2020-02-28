@@ -5,9 +5,9 @@ using UnityEngine;
 public class Pistola : MonoBehaviour
 {
     [SerializeField]
-    private Transform pistola;
+    private Transform pistola = null;
     [SerializeField]
-    private GameObject bala;
+    private GameObject bala = null;
 
     // Update is called once per frame
     void Update()

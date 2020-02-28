@@ -117,10 +117,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3270135627175731410}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 872ec8dbacc537a40ae122cb7723c9e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 604a4c3cf39898d479b697e0887eca0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fov: {fileID: 8273156320054472941, guid: 2df8b0edaf8fcb04fae0d83a74da2972, type: 3}
   fovSet: 90
-  limit: 3
+  limit: 5
   fovMat: {fileID: 2100000, guid: a238df406ca91ee43852676be7494d92, type: 2}

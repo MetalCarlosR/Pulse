@@ -5,11 +5,11 @@ using UnityEngine;
 public class Enemigo : MonoBehaviour
 {
     [SerializeField]
-    private FieldOfView fov;
+    private FieldOfView fov  = null;
     [SerializeField]
-    private float fovSet, limit;
+    private float fovSet = 90f, limit = 5f;
     [SerializeField]
-    private Material fovMat;
+    private Material fovMat = null;
 
     void Start()
     {
