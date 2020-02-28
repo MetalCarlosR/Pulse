@@ -1,4 +1,3 @@
-﻿
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,10 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField]
     private GameObject player_;
 
     [SerializeField]
-    private GameObject gameOverMenu_;
+    public UIManager UIManager_
+    {
+        private get { return UIManager_; }
+        set { UIManager_ = value; }
+    }
 
     public static GameManager gmInstance_ { get; private set; }
 
@@ -30,7 +34,14 @@ public class GameManager : MonoBehaviour
     public void PlayerDeath()
     {
         Time.timeScale = 0;
-        gameOverMenu_.SetActive(true);
+        if (UIManager_ != null)
+        {
+            UIManager_.RespawnMenu();
+        }
+        else
+        {
+            Debug.LogError("No UIManager_ set on the GameManager");
+        }
     }
 
     public void ReloadScene()
@@ -53,4 +64,5 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("No PlayerController Found on " + this);
         }
     }
+
 }
