@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControllerMal : MonoBehaviour
+public class PlayerControllerMal2 : MonoBehaviour
 {
     Rigidbody2D rb;
     Vector2 MouseDir;
@@ -49,4 +49,13 @@ public class PlayerControllerMal : MonoBehaviour
         transform.up = MouseDir;
         
     }
+
+    public void Die()
+    {
+        Debug.Log("got here");
+        Time.timeScale = 0;
+        Destroy(fov);
+        Destroy(this.gameObject);
+    }
+
 }

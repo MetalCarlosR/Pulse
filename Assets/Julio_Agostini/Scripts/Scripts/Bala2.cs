@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bala : MonoBehaviour
+public class Bala2 : MonoBehaviour
 {
     public int bounces = 1;
 
@@ -16,6 +16,11 @@ public class Bala : MonoBehaviour
         if (collision.gameObject.tag == "Enemy" )
         {
             Destroy(collision.gameObject);
+            Destroy(this.gameObject);
+        }
+        else if (collision.gameObject.tag.Equals("Player"))
+        {
+            GameManager.Die();
             Destroy(this.gameObject);
         }
         if (bounces == 0)   Destroy(this.gameObject);
