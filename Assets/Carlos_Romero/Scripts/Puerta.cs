@@ -10,13 +10,12 @@ public class Puerta : MonoBehaviour
 
     private void Start()
     {
-        rot = transform.rotation.z;
         open = false;
         jugador = false;
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && jugador)
+        if (Input.GetKeyDown(KeyCode.E) && jugador && !open)
         {
             MovPuerta();
         }
@@ -34,7 +33,7 @@ public class Puerta : MonoBehaviour
     void MovPuerta()
     {
         StopAllCoroutines();
-        if (!open) StartCoroutine(CameraChange(transform.rotation.z, transform.rotation.z + 90, (((rot + 90) - transform.rotation.z) / 90)));
+        if (!open) StartCoroutine(CameraChange(transform.rotation.z, transform.rotation.z + 90, 1f));
     }
 
     IEnumerator CameraChange(float begin, float end, float duration)

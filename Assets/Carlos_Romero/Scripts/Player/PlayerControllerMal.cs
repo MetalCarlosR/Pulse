@@ -8,8 +8,9 @@ public class PlayerControllerMal : MonoBehaviour
     Vector2 MouseDir;
 
     public int speed;
+
+    //private GameObject FOV;
     [SerializeField]
-    private GameObject FOV;
     private FieldOfView fov;
     [SerializeField]
     private float fovSet = 0, limit = 0;
@@ -18,11 +19,9 @@ public class PlayerControllerMal : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        fov = Instantiate(FOV, Vector3.zero, Quaternion.identity).GetComponent<FieldOfView>();
+        fov = Instantiate(fov.gameObject, Vector3.zero, Quaternion.identity).GetComponent<FieldOfView>();
         fov.name = "FieldOfView" + this.name;
-        fov.SetFov(fovSet);
-        fov.SetLimit(limit);
-           
+        fov.SetInstance(limit, fovSet, false);         
     }
 
     void Update()

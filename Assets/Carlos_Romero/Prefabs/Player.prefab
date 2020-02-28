@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  FOV: {fileID: 8273156320054472937, guid: 2df8b0edaf8fcb04fae0d83a74da2972, type: 3}
+  fov: {fileID: 8273156320054472941, guid: 2df8b0edaf8fcb04fae0d83a74da2972, type: 3}
   fovSet: 360
   limit: 20
 --- !u!114 &5668069761844117323
