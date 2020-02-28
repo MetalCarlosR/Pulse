@@ -11,7 +11,7 @@ public class PlayerControllerMal2 : MonoBehaviour
     public int speed;
     [SerializeField]
     private GameObject FOV;
-    private FieldOfView fov;
+    private FieldOfView2 fov;
     [SerializeField]
     private float fovSet = 0, limit = 0;
 
@@ -19,7 +19,7 @@ public class PlayerControllerMal2 : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        fov = Instantiate(FOV, Vector3.zero, Quaternion.identity).GetComponent<FieldOfView>();
+        fov = Instantiate(FOV, Vector3.zero, Quaternion.identity).GetComponent<FieldOfView2>();
         fov.name = "FieldOfView" + this.name;
         fov.SetFov(fovSet);
         fov.SetLimit(limit);

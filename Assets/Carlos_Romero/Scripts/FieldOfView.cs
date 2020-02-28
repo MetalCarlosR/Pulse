@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class FieldOfView : MonoBehaviour
 {
-    private bool enemigo = false;
-
     private Mesh mesh;
 
     private float angleIncrease, startAngle = 0, fov = 90f, viewDistance = 10f;
@@ -99,12 +97,11 @@ public class FieldOfView : MonoBehaviour
         startAngle = AngleFromVec3(aimDir) - fov / 2f;
     }
 
-    public void SetInstance(float limit , float fov , bool enemigo)
+    public void SetInstance(float limit , float fov)
     {
         this.fov = fov;
         angleIncrease = fov / rayCount;
         viewDistance = limit;
-        this.enemigo = enemigo;
     }
     public void setMaterial(Material mat)
     {

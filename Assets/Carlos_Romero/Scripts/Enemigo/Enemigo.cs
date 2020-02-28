@@ -13,9 +13,9 @@ public class Enemigo : MonoBehaviour
 
     void Start()
     {
-        fov = Instantiate(fov.gameObject, Vector3.zero, Quaternion.identity).GetComponent<FieldOfView>();
+        fov = Instantiate(fov.gameObject , null).GetComponent<FieldOfView>();
         fov.name = "FieldOfView" + this.name;
-        fov.SetInstance(limit, fovSet, false);
+        fov.SetInstance(limit, fovSet);
         fov.gameObject.layer = this.gameObject.layer;
         fov.setMaterial(fovMat);
     }
@@ -29,6 +29,14 @@ public class Enemigo : MonoBehaviour
                 fov.SetAngle(-transform.right);
             }
             fov.SetOrigin(transform.position);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (fov != null)
+        {
+            Destroy(fov.gameObject);
         }
     }
 }
