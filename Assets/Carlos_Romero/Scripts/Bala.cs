@@ -18,6 +18,11 @@ public class Bala : MonoBehaviour
             Destroy(collision.gameObject);
             Destroy(this.gameObject);
         }
+        else if (collision.gameObject.tag.Equals("Player"))
+        {
+            GameManager.Die();
+            Destroy(this.gameObject);
+        }
         if (bounces == 0)   Destroy(this.gameObject);
     
         bounces--;

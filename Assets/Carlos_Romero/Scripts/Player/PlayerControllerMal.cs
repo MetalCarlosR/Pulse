@@ -49,4 +49,12 @@ public class PlayerControllerMal : MonoBehaviour
         transform.up = MouseDir;
         
     }
+
+    public void Die()
+    {
+        Time.timeScale = 0;
+        Destroy(fov);
+        Destroy(this.gameObject);
+    }
+
 }

@@ -8,7 +8,10 @@ public class CameraControllerMal : MonoBehaviour
     Vector3 pos;
     void Update()
     {
-        pos.Set(player.position.x, player.position.y , -10);
-        transform.position = pos;
+        if (player != null)
+        {
+            pos.Set(player.position.x, player.position.y, -10);
+            transform.position = pos;
+        }
     }
 }
