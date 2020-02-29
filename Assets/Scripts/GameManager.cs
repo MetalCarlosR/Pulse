@@ -5,16 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
     private GameObject player_;
 
-    [SerializeField]
     public UIManager UIManager_
     {
         private get { return UIManager_; }
         set { UIManager_ = value; }
     }
 
+    private Camera camara;
     public static GameManager gmInstance_ { get; private set; }
 
     private void Awake()
@@ -23,6 +22,7 @@ public class GameManager : MonoBehaviour
         {
             gmInstance_ = this;
             DontDestroyOnLoad(this);
+            Debug.Log("GameManager Set");
         }
         else
         {
@@ -65,4 +65,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SetCamera(Camera cam)
+    {
+        camara = cam;
+    }
+
+    public Camera GetCamera()
+    {
+        return camara;
+    }
 }

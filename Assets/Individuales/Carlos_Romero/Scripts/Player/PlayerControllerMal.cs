@@ -14,11 +14,16 @@ public class PlayerControllerMal : MonoBehaviour
     private FieldOfView fov;
     [SerializeField]
     private float fovSet = 0, limit = 0;
-
-
     void Start()
     {
-        GameManager.gmInstance_.SetPlayer(gameObject);
+        if (GameManager.gmInstance_ != null)
+        {
+            GameManager.gmInstance_.SetPlayer(gameObject);
+        }
+        else
+        {
+            Debug.LogError("Warnign GameManager was null when trying to access it from " + this);
+        }
         rb = GetComponent<Rigidbody2D>();
         fov = Instantiate(fov.gameObject, null).GetComponent<FieldOfView>();
         fov.name = "FieldOfView" + name;

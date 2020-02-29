@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class CameraControllerMal : MonoBehaviour
 {
-    public Transform player;
+    [SerializeField]
+    private Transform player = null;
     Vector3 pos;
+
+
     void Update()
     {
         pos.Set(player.position.x, player.position.y , -10);

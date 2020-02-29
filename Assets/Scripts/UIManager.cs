@@ -5,7 +5,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject RespawnUI;
+    GameObject RespawnUI = null;
     private void Start()
     {
         GameManager.gmInstance_.UIManager_ = this;

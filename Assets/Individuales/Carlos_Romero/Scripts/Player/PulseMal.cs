@@ -10,7 +10,8 @@ public class PulseMal : MonoBehaviour
     private float ortSize;
     private PostProcessLayer post;
 
-    public Camera cam;
+    [SerializeField]
+    private Camera cam = null;
 
     void Start()
     {
