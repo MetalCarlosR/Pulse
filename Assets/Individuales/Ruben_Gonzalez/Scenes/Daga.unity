@@ -194,7 +194,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 236530717}
   m_LocalRotation: {x: -0, y: -0, z: 0.62815547, w: 0.7780879}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.1, y: -0.5, z: 0}
   m_LocalScale: {x: 7, y: 7, z: 1}
   m_Children:
   - {fileID: 353097307}
@@ -212,7 +212,6 @@ GameObject:
   - component: {fileID: 353097307}
   - component: {fileID: 353097309}
   - component: {fileID: 353097311}
-  - component: {fileID: 353097310}
   - component: {fileID: 353097308}
   m_Layer: 0
   m_Name: Daga
@@ -244,7 +243,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 353097306}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5914f0c743decba4698cd32b4e5683f7, type: 3}
+  m_Script: {fileID: 11500000, guid: d342ebca43785444cb43c939cb7c9b3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &353097309
@@ -296,18 +295,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &353097310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 353097306}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d342ebca43785444cb43c939cb7c9b3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &353097311
 BoxCollider2D:
   m_ObjectHideFlags: 0
