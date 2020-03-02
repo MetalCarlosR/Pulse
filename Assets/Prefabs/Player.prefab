@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 4679436963014573588}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.2}
-  m_LocalScale: {x: 60, y: 50, z: 0.2}
+  m_LocalScale: {x: 70, y: 70, z: 0.2}
   m_Children: []
   m_Father: {fileID: 5668069761844117322}
   m_RootOrder: 1
@@ -284,8 +284,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  lasers:
-  - {fileID: 2971181452301506994, guid: f1d635091723a1b4684ec1dd5e1b7731, type: 3}
   fov: {fileID: 8273156320054472941, guid: 2df8b0edaf8fcb04fae0d83a74da2972, type: 3}
   fovSet: 360
   limit: 10

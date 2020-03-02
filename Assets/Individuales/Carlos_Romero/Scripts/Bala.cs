@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bala : MonoBehaviour
 {
-    public int bounces = 1;
+    private int bounces = 1;
 
     void Start()
     {
@@ -26,5 +26,10 @@ public class Bala : MonoBehaviour
         if (bounces == 0)   Destroy(this.gameObject);
     
         bounces--;
+    }
+
+    void EnemyBullet()
+    {
+        bounces = 0;
     }
 }

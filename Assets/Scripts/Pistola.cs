@@ -9,12 +9,8 @@ public class Pistola : MonoBehaviour
     [SerializeField]
     private GameObject bala = null;
 
-    // Update is called once per frame
-    void Update()
+    public void Shoot(int bounces)
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Instantiate(bala, pistola.position , Quaternion.Euler(transform.localEulerAngles));
-        }
+        Instantiate(bala, pistola.position, Quaternion.Euler(transform.localEulerAngles)).GetComponent<Bullet>().SetBounce(bounces);
     }
 }

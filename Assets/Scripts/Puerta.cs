@@ -22,11 +22,11 @@ public class Puerta : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<PlayerControllerMal>()) jugador = true;
+        if (collision.GetComponent<PlayerController>()) jugador = true;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.GetComponent<PlayerControllerMal>()) jugador = false;
+        if (collision.GetComponent<PlayerController>()) jugador = false;
 
     }
 

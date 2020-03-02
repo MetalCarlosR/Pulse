@@ -8,7 +8,6 @@ public class PulseMal : MonoBehaviour
     private PlayerController player;
     private int speed;
     private float ortSize;
-    private PostProcessLayer post;
 
     [SerializeField]
     private Camera cam = null;
@@ -20,13 +19,6 @@ public class PulseMal : MonoBehaviour
             player = GetComponent<PlayerController>();
             speed = player.speed;
             ortSize = cam.orthographicSize;
-            if (cam.GetComponent<PostProcessLayer>())
-                post = cam.GetComponent<PostProcessLayer>();
-            else
-            {
-                Debug.LogError("Warning no PostProcessLayer found in " + cam);
-                post = null;
-            }  
         }
         else
         {
@@ -55,10 +47,6 @@ public class PulseMal : MonoBehaviour
     IEnumerator CameraChange(float begin, float end, float duration)
     {
         float time = 0;
-        if (post != null)
-        {
-            post.enabled = !post.enabled;
-        }
         while (time < duration) {
             cam.orthographicSize = Mathf.Lerp(begin, end, time/duration);
             time += Time.deltaTime;

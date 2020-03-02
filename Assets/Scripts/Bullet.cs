@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public int bounces = 1;
+    private int bounces_ = 1;
 
     void Start()
     {
@@ -21,10 +21,15 @@ public class Bullet : MonoBehaviour
         else if (collision.gameObject.tag == "Player")
         {
             Destroy(this.gameObject);
-            collision.gameObject.GetComponent<PlayerControllerMal2>().Die();
+            collision.gameObject.GetComponent<PlayerController>().Die();
         }
-        if (bounces == 0)   Destroy(this.gameObject);
+        if (bounces_ == 0)   Destroy(this.gameObject);
     
-        bounces--;
+        bounces_--;
+    }
+
+    public void SetBounce(int bounces)
+    {
+        bounces_ = bounces;
     }
 }

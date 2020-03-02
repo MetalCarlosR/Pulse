@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private FieldOfView fov;
     [SerializeField]
     private float fovSet = 0, limit = 0;
+
+    private Pistola gun;
     void Start()
     {
         if (GameManager.gmInstance_ != null)
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogError("Warnign GameManager was null when trying to access it from " + this);
         }
+        gun = GetComponent<Pistola>();
         rb = GetComponent<Rigidbody2D>();
         fov = Instantiate(fov.gameObject, null).GetComponent<FieldOfView>();
         fov.name = "FieldOfView" + name;
@@ -41,6 +44,10 @@ public class PlayerController : MonoBehaviour
                 fov.SetAngle(-transform.right);
             }
             fov.SetOrigin(transform.position);
+        }
+        if (Input.GetButtonDown("Fire1"))
+        {
+            gun.Shoot(1);
         }
     }
     void FixedUpdate()

@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     private UIManager UIManager_;
 
     private Camera camara;
-    public static GameManager gmInstance_ { get; private set; }
+    public static GameManager gmInstance_;
 
     
 
@@ -84,9 +84,6 @@ public class GameManager : MonoBehaviour
 
     public void SetUImanager(UIManager UImanager)
     {
-        if (UImanager != null)
-        {
-            UIManager_ = UImanager;
-        }
+        UIManager_ = UImanager;
     }
 }
