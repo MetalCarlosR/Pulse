@@ -9,14 +9,19 @@ public class Enemigo : MonoBehaviour
     [SerializeField]
     private float fovSet = 90f, limit = 5f;
     [SerializeField]
-    private Material fovMat = null;
+    private Material fovMatPat = null, fovMatAlerted = null, fovMatAtacking = null;
     [SerializeField]
     private string layer_ = "";
 
-
     private Transform player;
 
-    bool alertado;
+    public enum State
+    {
+        Patrolling,
+        Alerted,
+        Atacking
+    };
+    private State state_;
     void Start()
     {
         gameObject.layer = LayerMask.NameToLayer(layer_);
@@ -24,7 +29,7 @@ public class Enemigo : MonoBehaviour
         fov.name = "FieldOfView" + this.name;
         fov.SetInstance(limit, fovSet);
         fov.gameObject.layer = this.gameObject.layer;
-        fov.setMaterial(fovMat);
+        SetState(State.Patrolling);
         if (GameManager.gmInstance_ != null) player = GameManager.gmInstance_.GetPlayerTransform();
     }
 
@@ -47,22 +52,29 @@ public class Enemigo : MonoBehaviour
 
     void FindPlayer()
     {
-
         if (Vector3.Distance(transform.position, player.position) < limit)
         {
-            Debug.Log("1");
             Vector3 direction = (player.position - transform.position);
             if (Vector3.Angle(transform.up, direction) < fovSet / 2)
             {
-                Debug.Log("2");
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, limit);
                 Debug.DrawRay(transform.position, direction, Color.green);
                 if (hit.collider != null && hit.collider.tag == "Player")
                 {
-                    Debug.Log("3");
                     transform.up = direction;
+                    if (state_ != State.Atacking)
+                    {
+                        SetState(State.Atacking);
+                    }
+                }
+                else if (state_ == State.Atacking){
+                    SetState(State.Alerted);    
                 }
             }
+        }
+        else if (state_ != State.Patrolling)
+        {
+            SetState(State.Patrolling);
         }
     }
 
@@ -71,6 +83,29 @@ public class Enemigo : MonoBehaviour
         if (fov != null)
         {
             Destroy(fov.gameObject);
+        }
+    }
+
+    private void AttackPlayer()
+    {
+
+    }
+
+    public void SetState(State state)
+    {
+        state_ = state;
+        switch (state)
+        {
+            case State.Patrolling:
+                fov.setMaterial(fovMatPat);
+                break;
+            case State.Alerted:
+                fov.setMaterial(fovMatAlerted);
+                break;
+            case State.Atacking:
+                fov.setMaterial(fovMatAtacking);
+                break;
+
         }
     }
 }

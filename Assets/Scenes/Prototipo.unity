@@ -482,6 +482,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5668069761844117316, guid: 106736dc44b77614a912095aed9cf61f,
+        type: 3}
+      propertyPath: fovSet
+      value: 360
+      objectReference: {fileID: 0}
     - target: {fileID: 5668069761844117318, guid: 106736dc44b77614a912095aed9cf61f,
         type: 3}
       propertyPath: m_Name
@@ -490,12 +495,12 @@ PrefabInstance:
     - target: {fileID: 5668069761844117322, guid: 106736dc44b77614a912095aed9cf61f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.291696
+      value: -1.27
       objectReference: {fileID: 0}
     - target: {fileID: 5668069761844117322, guid: 106736dc44b77614a912095aed9cf61f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.3779347
+      value: 1.65
       objectReference: {fileID: 0}
     - target: {fileID: 5668069761844117322, guid: 106736dc44b77614a912095aed9cf61f,
         type: 3}
@@ -542,11 +547,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5668069761844117316, guid: 106736dc44b77614a912095aed9cf61f,
-        type: 3}
-      propertyPath: fovSet
-      value: 360
-      objectReference: {fileID: 0}
     - target: {fileID: 5668069761844117323, guid: 106736dc44b77614a912095aed9cf61f,
         type: 3}
       propertyPath: cam
@@ -561,11 +561,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3270135627175731410, guid: 92210dc51b465ca4f813d301c99a842b,
-        type: 3}
-      propertyPath: m_Name
-      value: Enemigo
-      objectReference: {fileID: 0}
     - target: {fileID: 3270135627175731373, guid: 92210dc51b465ca4f813d301c99a842b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -620,6 +615,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3270135627175731410, guid: 92210dc51b465ca4f813d301c99a842b,
+        type: 3}
+      propertyPath: m_Name
+      value: Enemigo
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92210dc51b465ca4f813d301c99a842b, type: 3}
@@ -737,11 +737,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2630508900883234970, guid: 64e5703a10bede04e89fff353f960306,
-        type: 3}
-      propertyPath: m_Name
-      value: ParedEstandar
-      objectReference: {fileID: 0}
     - target: {fileID: 2630508900883234969, guid: 64e5703a10bede04e89fff353f960306,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -797,6 +792,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2630508900883234970, guid: 64e5703a10bede04e89fff353f960306,
+        type: 3}
+      propertyPath: m_Name
+      value: ParedEstandar
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64e5703a10bede04e89fff353f960306, type: 3}
 --- !u!1001 &6395133698481203653
@@ -806,11 +806,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6395133698238684673, guid: 9855bc796fa271640b307e936b116c2a,
-        type: 3}
-      propertyPath: m_Name
-      value: Door
-      objectReference: {fileID: 0}
     - target: {fileID: 6395133698238684672, guid: 9855bc796fa271640b307e936b116c2a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -865,6 +860,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6395133698238684673, guid: 9855bc796fa271640b307e936b116c2a,
+        type: 3}
+      propertyPath: m_Name
+      value: Door
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9855bc796fa271640b307e936b116c2a, type: 3}
@@ -944,16 +944,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8794938783682854158, guid: 4f1544e1ad48ef3459782c21558bca5a,
-        type: 3}
-      propertyPath: m_Name
-      value: Main Camera
-      objectReference: {fileID: 0}
     - target: {fileID: 8794938783682854156, guid: 4f1544e1ad48ef3459782c21558bca5a,
         type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1299683174}
+    - target: {fileID: 8794938783682854158, guid: 4f1544e1ad48ef3459782c21558bca5a,
+        type: 3}
+      propertyPath: m_Name
+      value: Main Camera
+      objectReference: {fileID: 0}
     - target: {fileID: 8794938783682854386, guid: 4f1544e1ad48ef3459782c21558bca5a,
         type: 3}
       propertyPath: m_LocalPosition.x
