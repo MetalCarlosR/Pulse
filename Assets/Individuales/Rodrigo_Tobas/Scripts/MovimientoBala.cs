@@ -10,7 +10,7 @@ public class MovimientoBala : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(Vector3.up * velocidadBala, ForceMode2D.Impulse);
+        rb.AddForce(transform.right * velocidadBala, ForceMode2D.Impulse);
            
         
     }

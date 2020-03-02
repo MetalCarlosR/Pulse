@@ -122,9 +122,9 @@ GameObject:
   - component: {fileID: 5668069761844117317}
   - component: {fileID: 5668069761844117319}
   - component: {fileID: 5668069761844117321}
-  - component: {fileID: 5668069761844117316}
   - component: {fileID: 5668069761844117323}
   - component: {fileID: 5668069761844117320}
+  - component: {fileID: -5082880099442870239}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -244,22 +244,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.14220393, y: 0.14375138}
   m_EdgeRadius: 0
---- !u!114 &5668069761844117316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5668069761844117318}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6ea812d424227a41818698cea3dd9ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
-  fov: {fileID: 8273156320054472941, guid: 2df8b0edaf8fcb04fae0d83a74da2972, type: 3}
-  fovSet: 90
-  limit: 10
 --- !u!114 &5668069761844117323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,3 +271,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pistola: {fileID: 5668069761414816662}
   bala: {fileID: 7708167321584544558, guid: f45352a6162a4ee4a91c4f1bb5c0f96b, type: 3}
+--- !u!114 &-5082880099442870239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5668069761844117318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c9bc38909660e44e8fbc2b9ebbf97cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  lasers:
+  - {fileID: 2971181452301506994, guid: f1d635091723a1b4684ec1dd5e1b7731, type: 3}
+  fov: {fileID: 8273156320054472941, guid: 2df8b0edaf8fcb04fae0d83a74da2972, type: 3}
+  fovSet: 360
+  limit: 10

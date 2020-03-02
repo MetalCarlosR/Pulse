@@ -8,7 +8,15 @@ public class UIManager : MonoBehaviour
     GameObject RespawnUI = null;
     private void Start()
     {
-        GameManager.gmInstance_.SetUImanager(this);
+
+        if (GameManager.gmInstance_ != null)
+        {
+            GameManager.gmInstance_.SetUImanager(this);
+        }
+        else
+        {
+            Debug.LogError("Warnign GameManager was null when trying to access it from " + this);
+        }
         if (RespawnUI != null)
         {
             RespawnUI.SetActive(false);
@@ -17,7 +25,7 @@ public class UIManager : MonoBehaviour
         {
             Debug.LogWarning("Warning RespawnUI is not set on " + this);
         }
-        
+
     }
     public void RespawnMenu()
     {
@@ -29,6 +37,6 @@ public class UIManager : MonoBehaviour
         {
             Debug.LogError("Warning RespawnUI is not set on " + this + "and can't be shown");
         }
-        
+
     }
 }

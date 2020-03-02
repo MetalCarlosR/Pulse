@@ -7,10 +7,12 @@ public class GameManager : MonoBehaviour
 {
     private GameObject player_;
 
-    public UIManager UIManager_;
+    private UIManager UIManager_;
 
     private Camera camara;
     public static GameManager gmInstance_ { get; private set; }
+
+    
 
     private void Awake()
     {
@@ -43,15 +45,24 @@ public class GameManager : MonoBehaviour
     public void ReloadScene()
     {
         Time.timeScale = 1;
+        Debug.Log(SceneManager.GetActiveScene().name);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
     }
 
     public Transform GetPlayerTransform()
     {
-        return player_.transform;
+        if (player_ != null ){
+            return player_.transform;
+        }
+        else
+        {
+            return null;
+        }
+        
     }
     public void SetPlayer(GameObject player) {
-        if (player.GetComponent<PlayerControllerMal>())
+        if (player.GetComponent<PlayerController>())
         {
             player_ = player;
         }

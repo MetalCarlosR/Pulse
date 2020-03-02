@@ -132,6 +132,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2971181452301506994, guid: f1d635091723a1b4684ec1dd5e1b7731,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2971181452301506996, guid: f1d635091723a1b4684ec1dd5e1b7731,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -537,6 +542,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5668069761844117316, guid: 106736dc44b77614a912095aed9cf61f,
+        type: 3}
+      propertyPath: fovSet
+      value: 360
+      objectReference: {fileID: 0}
     - target: {fileID: 5668069761844117323, guid: 106736dc44b77614a912095aed9cf61f,
         type: 3}
       propertyPath: cam
@@ -939,10 +949,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
-    - target: {fileID: 338395139, guid: 4f1544e1ad48ef3459782c21558bca5a, type: 3}
-      propertyPath: m_Color.a
-      value: 0.39215687
-      objectReference: {fileID: 0}
     - target: {fileID: 8794938783682854156, guid: 4f1544e1ad48ef3459782c21558bca5a,
         type: 3}
       propertyPath: player
@@ -1002,6 +1008,10 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 338395139, guid: 4f1544e1ad48ef3459782c21558bca5a, type: 3}
+      propertyPath: m_Color.a
+      value: 0.39215687
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f1544e1ad48ef3459782c21558bca5a, type: 3}

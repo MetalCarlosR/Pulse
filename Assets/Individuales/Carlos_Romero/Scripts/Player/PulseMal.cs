@@ -5,7 +5,7 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class PulseMal : MonoBehaviour
 {
-    private PlayerControllerMal player;
+    private PlayerController player;
     private int speed;
     private float ortSize;
     private PostProcessLayer post;
@@ -15,9 +15,9 @@ public class PulseMal : MonoBehaviour
 
     void Start()
     {
-        if (GetComponent<PlayerControllerMal>() && cam != null)
+        if (GetComponent<PlayerController>() && cam != null)
         {
-            player = GetComponent<PlayerControllerMal>();
+            player = GetComponent<PlayerController>();
             speed = player.speed;
             ortSize = cam.orthographicSize;
             if (cam.GetComponent<PostProcessLayer>())

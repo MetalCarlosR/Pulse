@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControllerMal : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
     Vector2 MouseDir;
