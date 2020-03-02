@@ -30,7 +30,7 @@ public class Enemigo : MonoBehaviour
 
     private void Update()
     {
-        if (!player)
+        if (player == null)
         {
             player = GameManager.gmInstance_.GetPlayerTransform();
         }

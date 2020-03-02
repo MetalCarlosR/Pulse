@@ -7,11 +7,7 @@ public class GameManager : MonoBehaviour
 {
     private GameObject player_;
 
-    public UIManager UIManager_
-    {
-        private get { return UIManager_; }
-        set { UIManager_ = value; }
-    }
+    public UIManager UIManager_;
 
     private Camera camara;
     public static GameManager gmInstance_ { get; private set; }
@@ -73,5 +69,13 @@ public class GameManager : MonoBehaviour
     public Camera GetCamera()
     {
         return camara;
+    }
+
+    public void SetUImanager(UIManager UImanager)
+    {
+        if (UImanager != null)
+        {
+            UIManager_ = UImanager;
+        }
     }
 }

@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour
     GameObject RespawnUI = null;
     private void Start()
     {
-        GameManager.gmInstance_.UIManager_ = this;
+        GameManager.gmInstance_.SetUImanager(this);
         if (RespawnUI != null)
         {
             RespawnUI.SetActive(false);
