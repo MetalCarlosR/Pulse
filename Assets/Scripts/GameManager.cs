@@ -12,21 +12,20 @@ public class GameManager : MonoBehaviour
     private Camera camara;
     public static GameManager gmInstance_;
 
-    
+
 
     private void Awake()
     {
         if (gmInstance_ == null)
         {
             gmInstance_ = this;
-            DontDestroyOnLoad(this);
             Debug.Log("GameManager Set");
         }
-        else
+        else if (gmInstance_ != this)
         {
-            Debug.LogWarning("More than one Instance of GameManager on Scene deleting " + this);
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
+        DontDestroyOnLoad(this);
     }
 
     public void PlayerDeath()
@@ -47,21 +46,23 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         Debug.Log(SceneManager.GetActiveScene().name);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        
+
     }
 
     public Transform GetPlayerTransform()
     {
-        if (player_ != null ){
+        if (player_ != null)
+        {
             return player_.transform;
         }
         else
         {
             return null;
         }
-        
+
     }
-    public void SetPlayer(GameObject player) {
+    public void SetPlayer(GameObject player)
+    {
         if (player.GetComponent<PlayerController>())
         {
             player_ = player;

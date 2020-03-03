@@ -8,7 +8,7 @@ public class FieldOfView : MonoBehaviour
 
     private float angleIncrease, startAngle = 0, fov = 90f, viewDistance = 10f;
 
-    private int rayCount = 100 ;
+    private int rayCount = 500 ;
 
     private Vector3 origin_ = Vector3.zero;
 
@@ -64,7 +64,6 @@ public class FieldOfView : MonoBehaviour
             verIndex++;
             angle -= angleIncrease;
         }
-
 
         mesh.vertices = vertices;
         //mesh.uv = uv;

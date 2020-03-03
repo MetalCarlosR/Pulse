@@ -8,7 +8,8 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
-        GetComponent<Rigidbody2D>().AddForce(transform.up * 10, ForceMode2D.Impulse);
+        GetComponent<Rigidbody2D>().AddForce(transform.up * 10, ForceMode2D.Impulse);       
+        Invoke("Destroy", 5f);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -16,14 +17,14 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.tag == "Enemy" )
         {
             Destroy(collision.gameObject);
-            Destroy(this.gameObject);
+            Destroy();
         }
         else if (collision.gameObject.tag == "Player")
         {
-            Destroy(this.gameObject);
+            Destroy();
             collision.gameObject.GetComponent<PlayerController>().Die();
         }
-        if (bounces_ == 0)   Destroy(this.gameObject);
+        if (bounces_ == 0)   Destroy();
     
         bounces_--;
     }
@@ -31,5 +32,10 @@ public class Bullet : MonoBehaviour
     public void SetBounce(int bounces)
     {
         bounces_ = bounces;
+    }
+
+    private void Destroy()
+    {
+        Destroy(gameObject);
     }
 }

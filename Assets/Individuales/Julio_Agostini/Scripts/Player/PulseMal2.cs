@@ -30,7 +30,7 @@ public class PulseMal2 : MonoBehaviour
         else
         {
             Debug.LogError("Warning non PlayerController or Camera found on " + this);
-            GetComponent<PulseMal>().enabled = false;
+            GetComponent<Pulse>().enabled = false;
         }
     }
 

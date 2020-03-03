@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
 
     public int speed;
 
-    //private GameObject FOV;
     [SerializeField]
     private FieldOfView fov;
     [SerializeField]

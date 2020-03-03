@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraControllerMal : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
     [SerializeField]
     private Transform player = null;
     Vector3 pos;
 
+
+    private void Start()
+    {
+        GameManager.gmInstance_.SetCamera(GetComponent<Camera>());  
+    }
 
     void Update()
     {
