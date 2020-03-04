@@ -12,8 +12,6 @@ public class GameManager : MonoBehaviour
     private Camera camara;
     public static GameManager gmInstance_;
 
-
-
     private void Awake()
     {
         if (gmInstance_ == null)
