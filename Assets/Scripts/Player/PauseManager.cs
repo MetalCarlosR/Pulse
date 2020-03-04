@@ -6,6 +6,6 @@ public class PauseManager : MonoBehaviour
 {
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) GameManager.gmInstance_.PauseGame(); 
+        if (Input.GetKeyDown(KeyCode.Q)) GameManager.gmInstance_.PauseGame(); 
     }
 }
