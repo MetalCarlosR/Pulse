@@ -20,16 +20,11 @@ public class GameManager : MonoBehaviour
     private Camera camara;
     public static GameManager gmInstance_;
 
-    public enum Escenas
-    {
-        Prototipo,
-        Menu
-    }
 
 
     private void Awake()
     {
-        
+
         if (gmInstance_ == null)
         {
             gmInstance_ = this;
@@ -106,6 +101,7 @@ public class GameManager : MonoBehaviour
         UIManager_ = UImanager;
     }
 
+
     public FieldOfView createFieldofView()
     {
         FieldOfView newFov;
@@ -119,11 +115,24 @@ public class GameManager : MonoBehaviour
         newPulse = Instantiate(pulsePrefab.gameObject, PulsePool.transform).GetComponent<PulseEnemigo>();
         return newPulse;
     }
+
+    public void PauseGame()
+    {
+        Debug.Log("Pausing");
+        Time.timeScale = 0;
+        UIManager_.Pause();
+        //player_.GetComponent<PlayerController>().Activate(false);
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        UIManager_.Resume();
+        // player_.GetComponent<PlayerController>().Activate(true);
+    }
+
     public void ChangeScene(string scene)
     {
-        Escenas s;
-        
-        //Meter código defensivo
         SceneManager.LoadScene(scene, LoadSceneMode.Single);
     }
     public void ExitGame()
