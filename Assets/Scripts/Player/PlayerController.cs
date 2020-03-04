@@ -72,4 +72,18 @@ public class PlayerController : MonoBehaviour
         enabled = false;
         GameManager.gmInstance_.PlayerDeath();
     }
+
+    /**
+     *Despues se puede poner en Die()
+     */
+    public void Activate(bool activate)
+    {
+        Pistola pistola = GetComponent<Pistola>();
+        //gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
+        if (pistola)
+        {
+            pistola.enabled = activate;
+        }
+        enabled = activate;
+    }
 }

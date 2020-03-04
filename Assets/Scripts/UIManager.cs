@@ -7,6 +7,10 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField]
     GameObject RespawnUI = null;
+    [SerializeField]
+    private GameObject pauseMenu;
+    [SerializeField]
+    private GameObject pauseButton;
 
     private void Start()
     {
@@ -40,5 +44,18 @@ public class UIManager : MonoBehaviour
             Debug.LogError("Warning RespawnUI is not set on " + this + "and can't be shown");
         }
 
+    }
+
+    public void Pause()
+    {
+        Debug.Log("UI Pause menu");
+        pauseButton.SetActive(false);
+        pauseMenu.SetActive(true);
+    }
+
+    public void Resume()
+    {
+        pauseButton.SetActive(true);
+        pauseMenu.SetActive(false);
     }
 }

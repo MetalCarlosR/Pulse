@@ -87,4 +87,19 @@ public class GameManager : MonoBehaviour
     {
         UIManager_ = UImanager;
     }
+
+    public void PauseGame()
+    {
+        Debug.Log("Pausing");
+        Time.timeScale = 0;
+        UIManager_.Pause();
+        player_.GetComponent<PlayerController>().Activate(false);
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        UIManager_.Resume();
+        player_.GetComponent<PlayerController>().Activate(true);
+    }
 }
