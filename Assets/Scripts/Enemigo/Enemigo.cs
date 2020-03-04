@@ -12,6 +12,8 @@ public class Enemigo : MonoBehaviour
     private Material fovMatPat = null, fovMatAlerted = null, fovMatAtacking = null;
     [SerializeField]
     private string layer_ = "";
+    [SerializeField]
+    private PulseEnemigo pulse;
 
     private Transform player;
     private Pistola gun;
@@ -23,13 +25,15 @@ public class Enemigo : MonoBehaviour
         Alerted,
         Lost,
         Atacking
-    };
+    }
     private State state_ = State.Alerted;
     void Start()
     {
         gameObject.layer = LayerMask.NameToLayer(layer_);
         gun = GetComponent<Pistola>();
         rb = GetComponent<Rigidbody2D>();
+        pulse = Instantiate(pulse.gameObject, null).GetComponent<PulseEnemigo>();
+        pulse.SetEnemy(transform);
         fov = Instantiate(fov.gameObject, null).GetComponent<FieldOfView>();
         fov.name = "FieldOfView" + this.name;
         fov.SetInstance(limit, fovSet);
@@ -57,7 +61,6 @@ public class Enemigo : MonoBehaviour
         {
             player = GameManager.gmInstance_.GetPlayerTransform();
         }
-
     }
 
     void FindPlayer()

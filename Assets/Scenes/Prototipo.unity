@@ -244,7 +244,7 @@ PrefabInstance:
     - target: {fileID: 7943091572148078256, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7943091572148078256, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5,
         type: 3}
@@ -377,7 +377,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &519420031 stripped
 Camera:
@@ -454,7 +454,7 @@ Transform:
   m_Children:
   - {fileID: 1186932447}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1186932446
 GameObject:
@@ -658,7 +658,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1001 &1429551682
 PrefabInstance:
@@ -735,6 +735,11 @@ PrefabInstance:
         type: 3}
       propertyPath: fovSet
       value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 7610294071730264006, guid: 106736dc44b77614a912095aed9cf61f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 106736dc44b77614a912095aed9cf61f, type: 3}
@@ -1033,7 +1038,7 @@ PrefabInstance:
     - target: {fileID: 6395133698238684672, guid: 9855bc796fa271640b307e936b116c2a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6395133698238684672, guid: 9855bc796fa271640b307e936b116c2a,
         type: 3}

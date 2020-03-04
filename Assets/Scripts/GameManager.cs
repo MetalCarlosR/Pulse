@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-
     private void Awake()
     {
         if (gmInstance_ == null)
