@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2971181452301506996}
-  - component: {fileID: 2971181452301506995}
+  - component: {fileID: 3648562890854971307}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2971181452301506995
+--- !u!114 &3648562890854971307
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7267f4f933074c46bd2aa93b3a4f60f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fovPrefab: {fileID: 8273156320054472941, guid: 2df8b0edaf8fcb04fae0d83a74da2972,
+  fovPrefab: {fileID: 8273156320054472937, guid: 2df8b0edaf8fcb04fae0d83a74da2972,
     type: 3}
-  pulsePrefab: {fileID: 4328990365136060843, guid: c8da73be1b1578f449bb09c268af9457,
+  pulsePrefab: {fileID: 4328990365136060840, guid: c8da73be1b1578f449bb09c268af9457,
     type: 3}

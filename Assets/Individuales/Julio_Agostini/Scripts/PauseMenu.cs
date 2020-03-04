@@ -6,11 +6,11 @@ public class PauseMenu : MonoBehaviour
 {
 
     [SerializeField]
-    private GameObject pauseMenu;
+    private GameObject pauseMenu = null;
     [SerializeField]
-    private GameObject pauseButton;
+    private GameObject pauseButton = null;
     [SerializeField]
-    private GameObject player;
+    private GameObject player = null;
 
 
     public void PauseGame()

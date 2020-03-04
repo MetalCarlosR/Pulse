@@ -6,21 +6,18 @@ using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
-    private GameObject player_;
     [SerializeField]
-    private FieldOfView fovPrefab;
-    [SerializeField]
-    private PulseEnemigo pulsePrefab;
+    private GameObject fovPrefab = null, pulsePrefab = null;
 
     private UIManager UIManager_;
 
-    private GameObject FieldOfViewPool;
-    private GameObject PulsePool;
+    private GameObject FieldOfViewPool , PulsePool, player_;
 
     private Camera camara;
     public static GameManager gmInstance_;
 
 
+    bool paused = false;
 
     private void Awake()
     {
@@ -28,10 +25,6 @@ public class GameManager : MonoBehaviour
         if (gmInstance_ == null)
         {
             gmInstance_ = this;
-            FieldOfViewPool = new GameObject();
-            FieldOfViewPool.name = "FieldOfViewPool";
-            PulsePool = new GameObject();
-            PulsePool.name = "PulsePool";
             Debug.Log("GameManager Set");
         }
         else if (gmInstance_ != this)
@@ -40,7 +33,17 @@ public class GameManager : MonoBehaviour
         }
         DontDestroyOnLoad(this);
     }
-
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        FieldOfViewPool = new GameObject();
+        PulsePool = new GameObject();
+        FieldOfViewPool.name = "FieldOfViewPool";
+        PulsePool.name = "PulsePool";
+    }
     public void PlayerDeath()
     {
         Time.timeScale = 0;
@@ -105,30 +108,38 @@ public class GameManager : MonoBehaviour
     public FieldOfView createFieldofView()
     {
         FieldOfView newFov;
-        newFov = Instantiate(fovPrefab.gameObject, FieldOfViewPool.transform).GetComponent<FieldOfView>();
+        newFov = Instantiate(fovPrefab, FieldOfViewPool.transform).GetComponent<FieldOfView>();
         return newFov;
     }
 
     public PulseEnemigo createPulse()
     {
         PulseEnemigo newPulse;
-        newPulse = Instantiate(pulsePrefab.gameObject, PulsePool.transform).GetComponent<PulseEnemigo>();
+        newPulse = Instantiate(pulsePrefab, PulsePool.transform).GetComponent<PulseEnemigo>();
         return newPulse;
     }
 
     public void PauseGame()
     {
-        Debug.Log("Pausing");
-        Time.timeScale = 0;
-        UIManager_.Pause();
-        //player_.GetComponent<PlayerController>().Activate(false);
+        if (!paused)
+        {
+            Time.timeScale = 0;
+            UIManager_.Pause();
+            player_.GetComponent<PlayerController>().CanShoot(false);
+            paused = true;
+        }
+
     }
 
     public void ResumeGame()
     {
-        Time.timeScale = 1;
-        UIManager_.Resume();
-        // player_.GetComponent<PlayerController>().Activate(true);
+        if (paused)
+        {
+            Time.timeScale = 1;
+            UIManager_.Resume();
+            player_.GetComponent<PlayerController>().CanShoot(true);
+            paused = false;
+        }
     }
 
     public void ChangeScene(string scene)
@@ -139,5 +150,9 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("A la verga");
         Application.Quit();
+    }
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

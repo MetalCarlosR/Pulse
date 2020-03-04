@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 5668069761844117320}
   - component: {fileID: -5082880099442870239}
   - component: {fileID: 7610294071730264006}
+  - component: {fileID: 3536169602907956214}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -287,7 +288,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c9bc38909660e44e8fbc2b9ebbf97cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mat: {fileID: 2100000, guid: ab1432d453c22304a82c8f4269114e5e, type: 2}
   fov: {fileID: 8273156320054472941, guid: 2df8b0edaf8fcb04fae0d83a74da2972, type: 3}
   fovSet: 360
   limit: 10
@@ -304,3 +304,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
+--- !u!114 &3536169602907956214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5668069761844117318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae127de4e0dfbf54294722f100e45a40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -7,7 +7,7 @@ public class Laser : MonoBehaviour
     [SerializeField]
     private string layer_ = "";
     [SerializeField]
-    private bool intermitencia;
+    private bool intermitencia = false;
     void Start()
     {
         gameObject.layer = LayerMask.NameToLayer(layer_);

@@ -6,15 +6,9 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject RespawnUI = null;
-    [SerializeField]
-    private GameObject pauseMenu;
-    [SerializeField]
-    private GameObject pauseButton;
-
+    GameObject RespawnUI = null, pauseMenu = null;
     private void Start()
     {
-
         if (GameManager.gmInstance_ != null)
         {
             GameManager.gmInstance_.SetUImanager(this);
@@ -23,13 +17,14 @@ public class UIManager : MonoBehaviour
         {
             Debug.LogError("Warnign GameManager was null when trying to access it from " + this);
         }
-        if (RespawnUI != null)
+        if (RespawnUI  && pauseMenu)
         {
             RespawnUI.SetActive(false);
+            pauseMenu.SetActive(false);
         }
         else
         {
-            Debug.LogWarning("Warning RespawnUI is not set on " + this);
+            Debug.LogWarning("Warning RespawnUI or Pause is not set on " + this);
         }
 
     }
@@ -49,13 +44,11 @@ public class UIManager : MonoBehaviour
     public void Pause()
     {
         Debug.Log("UI Pause menu");
-        pauseButton.SetActive(false);
         pauseMenu.SetActive(true);
     }
 
     public void Resume()
     {
-        pauseButton.SetActive(true);
         pauseMenu.SetActive(false);
     }
 }

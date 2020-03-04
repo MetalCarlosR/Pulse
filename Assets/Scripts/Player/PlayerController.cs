@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 
     private int speed_ = 10;
 
-    private bool pulse_;
+    private bool shoot = true;
     [SerializeField]
     private FieldOfView fov;
     [SerializeField]
@@ -34,7 +34,6 @@ public class PlayerController : MonoBehaviour
 
 
     }
-
     void Update()
     {
         Debug.DrawRay(transform.position, transform.up * 2, Color.red);
@@ -47,7 +46,7 @@ public class PlayerController : MonoBehaviour
             }
             fov.SetOrigin(transform.position);
         }
-        if (Input.GetButtonDown("Fire1") && !pulse_)
+        if (Input.GetButtonDown("Fire1") && shoot)
         {
             gun.Shoot(1);
         }
@@ -78,7 +77,7 @@ public class PlayerController : MonoBehaviour
 
     public void UsePulse(bool pulse)
     {
-        pulse_ = pulse;
+        CanShoot(!pulse);
         if (!pulse)
         {
             speed_ = 10;
@@ -88,6 +87,7 @@ public class PlayerController : MonoBehaviour
             speed_ = 0;
         }
     }
+    public void CanShoot(bool can) { shoot = can; }
     public int GetSpeed()
     {
         return speed_;
