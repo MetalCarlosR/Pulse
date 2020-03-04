@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 5668069761844117317}
   - component: {fileID: 5668069761844117319}
   - component: {fileID: 5668069761844117321}
+  - component: {fileID: 4897446670433366688}
   - component: {fileID: 5668069761844117320}
   - component: {fileID: -5082880099442870239}
   - component: {fileID: 7610294071730264006}
@@ -244,6 +245,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.14220393, y: 0.14375138}
   m_EdgeRadius: 0
+--- !u!58 &4897446670433366688
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5668069761844117318}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1
 --- !u!114 &5668069761844117320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,7 +287,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c9bc38909660e44e8fbc2b9ebbf97cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
   fov: {fileID: 8273156320054472941, guid: 2df8b0edaf8fcb04fae0d83a74da2972, type: 3}
   fovSet: 360
   limit: 10
@@ -286,3 +302,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd616780c57b71340b27dd058245532a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 0}

@@ -9,14 +9,22 @@ public class GameManager : MonoBehaviour
 
     private UIManager UIManager_;
 
+    private GameObject FieldOfViewPool;
+    private GameObject PulsePool;
+
     private Camera camara;
     public static GameManager gmInstance_;
 
     private void Awake()
     {
+        
         if (gmInstance_ == null)
         {
             gmInstance_ = this;
+            FieldOfViewPool = new GameObject();
+            FieldOfViewPool.name = "FieldOfViewPool";
+            PulsePool = new GameObject();
+            PulsePool.name = "PulsePool";
             Debug.Log("GameManager Set");
         }
         else if (gmInstance_ != this)
@@ -84,5 +92,18 @@ public class GameManager : MonoBehaviour
     public void SetUImanager(UIManager UImanager)
     {
         UIManager_ = UImanager;
+    }
+
+    public  GameObject GetPool<T>(T obj)
+    {
+        switch (obj.GetType().ToString()){
+            case "FieldOfView":
+                return FieldOfViewPool;
+            case "PulseEnemigo":
+                return PulsePool;
+            default:
+                return null;
+        }
+        
     }
 }

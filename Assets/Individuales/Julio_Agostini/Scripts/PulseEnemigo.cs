@@ -9,7 +9,7 @@ public class PulseEnemigo : MonoBehaviour
     private Transform assignEnemy;
 
 
-    void OnEnable()
+    void Start()
     {
         startingSize = transform.localScale;
         StartCoroutine(Reset());

@@ -13,12 +13,16 @@ public class Pulse : MonoBehaviour
     void Start()
     {
         player = GetComponent<PlayerController>();
-        if (GameManager.gmInstance_) cam = GameManager.gmInstance_.GetCamera();
+        if (GameManager.gmInstance_)
+        {
+            cam = GameManager.gmInstance_.GetCamera();
+            ortSize = cam.orthographicSize;
+        }
         else
         {
             Debug.LogError("Warning no GameManager found"); enabled = false; return;
         }
-        if (player) speed = player.speed;
+        if (player) speed = player.GetSpeed();
         else
         {
             Debug.LogError("Warning no PlayerController found on " + this); enabled = false; return;
@@ -29,16 +33,15 @@ public class Pulse : MonoBehaviour
     {
         if (cam)
         {
-
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                player.speed = 0;
+                player.SetSpeed(0);
                 StopAllCoroutines();
-                StartCoroutine(PulseH(cam.orthographicSize, ortSize * 2, (((ortSize * 2) - cam.orthographicSize) / 5) * 3));
+                StartCoroutine(PulseH(cam.orthographicSize, ortSize * 2, (((ortSize * 2) - cam.orthographicSize) / 5)));
             }
             else if (Input.GetKeyUp(KeyCode.Space))
             {
-                player.speed = speed;
+                player.SetSpeed(speed);
                 StopAllCoroutines();
                 StartCoroutine(PulseH(cam.orthographicSize, ortSize, (cam.orthographicSize - ortSize) / 5));
             }
@@ -60,5 +63,16 @@ public class Pulse : MonoBehaviour
             yield return null;
         }
         cam.orthographicSize = end;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Enemigo enemy = collision.GetComponent<Enemigo>();
+        if (enemy) enemy.SetPulseState(true);
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Enemigo enemy = collision.GetComponent<Enemigo>();
+        if (enemy) enemy.SetPulseState(false);
     }
 }

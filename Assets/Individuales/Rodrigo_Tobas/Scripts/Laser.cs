@@ -28,7 +28,7 @@ public class Laser : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerController detectorJugador = collision.gameObject.GetComponent<PlayerController>();
+        PlayerController detectorJugador = collision.GetComponent<PlayerController>();
         if (detectorJugador)
             detectorJugador.Die();
     }
