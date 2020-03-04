@@ -33,6 +33,7 @@ public class Enemigo : MonoBehaviour
         gun = GetComponent<Pistola>();
         rb = GetComponent<Rigidbody2D>();
         pulse = Instantiate(pulse.gameObject, GameManager.gmInstance_.GetPool(pulse).transform).GetComponent<PulseEnemigo>();
+        // CAMBIAR INSTANTIATE A METODOS DELEGADOS
         pulse.SetEnemy(transform);
         pulse.name = "Pulse" + this.name;
         fov = Instantiate(fov.gameObject, GameManager.gmInstance_.GetPool(fov).transform).GetComponent<FieldOfView>();
