@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +13,11 @@ public class GameManager : MonoBehaviour
     private Camera camara;
     public static GameManager gmInstance_;
 
+    public enum Escenas
+    {
+        Prototipo,
+        Menu
+    }
 
 
     private void Awake()
@@ -88,6 +94,7 @@ public class GameManager : MonoBehaviour
         UIManager_ = UImanager;
     }
 
+
     public void PauseGame()
     {
         Debug.Log("Pausing");
@@ -101,5 +108,18 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         UIManager_.Resume();
         player_.GetComponent<PlayerController>().Activate(true);
+    }
+
+        public void ChangeScene(string scene)
+    {
+        Escenas s;
+        
+        //Meter código defensivo
+        SceneManager.LoadScene(scene, LoadSceneMode.Single);
+    }
+    public void ExitGame()
+    {
+        Debug.Log("A la verga");
+        Application.Quit();
     }
 }

@@ -7,6 +7,7 @@ public class Pulse : MonoBehaviour
     private PlayerController player;
     private int speed;
     private float ortSize;
+    [SerializeField]
     private Camera cam;
 
     void Start()
