@@ -23,7 +23,7 @@ public class Enemigo : MonoBehaviour
         Alerted,
         Lost,
         Atacking
-    };
+    }
     private State state_ = State.Alerted;
     void Start()
     {
