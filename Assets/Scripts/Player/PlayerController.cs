@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     private Pistola gun;
     void Start()
     {
+        gun = GetComponent<Pistola>();
+        rb = GetComponent<Rigidbody2D>();
         if (GameManager.gmInstance_ != null)
         {
             GameManager.gmInstance_.SetPlayer(gameObject);
@@ -29,8 +31,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogError("Warnign GameManager was null when trying to access it from " + this);
         }
-        gun = GetComponent<Pistola>();
-        rb = GetComponent<Rigidbody2D>();
+
 
     }
 

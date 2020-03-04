@@ -109,8 +109,8 @@ public class Enemigo : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (fov) Destroy(fov.gameObject);
-        if (pulse) Destroy(pulse.gameObject);
+        if (fov) fov.enabled = false;
+        if (pulse) pulse.enabled = false;
     }
 
     IEnumerator AttackPlayer()
