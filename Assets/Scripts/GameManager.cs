@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,12 @@ public class GameManager : MonoBehaviour
 
     private Camera camara;
     public static GameManager gmInstance_;
+
+    public enum Escenas
+    {
+        Prototipo,
+        Menu
+    }
 
 
 
@@ -86,5 +93,18 @@ public class GameManager : MonoBehaviour
     public void SetUImanager(UIManager UImanager)
     {
         UIManager_ = UImanager;
+    }
+
+    public void ChangeScene(string scene)
+    {
+        Escenas s;
+        
+        //Meter código defensivo
+        SceneManager.LoadScene(scene, LoadSceneMode.Single);
+    }
+    public void ExitGame()
+    {
+        Debug.Log("A la verga");
+        Application.Quit();
     }
 }
