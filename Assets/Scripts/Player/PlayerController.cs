@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     Vector2 MouseDir;
 
-    public int speed;
+    private int speed_ = 10;
 
     [SerializeField]
     private FieldOfView fov;
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
         }
         gun = GetComponent<Pistola>();
         rb = GetComponent<Rigidbody2D>();
-        fov = Instantiate(fov.gameObject, null).GetComponent<FieldOfView>();
+        fov = Instantiate(fov.gameObject, GameManager.gmInstance_.GetPool(fov).transform).GetComponent<FieldOfView>();
         fov.name = "FieldOfView" + name;
         fov.SetInstance(limit, fovSet);
     }
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
     }
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, Input.GetAxis("Vertical") * speed);
+        rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed_, Input.GetAxis("Vertical") * speed_);
     }
 
     void LookAtMouse()
@@ -73,6 +73,7 @@ public class PlayerController : MonoBehaviour
         GameManager.gmInstance_.PlayerDeath();
     }
 
+
     /**
      *Despues se puede poner en Die()
      */
@@ -85,5 +86,15 @@ public class PlayerController : MonoBehaviour
             pistola.enabled = activate;
         }
         enabled = activate;
+    }
+
+    public void SetSpeed(int speed)
+    {
+        speed_ = speed;
+    }
+    public int GetSpeed()
+    {
+        return speed_;
+
     }
 }

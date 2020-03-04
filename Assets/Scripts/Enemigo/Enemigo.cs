@@ -32,13 +32,16 @@ public class Enemigo : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer(layer_);
         gun = GetComponent<Pistola>();
         rb = GetComponent<Rigidbody2D>();
-        pulse = Instantiate(pulse.gameObject, null).GetComponent<PulseEnemigo>();
+        pulse = Instantiate(pulse.gameObject, GameManager.gmInstance_.GetPool(pulse).transform).GetComponent<PulseEnemigo>();
+        // CAMBIAR INSTANTIATE A METODOS DELEGADOS
         pulse.SetEnemy(transform);
-        fov = Instantiate(fov.gameObject, null).GetComponent<FieldOfView>();
+        pulse.name = "Pulse" + this.name;
+        fov = Instantiate(fov.gameObject, GameManager.gmInstance_.GetPool(fov).transform).GetComponent<FieldOfView>();
         fov.name = "FieldOfView" + this.name;
         fov.SetInstance(limit, fovSet);
         fov.gameObject.layer = this.gameObject.layer;
         SetState(State.Patrolling);
+        SetPulseState(false);
         if (GameManager.gmInstance_ != null) player = GameManager.gmInstance_.GetPlayerTransform();
     }
 
@@ -63,6 +66,10 @@ public class Enemigo : MonoBehaviour
         }
     }
 
+    public void SetPulseState(bool state)
+    {
+        pulse.enabled = state;
+    }
     void FindPlayer()
     {
         if (Vector3.Distance(transform.position, player.position) < limit)
@@ -98,10 +105,8 @@ public class Enemigo : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (fov != null)
-        {
-            Destroy(fov.gameObject);
-        }
+        if (fov) Destroy(fov.gameObject);
+        if (pulse) Destroy(pulse.gameObject);
     }
 
     IEnumerator AttackPlayer()
