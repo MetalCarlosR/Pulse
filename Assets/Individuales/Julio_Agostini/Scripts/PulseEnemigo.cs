@@ -24,12 +24,15 @@ public class PulseEnemigo : MonoBehaviour
 
     private IEnumerator Reset()
     {
-        if(assignEnemy) transform.position = assignEnemy.position;
+        ResetAll();
         yield return new WaitForSeconds(2f);
-        transform.localScale = startingSize;
         StartCoroutine(Reset());
     }
-
+    public void ResetAll()
+    {
+        transform.localScale = startingSize;
+        if (assignEnemy) transform.position = assignEnemy.position;
+    }
     public void SetEnemy(Transform enemy)
     {
         assignEnemy = enemy;

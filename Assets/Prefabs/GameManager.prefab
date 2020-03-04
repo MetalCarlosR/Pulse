@@ -43,4 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7267f4f933074c46bd2aa93b3a4f60f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOverMenu: {fileID: 0}
+  fovPrefab: {fileID: 8273156320054472941, guid: 2df8b0edaf8fcb04fae0d83a74da2972,
+    type: 3}
+  pulsePrefab: {fileID: 4328990365136060843, guid: c8da73be1b1578f449bb09c268af9457,
+    type: 3}

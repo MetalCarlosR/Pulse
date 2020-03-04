@@ -287,6 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c9bc38909660e44e8fbc2b9ebbf97cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mat: {fileID: 2100000, guid: ab1432d453c22304a82c8f4269114e5e, type: 2}
   fov: {fileID: 8273156320054472941, guid: 2df8b0edaf8fcb04fae0d83a74da2972, type: 3}
   fovSet: 360
   limit: 10

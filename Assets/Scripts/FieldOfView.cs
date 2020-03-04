@@ -13,7 +13,6 @@ public class FieldOfView : MonoBehaviour
     private Vector3 origin_ = Vector3.zero;
 
     private Vector3[] vertices;
-  //  private Vector2[] uv;
 
     private int[] triangles;
 
@@ -25,7 +24,6 @@ public class FieldOfView : MonoBehaviour
         GetComponent<MeshFilter>().mesh = mesh;
         angleIncrease = fov / rayCount;
         vertices = new Vector3[rayCount + 2];
-        // uv = new Vector2[vertices.Length];
         triangles = new int[rayCount * 3];
     }
 
@@ -66,7 +64,6 @@ public class FieldOfView : MonoBehaviour
         }
 
         mesh.vertices = vertices;
-        //mesh.uv = uv;
         mesh.triangles = triangles;
         mesh.bounds = new Bounds(origin_ , Vector3.one * 1000f);
     }

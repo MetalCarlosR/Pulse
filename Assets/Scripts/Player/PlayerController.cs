@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     private int speed_ = 10;
 
+    private bool pulse_;
     [SerializeField]
     private FieldOfView fov;
     [SerializeField]
@@ -20,6 +21,9 @@ public class PlayerController : MonoBehaviour
         if (GameManager.gmInstance_ != null)
         {
             GameManager.gmInstance_.SetPlayer(gameObject);
+            fov = GameManager.gmInstance_.createFieldofView();
+            fov.name = "FieldOfView" + name;
+            fov.SetInstance(limit, fovSet);
         }
         else
         {
@@ -27,9 +31,7 @@ public class PlayerController : MonoBehaviour
         }
         gun = GetComponent<Pistola>();
         rb = GetComponent<Rigidbody2D>();
-        fov = Instantiate(fov.gameObject, GameManager.gmInstance_.GetPool(fov).transform).GetComponent<FieldOfView>();
-        fov.name = "FieldOfView" + name;
-        fov.SetInstance(limit, fovSet);
+
     }
 
     void Update()
@@ -44,7 +46,7 @@ public class PlayerController : MonoBehaviour
             }
             fov.SetOrigin(transform.position);
         }
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && !pulse_)
         {
             gun.Shoot(1);
         }
@@ -72,9 +74,18 @@ public class PlayerController : MonoBehaviour
         enabled = false;
         GameManager.gmInstance_.PlayerDeath();
     }
-    public void SetSpeed(int speed)
+
+    public void UsePulse(bool pulse)
     {
-        speed_ = speed;
+        pulse_ = pulse;
+        if (!pulse)
+        {
+            speed_ = 10;
+        }
+        else
+        {
+            speed_ = 0;
+        }
     }
     public int GetSpeed()
     {

@@ -7,6 +7,10 @@ using UnityEditor;
 public class GameManager : MonoBehaviour
 {
     private GameObject player_;
+    [SerializeField]
+    private FieldOfView fovPrefab;
+    [SerializeField]
+    private PulseEnemigo pulsePrefab;
 
     private UIManager UIManager_;
 
@@ -102,17 +106,18 @@ public class GameManager : MonoBehaviour
         UIManager_ = UImanager;
     }
 
-    public  GameObject GetPool<T>(T obj)
+    public FieldOfView createFieldofView()
     {
-        switch (obj.GetType().ToString()){
-            case "FieldOfView":
-                return FieldOfViewPool;
-            case "PulseEnemigo":
-                return PulsePool;
-            default:
-                return null;
-        }
-        
+        FieldOfView newFov;
+        newFov = Instantiate(fovPrefab.gameObject, FieldOfViewPool.transform).GetComponent<FieldOfView>();
+        return newFov;
+    }
+
+    public PulseEnemigo createPulse()
+    {
+        PulseEnemigo newPulse;
+        newPulse = Instantiate(pulsePrefab.gameObject, PulsePool.transform).GetComponent<PulseEnemigo>();
+        return newPulse;
     }
     public void ChangeScene(string scene)
     {

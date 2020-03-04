@@ -32,17 +32,20 @@ public class Enemigo : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer(layer_);
         gun = GetComponent<Pistola>();
         rb = GetComponent<Rigidbody2D>();
-        pulse = Instantiate(pulse.gameObject, GameManager.gmInstance_.GetPool(pulse).transform).GetComponent<PulseEnemigo>();
-        // CAMBIAR INSTANTIATE A METODOS DELEGADOS
-        pulse.SetEnemy(transform);
-        pulse.name = "Pulse" + this.name;
-        fov = Instantiate(fov.gameObject, GameManager.gmInstance_.GetPool(fov).transform).GetComponent<FieldOfView>();
-        fov.name = "FieldOfView" + this.name;
-        fov.SetInstance(limit, fovSet);
-        fov.gameObject.layer = this.gameObject.layer;
+        if (GameManager.gmInstance_ != null) {
+            player = GameManager.gmInstance_.GetPlayerTransform();
+            pulse = GameManager.gmInstance_.createPulse();
+            pulse.SetEnemy(transform);
+            pulse.name = "Pulse" + this.name;
+            fov = GameManager.gmInstance_.createFieldofView();
+            fov.name = "FieldOfView" + this.name;
+            fov.SetInstance(limit, fovSet);
+            fov.gameObject.layer = gameObject.layer;
+            fov.gameObject.layer = this.gameObject.layer;
+
+            SetPulseState(false);
+        }
         SetState(State.Patrolling);
-        SetPulseState(false);
-        if (GameManager.gmInstance_ != null) player = GameManager.gmInstance_.GetPlayerTransform();
     }
 
 
@@ -68,6 +71,7 @@ public class Enemigo : MonoBehaviour
 
     public void SetPulseState(bool state)
     {
+        if (!state) pulse.ResetAll();
         pulse.enabled = state;
     }
     void FindPlayer()
