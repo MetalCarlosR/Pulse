@@ -16,16 +16,13 @@ public class GameManager : MonoBehaviour
     private Camera camara;
     public static GameManager gmInstance_;
 
-    public enum Escenas
-    {
-        Prototipo,
-        Menu
-    }
+    string[] scenes = { "Menú", "Prototipo" };
+
 
 
     private void Awake()
     {
-        
+
         if (gmInstance_ == null)
         {
             gmInstance_ = this;
@@ -118,9 +115,10 @@ public class GameManager : MonoBehaviour
         player_.GetComponent<PlayerController>().Activate(true);
     }
 
-    public  GameObject GetPool<T>(T obj)
+    public GameObject GetPool<T>(T obj)
     {
-        switch (obj.GetType().ToString()){
+        switch (obj.GetType().ToString())
+        {
             case "FieldOfView":
                 return FieldOfViewPool;
             case "PulseEnemigo":
@@ -128,14 +126,22 @@ public class GameManager : MonoBehaviour
             default:
                 return null;
         }
-        
+
     }
     public void ChangeScene(string scene)
     {
-        Escenas s;
-        
-        //Meter código defensivo
-        SceneManager.LoadScene(scene, LoadSceneMode.Single);
+        bool validScene = false;
+        int i = 0;
+        while (i < scenes.Length && !validScene)
+        {
+            if (scene == scenes[i])
+                validScene = true;
+            i++;
+        }
+
+        if (validScene)
+            SceneManager.LoadScene(scene, LoadSceneMode.Single);
+        else Debug.LogWarning("Introduce a valid scene name");
     }
     public void ExitGame()
     {
