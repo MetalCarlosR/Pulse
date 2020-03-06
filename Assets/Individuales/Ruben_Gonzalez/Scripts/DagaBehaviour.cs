@@ -4,36 +4,44 @@ using UnityEngine;
 
 public class DagaBehaviour : MonoBehaviour
 {
-    DagaAttack daga;
-    BoxCollider2D dagaCollider;
+    BoxCollider2D colliderDaga;
     private bool atacando = false;
     private void Start()
     {
-        daga = GetComponent<DagaAttack>();
-        if (daga.GetComponent<BoxCollider2D>() != null)
-        {
-            dagaCollider = daga.GetComponent<BoxCollider2D>();
-            dagaCollider.enabled = !enabled;
-        }
-        else Debug.LogError("There is no BoxCollider2D attached on " + this);
+        colliderDaga = GetComponent<BoxCollider2D>();
+        colliderDaga.enabled = !enabled;
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && !atacando)
+        if (Input.GetKeyDown("space") && !atacando)
         {
-            transform.position += transform.up * 0.1f;
-            dagaCollider.enabled = enabled;
+            transform.position += transform.right * 0.5f;
+            colliderDaga.enabled = enabled;
             atacando = true;
-            StartCoroutine(RegresarDaga());
+            
+            StartCoroutine("RegresarDaga");
         }
+        /*
+        else if (Input.GetKeyUp("space"))
+        {
+            transform.position -= transform.right * 0.2f;
+            colliderDaga.enabled = !enabled;
+        }
+        */
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Destroy(collision.gameObject);
     }
 
     private IEnumerator RegresarDaga()
     {
         yield return new WaitForSeconds(0.25f);
-        transform.position -= transform.up * 0.1f;
-        dagaCollider.enabled = !enabled;
+        transform.position -= transform.right * 0.5f;
+        colliderDaga.enabled = !enabled;
         atacando = false;
+
     }
 
 }
