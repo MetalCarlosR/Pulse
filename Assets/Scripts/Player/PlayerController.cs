@@ -58,9 +58,11 @@ public class PlayerController : MonoBehaviour
 
     void LookAtMouse()
     {
-        MouseDir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-
-        transform.up = MouseDir;
+        if (Time.deltaTime != 0)
+        {
+            MouseDir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+            transform.up = MouseDir;
+        }
 
     }
     public void Die()

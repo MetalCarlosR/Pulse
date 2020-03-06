@@ -5,7 +5,7 @@ using UnityEngine;
 public class PulseEnemigo : MonoBehaviour
 {
     private Vector3 startingSize;
-    private float growth = 0.03f;
+    private float growthPerSecond = 1.8f;
     private Transform assignEnemy;
 
 
@@ -18,7 +18,7 @@ public class PulseEnemigo : MonoBehaviour
 
     void LateUpdate()
     {
-        transform.localScale = new Vector3(transform.localScale.x + growth, transform.localScale.y + growth, 1);
+        transform.localScale = new Vector3(transform.localScale.x + growthPerSecond *Time.deltaTime , transform.localScale.y + growthPerSecond * Time.deltaTime, 1);
     }
 
 
