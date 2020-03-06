@@ -43,13 +43,13 @@ public class Pulse : MonoBehaviour
             {
                 player.UsePulse(true);
                 StopAllCoroutines();
-                StartCoroutine(PulseCam(cam.orthographicSize, ortSize * 2f, coll.radius, 2f, (((ortSize * 2f) - cam.orthographicSize) / 5)));
+                StartCoroutine(PulseCam(cam.orthographicSize, ortSize * 2f, coll.radius, 2f, (((ortSize * 2f) - cam.orthographicSize) / ortSize)));
             }
             else if (Input.GetKeyUp(KeyCode.Space))
             {
                 player.UsePulse(false);
                 StopAllCoroutines();
-                StartCoroutine(PulseCam(cam.orthographicSize, ortSize, coll.radius, collSize, (cam.orthographicSize - ortSize) / 5));
+                StartCoroutine(PulseCam(cam.orthographicSize, ortSize, coll.radius, collSize, (cam.orthographicSize - ortSize) / ortSize));
             }
         }
         else
