@@ -8,23 +8,34 @@ public class Laser : MonoBehaviour
     private string layer_ = "";
     [SerializeField]
     private bool intermitencia = false;
+    [SerializeField]
+    private float ratio = 2f;
+    [SerializeField]
+    private SpriteRenderer renderer;
+    [SerializeField]
+    private BoxCollider2D coll;
+    
     void Start()
     {
         gameObject.layer = LayerMask.NameToLayer(layer_);
-        if (intermitencia == true)
-            StartCoroutine(LaserIntermitente(this.gameObject.GetComponent<SpriteRenderer>()));
+        if (intermitencia) StartCoroutine(LaserIntermitente());
+        
     }
    
    
     void Update()
     {
-        
+
     }
-    IEnumerator LaserIntermitente(SpriteRenderer visible)
+    IEnumerator LaserIntermitente()
     {
-        visible.enabled = !visible.enabled;
-        yield return new WaitForSeconds(2);
-        visible.enabled = !visible.enabled;
+        while (true)
+        {
+            coll.enabled = !(coll.enabled);
+            renderer.enabled = !(renderer.enabled);
+            yield return new WaitForSeconds(ratio);
+            Debug.Log("a");
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
