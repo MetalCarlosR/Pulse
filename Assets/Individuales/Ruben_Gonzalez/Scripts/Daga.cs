@@ -17,7 +17,7 @@ public class Daga : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F) && !atacando)//atacando se tiene que borrar cuando se incluya en el player controler
         {
-            transform.position += transform.right * 0.1f;
+            transform.position += transform.up * 0.1f;
             dagaCollider.enabled = enabled;
             atacando = true;
             StartCoroutine(RegresarDaga());
@@ -27,7 +27,7 @@ public class Daga : MonoBehaviour
     private IEnumerator RegresarDaga()
     {
         yield return new WaitForSeconds(0.25f);
-        transform.position -= transform.right * 0.1f;
+        transform.position -= transform.up * 0.1f;
         dagaCollider.enabled = !enabled;
         atacando = false;
     }
