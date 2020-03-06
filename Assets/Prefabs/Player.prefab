@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 342956839679756424}
   - component: {fileID: 7307448248461881038}
   - component: {fileID: 7643083847076006645}
-  - component: {fileID: 1036581535807803737}
-  - component: {fileID: 1532180939247669361}
+  - component: {fileID: 802868540447272490}
   m_Layer: 0
   m_Name: Daga
   m_TagString: Untagged
@@ -109,19 +108,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
---- !u!114 &1036581535807803737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4110884552553186585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60e7b20be78610f42be036b683c69e26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1532180939247669361
+--- !u!114 &802868540447272490
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

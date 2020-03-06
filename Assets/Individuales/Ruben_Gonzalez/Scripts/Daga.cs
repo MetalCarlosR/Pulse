@@ -2,24 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DagaBehaviour : MonoBehaviour
+public class Daga : MonoBehaviour
 {
-    DagaAttack daga;
     BoxCollider2D dagaCollider;
     private bool atacando = false;
     private void Start()
     {
-        daga = GetComponent<DagaAttack>();
-        if (daga.GetComponent<BoxCollider2D>() != null)
-        {
-            dagaCollider = daga.GetComponent<BoxCollider2D>();
-            dagaCollider.enabled = !enabled;
-        }
-        else Debug.LogError("There is no BoxCollider2D attached on " + this);
+
+        dagaCollider = GetComponent<BoxCollider2D>();
+        dagaCollider.enabled = !enabled;
+
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && !atacando)
+        if (Input.GetKeyDown(KeyCode.F) && !atacando)//atacando se tiene que borrar cuando se incluya en el player controler
         {
             transform.position += transform.right * 0.1f;
             dagaCollider.enabled = enabled;
@@ -34,6 +30,11 @@ public class DagaBehaviour : MonoBehaviour
         transform.position -= transform.right * 0.1f;
         dagaCollider.enabled = !enabled;
         atacando = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Destroy(collision.gameObject);
     }
 
 }
