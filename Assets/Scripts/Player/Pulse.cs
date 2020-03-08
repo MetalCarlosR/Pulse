@@ -6,18 +6,18 @@ public class Pulse : MonoBehaviour
 {
     private PlayerController player;
     private Pistola pistola;
-    private CircleCollider2D coll;
+    private MeshRenderer mesh;
     private int speed;
-    private float ortSize, collSize;
+    private float ortSize, trSize;
     [SerializeField]
     private Camera cam;
 
     void Start()
     {
-        player = GetComponent<PlayerController>();
-        coll = GetComponent<CircleCollider2D>();
-        pistola = GetComponent<Pistola>();
-        collSize = coll.radius;
+        player = GetComponentInParent<PlayerController>();
+        pistola = GetComponentInParent<Pistola>();
+        trSize = transform.localScale.x;
+        mesh = GetComponent<MeshRenderer>();
         if (GameManager.gmInstance_)
         {
             cam = GameManager.gmInstance_.GetCamera();
@@ -28,10 +28,14 @@ public class Pulse : MonoBehaviour
         {
             Debug.LogError("Warning no GameManager found"); enabled = false; return;
         }
-        if (player) speed = player.GetSpeed();
+        if (player && pistola && mesh)
+        {
+            speed = player.GetSpeed();
+            mesh.enabled = false;
+        }
         else
         {
-            Debug.LogError("Warning no PlayerController found on " + this); enabled = false; return;
+            Debug.LogError("Warning no PlayerController or Gun found on " + this); enabled = false; return;
         }
     }
 
@@ -43,13 +47,13 @@ public class Pulse : MonoBehaviour
             {
                 player.UsePulse(true);
                 StopAllCoroutines();
-                StartCoroutine(PulseCam(cam.orthographicSize, ortSize * 2f, coll.radius, 2f, (((ortSize * 2f) - cam.orthographicSize) / ortSize)));
+                if (mesh.enabled == false) mesh.enabled = true;
+                StartCoroutine(PulseCam(cam.orthographicSize, ortSize * 2f, transform.localScale.x, 4, (((ortSize * 2f) - cam.orthographicSize) / ortSize)));
             }
             else if (Input.GetKeyUp(KeyCode.Space))
             {
-                player.UsePulse(false);
                 StopAllCoroutines();
-                StartCoroutine(PulseCam(cam.orthographicSize, ortSize, coll.radius, collSize, (cam.orthographicSize - ortSize) / ortSize));
+                StartCoroutine(PulseCam(cam.orthographicSize, ortSize, transform.localScale.x, trSize, (cam.orthographicSize - ortSize) / ortSize));
             }
         }
         else
@@ -59,18 +63,24 @@ public class Pulse : MonoBehaviour
         }
     }
 
-    IEnumerator PulseCam(float beginCam, float endCam, float beginTrigger, float endTrigger, float duration)
+    IEnumerator PulseCam(float beginCam, float endCam, float beginSize, float endSize, float duration)
     {
         float time = 0;
         while (time < duration)
         {
+            float size = Mathf.Lerp(beginSize, endSize, time / duration); ;
             cam.orthographicSize = Mathf.Lerp(beginCam, endCam, time / duration);
-            coll.radius = Mathf.Lerp(beginTrigger, endTrigger, time / duration);
+            transform.localScale = new Vector2(size, size);
             time += Time.deltaTime;
             yield return null;
         }
+        if (endSize == trSize)
+        {
+            mesh.enabled = false;
+            player.UsePulse(false);
+        }
         cam.orthographicSize = endCam;
-        coll.radius = endTrigger;
+        transform.localScale = new Vector2(endSize, endSize);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

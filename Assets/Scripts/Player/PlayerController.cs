@@ -17,10 +17,12 @@ public class PlayerController : MonoBehaviour
     private float fovSet = 0, limit = 0;
 
     private Pistola gun;
+    private Daga daga;
     void Start()
     {
         gun = GetComponent<Pistola>();
         rb = GetComponent<Rigidbody2D>();
+        daga = GetComponentInChildren<Daga>();
         if (GameManager.gmInstance_ != null)
         {
             GameManager.gmInstance_.SetPlayer(gameObject);
@@ -52,6 +54,7 @@ public class PlayerController : MonoBehaviour
             }
             if (Input.GetButtonDown("Fire1") && !pulse_)
             {
+                daga.Attack();
                 gun.Shoot(1);
             }
         }
