@@ -5,25 +5,17 @@ using UnityEngine;
 public class Boton : MonoBehaviour
 {
     [SerializeField]
-    private GameObject laser;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    private List<GameObject> laser = new List<GameObject>();
     private void OnTriggerStay2D(Collider2D collision)
     {
         PlayerController detectorJugador = collision.GetComponent<PlayerController>();
         if (detectorJugador && Input.GetKeyDown(KeyCode.E))
         {
-            laser.SetActive(false);
-            
+            foreach (GameObject obj in laser)
+            {
+                obj.SetActive(false);
+            }
+
         }
 
     }

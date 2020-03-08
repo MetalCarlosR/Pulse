@@ -9,7 +9,8 @@ public class PlayerController : MonoBehaviour
 
     private int speed_ = 10;
 
-    private bool shoot = true;
+    private bool pause_ = false;
+    private bool pulse_ = false;
     [SerializeField]
     private FieldOfView fov;
     [SerializeField]
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
         if (GameManager.gmInstance_ != null)
         {
             GameManager.gmInstance_.SetPlayer(gameObject);
+            GameManager.gmInstance_.AddEntity(gameObject);
             fov = GameManager.gmInstance_.createFieldofView();
             fov.name = "FieldOfView" + name;
             fov.SetInstance(limit, fovSet);
@@ -37,18 +39,21 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Debug.DrawRay(transform.position, transform.up * 2, Color.red);
-        LookAtMouse();
-        if (fov != null)
+        if (!pause_)
         {
-            if (fovSet != 360)
+            LookAtMouse();
+            if (fov != null)
             {
-                fov.SetAngle(-transform.right);
+                if (fovSet != 360)
+                {
+                    fov.SetAngle(-transform.right);
+                }
+                fov.SetOrigin(transform.position);
             }
-            fov.SetOrigin(transform.position);
-        }
-        if (Input.GetButtonDown("Fire1") && shoot)
-        {
-            gun.Shoot(1);
+            if (Input.GetButtonDown("Fire1") && !pulse_)
+            {
+                gun.Shoot(1);
+            }
         }
     }
     void FixedUpdate()
@@ -58,12 +63,8 @@ public class PlayerController : MonoBehaviour
 
     void LookAtMouse()
     {
-        if (Time.deltaTime != 0)
-        {
-            MouseDir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-            transform.up = MouseDir;
-        }
-
+        MouseDir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+        transform.up = MouseDir;
     }
     public void Die()
     {
@@ -77,19 +78,20 @@ public class PlayerController : MonoBehaviour
         GameManager.gmInstance_.PlayerDeath();
     }
 
+    private void OnPause()
+    {
+        pause_ = true;
+    }
+    private void OnResume()
+    {
+        pause_ = false;
+    }
     public void UsePulse(bool pulse)
     {
-        CanShoot(!pulse);
-        if (!pulse)
-        {
-            speed_ = 10;
-        }
-        else
-        {
-            speed_ = 0;
-        }
+        pulse_ = pulse;
+        if (!pulse) speed_ = 10;
+        else speed_ = 0;
     }
-    public void CanShoot(bool can) { shoot = can; }
     public int GetSpeed()
     {
         return speed_;

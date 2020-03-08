@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
         if (GameManager.gmInstance_ != null)
         {
             GameManager.gmInstance_.SetUImanager(this);
+            GameManager.gmInstance_.AddEntity(gameObject);
         }
         else
         {
@@ -41,13 +42,13 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void Pause()
+    public void OnPause()
     {
         Debug.Log("UI Pause menu");
         pauseMenu.SetActive(true);
     }
 
-    public void Resume()
+    public void OnResume()
     {
         pauseMenu.SetActive(false);
     }

@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     private GameObject FieldOfViewPool , PulsePool, player_;
 
+    List<GameObject> entities;
     private Camera camara;
     public static GameManager gmInstance_;
 
@@ -21,7 +22,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-
         if (gmInstance_ == null)
         {
             gmInstance_ = this;
@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        entities = new List<GameObject>();
         FieldOfViewPool = new GameObject();
         PulsePool = new GameObject();
         FieldOfViewPool.name = "FieldOfViewPool";
@@ -119,14 +120,29 @@ public class GameManager : MonoBehaviour
         return newPulse;
     }
 
+    public void AddEntity(GameObject entity)
+    {
+        entities.Add(entity);
+    }
+
+
+    public void TogglePause()
+    {
+        if (paused) ResumeGame();
+        else PauseGame();
+    }
     public void PauseGame()
     {
         if (!paused)
         {
-            Time.timeScale = 0;
-            UIManager_.Pause();
-            player_.GetComponent<PlayerController>().CanShoot(false);
             paused = true;
+            Time.timeScale = 0;
+            //UIManager_.OnPause();
+            foreach (GameObject obj in entities)
+            {
+                obj.SendMessage("OnPause");
+            }
+            
         }
 
     }
@@ -135,10 +151,14 @@ public class GameManager : MonoBehaviour
     {
         if (paused)
         {
-            Time.timeScale = 1;
-            UIManager_.Resume();
-            player_.GetComponent<PlayerController>().CanShoot(true);
             paused = false;
+            Time.timeScale = 1;
+            Debug.Log("B");
+            //UIManager_.OnResume();
+            foreach (GameObject obj in entities)
+            {
+                obj.SendMessage("OnResume");
+            }
         }
     }
 
@@ -148,7 +168,6 @@ public class GameManager : MonoBehaviour
     }
     public void ExitGame()
     {
-        Debug.Log("A la verga");
         Application.Quit();
     }
     private void OnDisable()
