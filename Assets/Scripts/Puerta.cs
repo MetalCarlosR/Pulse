@@ -23,18 +23,29 @@ public class Puerta : MonoBehaviour
     void MovPuerta(Transform player)
     {
         float rotationEnd = 0;
-        if (transform.rotation.z == 0 || transform.rotation.z == 180)
+        float rotaionBegin = transform.localEulerAngles.z;
+        if (rotaionBegin == 0)
         {
-            if (transform.position.x > player.transform.position.x) rotationEnd = transform.rotation.z - 90;
-            else rotationEnd = transform.rotation.z + 90;
+            if (transform.position.x > player.transform.position.x) rotationEnd = rotaionBegin - 90;
+            else rotationEnd = rotaionBegin + 90;
+        }
+        else if (rotaionBegin == 180 || rotaionBegin == -180)
+        {
+            if (transform.position.x > player.transform.position.x) rotationEnd = rotaionBegin + 90;
+            else rotationEnd = rotaionBegin - 90;
+        }
+        else if(rotaionBegin == 90)
+        {
+            if (transform.position.y > player.transform.position.y) rotationEnd = rotaionBegin - 90;
+            else rotationEnd = rotaionBegin + 90;
         }
         else
         {
-            if (transform.position.y > player.transform.position.y) rotationEnd = transform.rotation.z - 90;
-            else rotationEnd = transform.rotation.z + 90;
+            if (transform.position.y > player.transform.position.y) rotationEnd = rotaionBegin + 90;
+            else rotationEnd = rotaionBegin - 90;
         }
 
-        if (!open) StartCoroutine(DoorRotation(transform.localEulerAngles.z, rotationEnd, 1f));
+        if (!open) StartCoroutine(DoorRotation(rotaionBegin, rotationEnd, 1f));
     }
 
     IEnumerator DoorRotation(float begin, float end, float duration)
