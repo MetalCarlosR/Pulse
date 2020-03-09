@@ -13,15 +13,12 @@ public class Daga : MonoBehaviour
         dagaCollider.enabled = !enabled;
 
     }
-    void Update()
+    public void Attack()
     {
-        if (Input.GetKeyDown(KeyCode.F) && !atacando)//atacando se tiene que borrar cuando se incluya en el player controler
-        {
             transform.position += transform.up * 0.1f;
             dagaCollider.enabled = enabled;
             atacando = true;
             StartCoroutine(RegresarDaga());
-        }
     }
 
     private IEnumerator RegresarDaga()
@@ -34,7 +31,7 @@ public class Daga : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(collision.gameObject);
+        if (collision.tag == "Enemy") Destroy(collision.gameObject);
     }
 
 }

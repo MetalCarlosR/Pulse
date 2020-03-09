@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3270135627175731411}
   - component: {fileID: -8741704453989566174}
   - component: {fileID: 3394171051209391239}
-  - component: {fileID: 6845765761032585552}
+  - component: {fileID: 3809842595608913783}
   m_Layer: 0
   m_Name: Enemigo
   m_TagString: Enemy
@@ -153,7 +153,7 @@ MonoBehaviour:
   fovMatAtacking: {fileID: 2100000, guid: a238df406ca91ee43852676be7494d92, type: 2}
   layer_: Enemigos
   pulse: {fileID: 4328990365136060843, guid: c8da73be1b1578f449bb09c268af9457, type: 3}
---- !u!114 &6845765761032585552
+--- !u!114 &3809842595608913783
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -15,6 +15,7 @@ public class Enemigo : MonoBehaviour
     [SerializeField]
     private PulseEnemigo pulse;
 
+    private bool pause_ = false;
     private Transform player;
     private Pistola gun;
     private Rigidbody2D rb;
@@ -34,6 +35,7 @@ public class Enemigo : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         if (GameManager.gmInstance_ != null) {
             player = GameManager.gmInstance_.GetPlayerTransform();
+            GameManager.gmInstance_.AddEntity(gameObject);
             pulse = GameManager.gmInstance_.createPulse();
             pulse.SetEnemy(transform);
             pulse.name = "Pulse" + this.name;
@@ -76,19 +78,26 @@ public class Enemigo : MonoBehaviour
     }
     void FindPlayer()
     {
-        if (Vector3.Distance(transform.position, player.position) < limit)
+        if (!pause_)
         {
-            Vector3 direction = (player.position - transform.position);
-            if (Vector3.Angle(transform.up, direction) < fovSet / 2)
+            if (Vector3.Distance(transform.position, player.position) < limit)
             {
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, limit);
-                Debug.DrawRay(transform.position, direction, Color.green);
-                if (hit.collider != null && hit.collider.tag == "Player")
+                Vector3 direction = (player.position - transform.position);
+                if (Vector3.Angle(transform.up, direction) < fovSet / 2)
                 {
-                    transform.up = direction;
-                    if (state_ != State.Atacking)
+                    RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, limit);
+                    Debug.DrawRay(transform.position, direction, Color.green);
+                    if (hit.collider != null && hit.collider.tag == "Player")
                     {
-                        SetState(State.Atacking);
+                        transform.up = direction;
+                        if (state_ != State.Atacking)
+                        {
+                            SetState(State.Atacking);
+                        }
+                    }
+                    else if (state_ == State.Atacking)
+                    {
+                        SetState(State.Alerted);
                     }
                 }
                 else if (state_ == State.Atacking)
@@ -101,16 +110,20 @@ public class Enemigo : MonoBehaviour
                 SetState(State.Alerted);
             }
         }
-        else if (state_ == State.Atacking)
-        {
-            SetState(State.Alerted);
-        }
     }
 
     private void OnDestroy()
     {
         if (fov) Destroy(fov.gameObject);
         if (pulse) Destroy(pulse.gameObject);
+    }
+    private void OnPause()
+    {
+        pause_ = true;
+    }
+    private void OnResume()
+    {
+        pause_ = false;
     }
 
     IEnumerator AttackPlayer()
