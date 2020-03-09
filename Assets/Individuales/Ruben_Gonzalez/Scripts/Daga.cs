@@ -4,34 +4,48 @@ using UnityEngine;
 
 public class Daga : MonoBehaviour
 {
-    BoxCollider2D dagaCollider;
-    private bool atacando = false;
+    BoxCollider2D daga;
+    float rotation;
+    bool canAttack = true;
+    int offset = 90;
     private void Start()
     {
-
-        dagaCollider = GetComponent<BoxCollider2D>();
-        dagaCollider.enabled = !enabled;
-
+        daga = GetComponent<BoxCollider2D>();
+        daga.enabled = false;
+        transform.rotation = Quaternion.identity;
+        rotation = transform.rotation.z;
+        rotation = -45;
+        transform.rotation = Quaternion.Euler(0, 0, rotation);
     }
-    public void Attack()
+
+    private void Update()
     {
-            transform.position += transform.up * 0.1f;
-            dagaCollider.enabled = enabled;
-            atacando = true;
-            StartCoroutine(RegresarDaga());
+        if (Input.GetKeyDown(KeyCode.F) && canAttack)
+        {
+            canAttack = false;
+            StopAllCoroutines();
+            StartCoroutine(Ataque(daga, rotation, rotation + offset, 0));
+        }
+
     }
 
-    private IEnumerator RegresarDaga()
+    IEnumerator Ataque(BoxCollider2D daga, float begin, float end, float time)
     {
-        yield return new WaitForSeconds(0.25f);
-        transform.position -= transform.up * 0.1f;
-        dagaCollider.enabled = !enabled;
-        atacando = false;
+        daga.enabled = true;
+        while (time < 1f)
+        {
+            transform.localRotation = Quaternion.Euler(0, 0, Mathf.Lerp(begin, end, time));
+            time += 2f * Time.deltaTime;
+            yield return null;
+        }
+        daga.enabled = false;
+        canAttack = true;
+        offset = -offset;
+        rotation = -rotation;
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Enemy") Destroy(collision.gameObject);
+        Destroy(collision.gameObject);
     }
 
 }
