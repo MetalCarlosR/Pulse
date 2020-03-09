@@ -17,19 +17,14 @@ public class Daga : MonoBehaviour
         rotation = -45;
         transform.rotation = Quaternion.Euler(0, 0, rotation);
     }
-
-    private void Update()
+    void Attack()
     {
-        if (Input.GetKeyDown(KeyCode.F) && canAttack)
-        {
-            canAttack = false;
-            StopAllCoroutines();
-            StartCoroutine(Ataque(daga, rotation, rotation + offset, 0));
-        }
-
+        canAttack = false;
+        StopAllCoroutines();
+        StartCoroutine(DagaAttack(daga, rotation, rotation + offset, 0));
     }
 
-    IEnumerator Ataque(BoxCollider2D daga, float begin, float end, float time)
+    IEnumerator DagaAttack(BoxCollider2D daga, float begin, float end, float time)
     {
         daga.enabled = true;
         while (time < 1f)
@@ -47,5 +42,4 @@ public class Daga : MonoBehaviour
     {
         Destroy(collision.gameObject);
     }
-
 }
