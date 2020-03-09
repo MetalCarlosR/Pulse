@@ -34,7 +34,7 @@ public class Puerta : MonoBehaviour
             else rotationEnd = transform.rotation.z + 90;
         }
 
-        if (!open) StartCoroutine(CameraChange(transform.rotation.z, rotationEnd, 1f));
+        if (!open) StartCoroutine(CameraChange(transform.localEulerAngles.z, rotationEnd, 1f));
     }
 
     IEnumerator CameraChange(float begin, float end, float duration)
