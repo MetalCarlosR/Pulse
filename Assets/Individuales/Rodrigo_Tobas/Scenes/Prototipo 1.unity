@@ -391,41 +391,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Laser (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 9141005736038743567, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9141005736038743567, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: 0.0004093945
-      objectReference: {fileID: 0}
-    - target: {fileID: 9141005736038743567, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 0.15426853
-      objectReference: {fileID: 0}
-    - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
-        type: 3}
-      propertyPath: intermitencia
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
-        type: 3}
-      propertyPath: laser
-      value: 
-      objectReference: {fileID: 1314611545}
-    - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
-        type: 3}
-      propertyPath: renderer
-      value: 
-      objectReference: {fileID: 1314611548}
-    - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
-        type: 3}
-      propertyPath: coll
-      value: 
-      objectReference: {fileID: 1314611547}
     - target: {fileID: 2412729377494600614, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -486,6 +451,41 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 0.8086727
       objectReference: {fileID: 0}
+    - target: {fileID: 9141005736038743567, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9141005736038743567, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0.0004093945
+      objectReference: {fileID: 0}
+    - target: {fileID: 9141005736038743567, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.15426853
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
+        type: 3}
+      propertyPath: intermitencia
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
+        type: 3}
+      propertyPath: laser
+      value: 
+      objectReference: {fileID: 1314611545}
+    - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
+        type: 3}
+      propertyPath: renderer
+      value: 
+      objectReference: {fileID: 1314611548}
+    - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
+        type: 3}
+      propertyPath: coll
+      value: 
+      objectReference: {fileID: 1314611547}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0, type: 3}
 --- !u!20 &519420031 stripped
@@ -702,41 +702,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Laser (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 9141005736038743567, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9141005736038743567, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: 0.0004093945
-      objectReference: {fileID: 0}
-    - target: {fileID: 9141005736038743567, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 0.15426853
-      objectReference: {fileID: 0}
-    - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
-        type: 3}
-      propertyPath: intermitencia
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
-        type: 3}
-      propertyPath: laser
-      value: 
-      objectReference: {fileID: 637438543}
-    - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
-        type: 3}
-      propertyPath: renderer
-      value: 
-      objectReference: {fileID: 637438546}
-    - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
-        type: 3}
-      propertyPath: coll
-      value: 
-      objectReference: {fileID: 637438545}
     - target: {fileID: 2412729377494600614, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -797,20 +762,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 0.8086727
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0, type: 3}
---- !u!1001 &1213949124
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4984375246714147811, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
-        type: 3}
-      propertyPath: m_Name
-      value: Laser (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 9141005736038743567, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
         type: 3}
       propertyPath: m_IsTrigger
@@ -829,23 +780,37 @@ PrefabInstance:
     - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
         type: 3}
       propertyPath: intermitencia
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
         type: 3}
       propertyPath: laser
       value: 
-      objectReference: {fileID: 1723071122}
+      objectReference: {fileID: 637438543}
     - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
         type: 3}
       propertyPath: renderer
       value: 
-      objectReference: {fileID: 1723071125}
+      objectReference: {fileID: 637438546}
     - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
         type: 3}
       propertyPath: coll
       value: 
-      objectReference: {fileID: 1723071124}
+      objectReference: {fileID: 637438545}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0, type: 3}
+--- !u!1001 &1213949124
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4984375246714147811, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
+        type: 3}
+      propertyPath: m_Name
+      value: Laser (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 2412729377494600614, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -906,6 +871,41 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 0.8086727
       objectReference: {fileID: 0}
+    - target: {fileID: 9141005736038743567, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9141005736038743567, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0.0004093945
+      objectReference: {fileID: 0}
+    - target: {fileID: 9141005736038743567, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.15426853
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
+        type: 3}
+      propertyPath: intermitencia
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
+        type: 3}
+      propertyPath: laser
+      value: 
+      objectReference: {fileID: 1723071122}
+    - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
+        type: 3}
+      propertyPath: renderer
+      value: 
+      objectReference: {fileID: 1723071125}
+    - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
+        type: 3}
+      propertyPath: coll
+      value: 
+      objectReference: {fileID: 1723071124}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0, type: 3}
 --- !u!4 &1299683174 stripped
@@ -1222,10 +1222,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laser:
-  - {fileID: 1844168576}
   - {fileID: 1723071122}
   - {fileID: 637438543}
   - {fileID: 1314611545}
+  - {fileID: 1844168576}
 --- !u!1001 &1576395805
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1343,41 +1343,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Laser
       objectReference: {fileID: 0}
-    - target: {fileID: 9141005736038743567, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9141005736038743567, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: 0.0004093945
-      objectReference: {fileID: 0}
-    - target: {fileID: 9141005736038743567, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 0.15426853
-      objectReference: {fileID: 0}
-    - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
-        type: 3}
-      propertyPath: intermitencia
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
-        type: 3}
-      propertyPath: laser
-      value: 
-      objectReference: {fileID: 1844168576}
-    - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
-        type: 3}
-      propertyPath: renderer
-      value: 
-      objectReference: {fileID: 1844168579}
-    - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
-        type: 3}
-      propertyPath: coll
-      value: 
-      objectReference: {fileID: 1844168578}
     - target: {fileID: 2412729377494600614, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1438,6 +1403,41 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 0.8086727
       objectReference: {fileID: 0}
+    - target: {fileID: 9141005736038743567, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9141005736038743567, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0.0004093945
+      objectReference: {fileID: 0}
+    - target: {fileID: 9141005736038743567, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.15426853
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
+        type: 3}
+      propertyPath: intermitencia
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
+        type: 3}
+      propertyPath: laser
+      value: 
+      objectReference: {fileID: 1844168576}
+    - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
+        type: 3}
+      propertyPath: renderer
+      value: 
+      objectReference: {fileID: 1844168579}
+    - target: {fileID: 1941612365338207836, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0,
+        type: 3}
+      propertyPath: coll
+      value: 
+      objectReference: {fileID: 1844168578}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f2b2ed59ed6b3a41876f6dc27002cf0, type: 3}
 --- !u!1 &1945252714

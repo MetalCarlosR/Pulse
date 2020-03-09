@@ -17,7 +17,7 @@ public class FieldOfView : MonoBehaviour
     private int[] triangles;
 
     [SerializeField]
-    private LayerMask mask;
+    private LayerMask mask = 0;
     private void Start()
     {
         mesh = new Mesh();
