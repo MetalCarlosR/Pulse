@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boton : MonoBehaviour
+public class Boton: MonoBehaviour
 {
     [SerializeField]
     private List<GameObject> laser = new List<GameObject>();
@@ -15,7 +15,6 @@ public class Boton : MonoBehaviour
             {
                 obj.SetActive(false);
             }
-
         }
 
     }
