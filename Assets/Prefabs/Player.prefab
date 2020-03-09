@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: -5082880099442870239}
   - component: {fileID: 3536169602907956214}
   - component: {fileID: 5601983625883321278}
+  - component: {fileID: 1352441276845946807}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -185,8 +186,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -49356369
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -287,6 +288,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pistola: {fileID: 5668069761414816662}
   bala: {fileID: 7708167321584544558, guid: f45352a6162a4ee4a91c4f1bb5c0f96b, type: 3}
+--- !u!114 &1352441276845946807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5668069761844117318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7c10b5c60fb4e74f83fc67b0effdfba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  daga: {fileID: 802868540447272490}
+  pistola: {fileID: 5601983625883321278}
 --- !u!1 &5955042706874075130
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,6 +483,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5151414807513711058, guid: a8dac9fa221917d43a49e5584fd05bc3,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5151414807513711058, guid: a8dac9fa221917d43a49e5584fd05bc3,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8dac9fa221917d43a49e5584fd05bc3, type: 3}
 --- !u!4 &342956839679756424 stripped
@@ -476,3 +501,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2455804362699845404}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &802868540447272490 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2968041073322361142, guid: a8dac9fa221917d43a49e5584fd05bc3,
+    type: 3}
+  m_PrefabInstance: {fileID: 2455804362699845404}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d342ebca43785444cb43c939cb7c9b3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

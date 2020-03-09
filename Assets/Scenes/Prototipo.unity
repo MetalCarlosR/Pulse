@@ -529,6 +529,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camara
       objectReference: {fileID: 0}
+    - target: {fileID: 3270135627175731410, guid: 95fdae4078ec4a448a9abbaf61c4dd13,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 3270135627175731373, guid: 95fdae4078ec4a448a9abbaf61c4dd13,
         type: 3}
       propertyPath: m_LocalPosition.x

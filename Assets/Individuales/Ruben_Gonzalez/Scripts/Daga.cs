@@ -19,7 +19,7 @@ public class Daga : MonoBehaviour
     }
     public void Attack()
     {
-        if (canAttack)
+        if (canAttack && enabled)
         {
             canAttack = false;
             StopAllCoroutines();
