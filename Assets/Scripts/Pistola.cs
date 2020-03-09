@@ -13,4 +13,5 @@ public class Pistola : MonoBehaviour
     {
         Instantiate(bala, pistola.position, Quaternion.Euler(transform.localEulerAngles)).GetComponent<Bullet>().SetBounce(bounces);
     }
+    void Update() { }
 }
