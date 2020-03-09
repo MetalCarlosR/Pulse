@@ -17,7 +17,7 @@ public class Enemigo : MonoBehaviour
 
     private bool pause_ = false;
     private Transform player;
-    private Pistola gun;
+    private PistolaEnemigo gun;
     private Rigidbody2D rb;
 
     public enum State
@@ -31,7 +31,7 @@ public class Enemigo : MonoBehaviour
     void Start()
     {
         gameObject.layer = LayerMask.NameToLayer(layer_);
-        gun = GetComponent<Pistola>();
+        gun = GetComponent<PistolaEnemigo>();
         rb = GetComponent<Rigidbody2D>();
         if (GameManager.gmInstance_ != null) {
             player = GameManager.gmInstance_.GetPlayerTransform();
@@ -131,7 +131,7 @@ public class Enemigo : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(rateOfFire);
-            gun.Shoot(0);
+            gun.Shoot();
         }
 
     }

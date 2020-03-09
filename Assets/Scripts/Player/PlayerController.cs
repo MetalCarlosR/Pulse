@@ -40,7 +40,6 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        Debug.DrawRay(transform.position, transform.up * 2, Color.red);
         if (!pause_)
         {
             LookAtMouse();
@@ -55,7 +54,15 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButtonDown("Fire1") && !pulse_)
             {
                 daga.Attack();
-                gun.Shoot(1);
+                gun.Shoot();
+            }
+            if (Input.GetButtonDown("Fire2") && !pulse_)
+            {
+                gun.Laser(true);
+            }
+            else if (Input.GetButtonUp("Fire2"))
+            {
+                gun.Laser(false);
             }
         }
     }
