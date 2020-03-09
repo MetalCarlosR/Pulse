@@ -17,7 +17,7 @@ public class Daga : MonoBehaviour
         rotation = -45;
         transform.rotation = Quaternion.Euler(0, 0, rotation);
     }
-    void Attack()
+    public void Attack()
     {
         canAttack = false;
         StopAllCoroutines();
