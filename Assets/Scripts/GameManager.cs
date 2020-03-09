@@ -63,7 +63,6 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         Debug.Log(SceneManager.GetActiveScene().name);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
     }
 
     public Transform GetPlayerTransform()
@@ -76,7 +75,6 @@ public class GameManager : MonoBehaviour
         {
             return null;
         }
-
     }
     public void SetPlayer(GameObject player)
     {
@@ -141,10 +139,8 @@ public class GameManager : MonoBehaviour
             foreach (GameObject obj in entities)
             {
                 obj.SendMessage("OnPause");
-            }
-            
+            }            
         }
-
     }
 
     public void ResumeGame()
@@ -166,10 +162,12 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(scene, LoadSceneMode.Single);
     }
+
     public void ExitGame()
     {
         Application.Quit();
     }
+
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;

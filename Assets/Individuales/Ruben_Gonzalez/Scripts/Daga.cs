@@ -19,9 +19,12 @@ public class Daga : MonoBehaviour
     }
     public void Attack()
     {
-        canAttack = false;
-        StopAllCoroutines();
-        StartCoroutine(DagaAttack(daga, rotation, rotation + offset, 0));
+        if (canAttack)
+        {
+            canAttack = false;
+            StopAllCoroutines();
+            StartCoroutine(DagaAttack(daga, rotation, rotation + offset, 0));
+        }
     }
 
     IEnumerator DagaAttack(BoxCollider2D daga, float begin, float end, float time)
@@ -30,7 +33,7 @@ public class Daga : MonoBehaviour
         while (time < 1f)
         {
             transform.localRotation = Quaternion.Euler(0, 0, Mathf.Lerp(begin, end, time));
-            time += 2f * Time.deltaTime;
+            time += 5f * Time.deltaTime;
             yield return null;
         }
         daga.enabled = false;
@@ -40,6 +43,7 @@ public class Daga : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(collision.gameObject);
+        if (collision.gameObject.tag == "Enemy")
+            Destroy(collision.gameObject);
     }
 }

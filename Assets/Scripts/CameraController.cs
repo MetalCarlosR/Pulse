@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        pos.Set(player.position.x, player.position.y , -10);
+        pos.Set(player.position.x, player.position.y ,-10);
         transform.position = pos;
     }
 }
