@@ -11,29 +11,30 @@ public class Puerta : MonoBehaviour
     private void Start()
     {
         open = false;
-        jugador = false;
     }
-    private void Update()
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (Input.GetKeyDown(KeyCode.E) && jugador && !open)
+        if (Input.GetKeyDown(KeyCode.E) && collision.GetComponent<PlayerController>() && !open)
         {
-            MovPuerta();
+            MovPuerta(collision.transform);
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.GetComponent<PlayerController>()) jugador = true;
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.GetComponent<PlayerController>()) jugador = false;
 
-    }
-
-    void MovPuerta()
+    void MovPuerta(Transform player)
     {
-        StopAllCoroutines();
-        if (!open) StartCoroutine(CameraChange(transform.rotation.z, transform.rotation.z + 90, 1f));
+        float rotationEnd = 0;
+        if (transform.rotation.z == 0 || transform.rotation.z == 180)
+        {
+            if (transform.position.x > player.transform.position.x) rotationEnd = transform.rotation.z - 90;
+            else rotationEnd = transform.rotation.z + 90;
+        }
+        else
+        {
+            if (transform.position.y > player.transform.position.y) rotationEnd = transform.rotation.z - 90;
+            else rotationEnd = transform.rotation.z + 90;
+        }
+
+        if (!open) StartCoroutine(CameraChange(transform.rotation.z, rotationEnd, 1f));
     }
 
     IEnumerator CameraChange(float begin, float end, float duration)
@@ -44,7 +45,7 @@ public class Puerta : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(0, 0, Mathf.Lerp(begin, end, time / duration));
             time += Time.deltaTime;
-        
+
             yield return null;
         }
         transform.rotation = Quaternion.Euler(0, 0, end);
