@@ -6,12 +6,13 @@ public class LaserPointer : MonoBehaviour
 {
 
     private LineRenderer lr;
+    [SerializeField]
+    private Transform startPoint;
 
     void Start()
     {
         lr = GetComponent<LineRenderer>();
         lr.positionCount = 3;
-        lr.enabled = false;
     }
 
 
@@ -20,20 +21,18 @@ public class LaserPointer : MonoBehaviour
     {
         
         RaycastHit2D hit;
-        hit = Physics2D.Raycast(transform.position, transform.up);
-        lr.SetPosition(0, transform.position);
+        hit = Physics2D.Raycast(startPoint.position, startPoint.up);
+        lr.SetPosition(0, startPoint.position);
         lr.SetPosition(1, hit.point);
-        Vector3 angleHit = Vector3.Reflect(transform.up, hit.normal);
+        Vector3 angleHit = Vector3.Reflect(startPoint.up, hit.normal);
         hit = Physics2D.Raycast(hit.point, angleHit);
         lr.SetPosition(2, hit.point);
        
     }
 
 
-
     public void SetLaser(bool active)
     {
-        if(lr)
-            lr.enabled = active;
+        lr.enabled = active;
     }
 }
