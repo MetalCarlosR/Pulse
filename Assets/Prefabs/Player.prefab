@@ -359,7 +359,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fov: {fileID: 8273156320054472941, guid: 2df8b0edaf8fcb04fae0d83a74da2972, type: 3}
   fovSet: 360
-  limit: 10
+  limit: 50
 --- !u!114 &3536169602907956214
 MonoBehaviour:
   m_ObjectHideFlags: 0
