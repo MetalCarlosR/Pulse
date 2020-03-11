@@ -86,7 +86,7 @@ public class Enemigo : MonoBehaviour
                 if (Vector3.Angle(transform.up, direction) < fovSet / 2)
                 {
                     RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, limit);
-                    Debug.DrawRay(transform.position, direction, Color.green);
+                    //Debug.DrawRay(transform.position, direction, Color.green);
                     if (hit.collider != null && hit.collider.tag == "Player")
                     {
                         transform.up = direction;

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5280826661023579039}
   - component: {fileID: 9141005736038743567}
   - component: {fileID: 1941612365338207836}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,5 +120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d5505239689258469bdc06377f3dd5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layer_: Enemigos
   intermitencia: 0
+  ratio: 0.2
+  renderer: {fileID: 0}
+  coll: {fileID: 0}
+  player: {fileID: 0}

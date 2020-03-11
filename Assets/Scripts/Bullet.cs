@@ -8,13 +8,13 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
-        GetComponent<Rigidbody2D>().AddForce(transform.up * 10, ForceMode2D.Impulse);       
+        GetComponent<Rigidbody2D>().AddForce(transform.up * 10, ForceMode2D.Impulse);
         Invoke("Destroy", 5f);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Enemy" )
+        if (collision.gameObject.tag == "Enemy")
         {
             Destroy(collision.gameObject);
             Destroy();
@@ -24,8 +24,8 @@ public class Bullet : MonoBehaviour
             Destroy();
             collision.gameObject.GetComponent<PlayerController>().Die();
         }
-        if (bounces_ == 0)   Destroy();
-    
+        if (bounces_ == 0) Destroy();
+
         bounces_--;
     }
 

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
-    [SerializeField]
-    private string layer_ = "";
+    //[SerializeField]
+    //private string layer_ = "";
     [SerializeField]
     private bool intermitencia = false;
     [SerializeField]
@@ -14,15 +14,17 @@ public class Laser : MonoBehaviour
     private SpriteRenderer renderer;
     [SerializeField]
     private BoxCollider2D coll;
-    
+    [SerializeField]
+    private PlayerController player;
+
     void Start()
     {
-        gameObject.layer = LayerMask.NameToLayer(layer_);
+        renderer = GetComponent<SpriteRenderer>();
+        coll = GetComponent<BoxCollider2D>();
+        //gameObject.layer = LayerMask.NameToLayer(layer_);
         if (intermitencia) StartCoroutine(LaserIntermitente());
-        
     }
-   
-   
+
     void Update()
     {
 
@@ -34,7 +36,6 @@ public class Laser : MonoBehaviour
             coll.enabled = !(coll.enabled);
             renderer.enabled = !(renderer.enabled);
             yield return new WaitForSeconds(ratio);
-            Debug.Log("a");
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

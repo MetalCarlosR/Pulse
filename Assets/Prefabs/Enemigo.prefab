@@ -146,7 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fov: {fileID: 8273156320054472941, guid: 2df8b0edaf8fcb04fae0d83a74da2972, type: 3}
   fovSet: 90
-  limit: 6
+  limit: 9
   rateOfFire: 0.5
   fovMatPat: {fileID: 2100000, guid: 6c20c177428817645acdda77532b3d7c, type: 2}
   fovMatAlerted: {fileID: 2100000, guid: 51dd8fd1ede9c414d8560df951b4f6ad, type: 2}
