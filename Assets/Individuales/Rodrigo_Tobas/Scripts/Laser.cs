@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
-    //[SerializeField]
-    //private string layer_ = "";
+    [SerializeField]
+    private string layer_ = "";
     [SerializeField]
     private bool intermitencia = false;
     [SerializeField]
@@ -21,7 +21,7 @@ public class Laser : MonoBehaviour
     {
         renderer = GetComponent<SpriteRenderer>();
         coll = GetComponent<BoxCollider2D>();
-        //gameObject.layer = LayerMask.NameToLayer(layer_);
+        gameObject.layer = LayerMask.NameToLayer(layer_);
         if (intermitencia) StartCoroutine(LaserIntermitente());
     }
 
