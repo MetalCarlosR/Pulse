@@ -38,10 +38,6 @@ public class SoundManager : MonoBehaviour
     {
         door.Play();
     }
-    public void PlayReload()
-    {
-        reload.Play();
-    }
     public void Playwalking()
     {
         walking.Play();

@@ -1,1 +1,0 @@
-Borrar estos archivos cuando ya introduzcas otro
