@@ -5,7 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Prototipo.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: "Assets/Individuales/Ruben_Gonzalez/Scenes/Men\xFA.unity"
+    guid: 8f4623f94b23a9a4faf1347dd2d9d1bf
+  - enabled: 1
+    path: Assets/Scenes/Hito1.unity
+    guid: 9de92c98beb2e2a4ea38e682c67f47dd
   m_configObjects: {}

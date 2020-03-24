@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
             {
                 daga.Attack();
                 gun.Shoot();
+                SoundManager.smInstance_.PlayShooting();
             }
             if (Input.GetButtonDown("Fire2") && !pulse_)
             {
