@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +9,12 @@ public class SoundManager : MonoBehaviour
     public static SoundManager smInstance_;
 
     [SerializeField]
-    private AudioSource shooting, door, walking, reload;
+    private AudioSource door, walking, reload;
+    private List<AudioSource> shots;
+    [SerializeField]
+    private int numOfShots;
+    [SerializeField]
+    private GameObject shot;
 
 
 
@@ -18,7 +24,13 @@ public class SoundManager : MonoBehaviour
             if (smInstance_ == null)
             {
                 smInstance_ = this;
-                Debug.Log("SoundManager Set");
+                shots = new List<AudioSource>(numOfShots);
+                for(int i = 0; i < numOfShots; i++)
+                {
+                    CreateShot();
+                }
+                Debug.Log(shots);
+
             }
             else if (smInstance_ != this)
             {
@@ -28,10 +40,27 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    private void CreateShot()
+    {
+        GameObject newShot;
+        newShot = Instantiate(shot);
+        shots.Add(newShot.GetComponent<AudioSource>());
+    }
 
     public void PlayShooting()
     {
-        shooting.Play();
+        bool shot = false;
+        int i = 0;
+        while(!shot) 
+        {
+            if (!shots[i].isPlaying)
+            {
+                Debug.Log("shootings " + i);
+                shots[i].Play();
+                shot = true;
+            }
+            i++;
+        }
     }
 
     public void PlayDoor()
