@@ -31,9 +31,7 @@ public class FieldOfView : MonoBehaviour
     {
         float angle = startAngle;
         int verIndex = 1;
-        int triaIndex = 0;
-
-        
+        int triaIndex = 0;        
 
         vertices[0] = origin_;
 

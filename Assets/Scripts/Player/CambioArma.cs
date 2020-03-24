@@ -20,7 +20,6 @@ public class CambioArma : MonoBehaviour
             daga.gameObject.SetActive(!daga.gameObject.activeSelf);
             daga.enabled = !daga.enabled;
             pistola.enabled = !pistola.enabled;
-
         }
     }
 }

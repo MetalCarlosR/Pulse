@@ -22,7 +22,6 @@ public class Pulse : MonoBehaviour
         {
             cam = GameManager.gmInstance_.GetCamera();
             if(cam) ortSize = cam.orthographicSize;
-
         }
         else
         {
