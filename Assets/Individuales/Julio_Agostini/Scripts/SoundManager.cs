@@ -55,7 +55,6 @@ public class SoundManager : MonoBehaviour
         {
             if (!shots[i].isPlaying)
             {
-                Debug.Log("shootings " + i);
                 shots[i].Play();
                 shot = true;
             }
