@@ -9,7 +9,7 @@ public class SoundManager : MonoBehaviour
     public static SoundManager smInstance_;
 
     [SerializeField]
-    private AudioSource door, walking, reload;
+    private AudioSource door, walking, enemyDeath;
     private List<AudioSource> shots;
     [SerializeField]
     private int numOfShots;
@@ -74,6 +74,11 @@ public class SoundManager : MonoBehaviour
     public void StopWalking()
     {
         walking.Stop();
+    }
+
+    public void PlayEnemyDeath()
+    {
+        enemyDeath.Play();
     }
 
 }
