@@ -44,8 +44,12 @@ public class Puerta : MonoBehaviour
             if (transform.position.y > player.transform.position.y) rotationEnd = rotaionBegin + 90;
             else rotationEnd = rotaionBegin - 90;
         }
-        SoundManager.smInstance_.PlayDoor();
-        if (!open) StartCoroutine(DoorRotation(rotaionBegin, rotationEnd, 1f));
+
+        if (!open)
+        {
+            SoundManager.smInstance_.PlaySound(SoundManager.Audio.DOOR);
+            StartCoroutine(DoorRotation(rotaionBegin, rotationEnd, 1f));
+        }
     }
 
     IEnumerator DoorRotation(float begin, float end, float duration)
