@@ -17,7 +17,9 @@ public class SoundManager : MonoBehaviour
         SHOOTENEMY,
         DOOR,
         ENEMYDEATH,
-        WALKING
+        PLAYERDEATH,
+        WALKING,
+        LASERSWITCH
     }
 
     void Awake()
