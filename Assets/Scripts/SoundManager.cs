@@ -39,4 +39,18 @@ public class SoundManager : MonoBehaviour
     {
         audioPool[Convert.ToInt32(audio)].Play();
     }
+
+    public void PlayWalking()
+    {
+        AudioSource walking = audioPool[Convert.ToInt32(Audio.WALKING)];
+        if (!walking.isPlaying)
+        {
+            walking.Play();
+        }
+    }
+
+    public void StopWalking()
+    {
+        audioPool[Convert.ToInt32(Audio.WALKING)].Stop();
+    }
 }

@@ -69,6 +69,14 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed_, Input.GetAxis("Vertical") * speed_);
+        if(rb.velocity.y != 0 || rb.velocity.x != 0)
+        {
+            SoundManager.smInstance_.PlayWalking();
+        }
+        else
+        {
+            SoundManager.smInstance_.StopWalking();
+        }
     }
 
     void LookAtMouse()
