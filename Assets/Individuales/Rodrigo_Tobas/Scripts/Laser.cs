@@ -25,19 +25,19 @@ public class Laser : MonoBehaviour
         if (intermitencia) StartCoroutine(LaserIntermitente());
     }
 
-    void Update()
-    {
-
-    }
     IEnumerator LaserIntermitente()
     {
-        while (true)
-        {
-            coll.enabled = !(coll.enabled);
-            laserRenderer.enabled = !(laserRenderer.enabled);
-            yield return new WaitForSeconds(ratio);
-        }
+        coll.enabled = true;
+        laserRenderer.enabled = true;
+        SoundManager.smInstance_.PlaySound(SoundManager.Audio.LASER);
+        yield return new WaitForSeconds(ratio);
+        coll.enabled = false;
+        laserRenderer.enabled = false;
+        SoundManager.smInstance_.StopSound(SoundManager.Audio.LASER);
+        yield return new WaitForSeconds(ratio);
+        StartCoroutine(LaserIntermitente());
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         PlayerController detectorJugador = collision.GetComponent<PlayerController>();

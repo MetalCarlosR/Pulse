@@ -19,6 +19,7 @@ public class SoundManager : MonoBehaviour
         ENEMYDEATH,
         PLAYERDEATH,
         WALKING,
+        LASER,
         LASERSWITCH
     }
 
@@ -40,9 +41,23 @@ public class SoundManager : MonoBehaviour
         audioPool[Convert.ToInt32(audio)].Play();
     }
 
+    public void StopSound(Audio audio)
+    {
+        audioPool[Convert.ToInt32(audio)].Stop();
+    }
+
     public void PlayWalking()
     {
         AudioSource walking = audioPool[Convert.ToInt32(Audio.WALKING)];
+        if (!walking.isPlaying)
+        {
+            walking.Play();
+        }
+    }
+
+    public void PlayLaser()
+    {
+        AudioSource walking = audioPool[Convert.ToInt32(Audio.LASER)];
         if (!walking.isPlaying)
         {
             walking.Play();
