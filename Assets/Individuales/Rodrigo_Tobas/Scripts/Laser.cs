@@ -11,7 +11,7 @@ public class Laser : MonoBehaviour
     [SerializeField]
     private float ratio = 2f;
     [SerializeField]
-    private SpriteRenderer renderer;
+    private SpriteRenderer laserRenderer;
     [SerializeField]
     private BoxCollider2D coll;
     [SerializeField]
@@ -19,7 +19,7 @@ public class Laser : MonoBehaviour
 
     void Start()
     {
-        renderer = GetComponent<SpriteRenderer>();
+        laserRenderer = GetComponent<SpriteRenderer>();
         coll = GetComponent<BoxCollider2D>();
         gameObject.layer = LayerMask.NameToLayer(layer_);
         if (intermitencia) StartCoroutine(LaserIntermitente());
@@ -34,7 +34,7 @@ public class Laser : MonoBehaviour
         while (true)
         {
             coll.enabled = !(coll.enabled);
-            renderer.enabled = !(renderer.enabled);
+            laserRenderer.enabled = !(laserRenderer.enabled);
             yield return new WaitForSeconds(ratio);
         }
     }
