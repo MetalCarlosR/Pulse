@@ -11,6 +11,7 @@ public class Boton: MonoBehaviour
         PlayerController detectorJugador = collision.GetComponent<PlayerController>();
         if (detectorJugador && Input.GetKeyDown(KeyCode.E))
         {
+            SoundManager.smInstance_.PlaySound(SoundManager.Audio.LASERSWITCH);
             foreach (GameObject obj in laser)
             {
                 obj.SetActive(false);
