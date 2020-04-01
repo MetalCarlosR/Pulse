@@ -18,10 +18,13 @@ public class Enemigo : MonoBehaviour
     private Transform player;
     private PistolaEnemigo gun;
     private Rigidbody2D rb;
-    private AudioSource source;
-
+    private AudioSource voices;
     [SerializeField]
     private AudioClip[] EnemyVoicePool = new AudioClip[3];
+    private AudioSource fire;
+    [SerializeField]
+    private AudioClip fire_;
+   
 
     public enum State
     {
@@ -36,7 +39,8 @@ public class Enemigo : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer(layer_);
         gun = GetComponent<PistolaEnemigo>();
         rb = GetComponent<Rigidbody2D>();
-        source = GetComponent<AudioSource>();
+        voices = GetComponent<AudioSource>();
+        fire = GetComponent<AudioSource>();
         if (GameManager.gmInstance_ != null)
         {
             player = GameManager.gmInstance_.GetPlayerTransform();
@@ -141,6 +145,8 @@ public class Enemigo : MonoBehaviour
     {
         while (true)
         {
+            fire.clip = fire_;
+            fire.Play();
             yield return new WaitForSeconds(rateOfFire);
             gun.Shoot();
         }
@@ -178,7 +184,7 @@ public class Enemigo : MonoBehaviour
                     StartCoroutine(LostPlayer());
                     break;
                 case State.Atacking:
-                    if (state_ == State.Patrolling)  PlayEnemyVoice();
+                    if (state_ == State.Patrolling) PlayEnemyVoice();
                     StartCoroutine(AttackPlayer());
                     fov.setMaterial(fovMatAtacking);
                     break;
@@ -190,7 +196,7 @@ public class Enemigo : MonoBehaviour
 
     public void PlayEnemyVoice()
     {
-        source.clip = EnemyVoicePool[Random.Range(0, 3)];
-        source.Play();
+        voices.clip = EnemyVoicePool[Random.Range(0, 3)];
+        voices.Play();
     }
 }
