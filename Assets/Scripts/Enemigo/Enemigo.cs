@@ -114,7 +114,7 @@ public class Enemigo : MonoBehaviour
 
     private void OnDestroy()
     {
-        SoundManager.smInstance_.PlaySound(SoundManager.Audio.ENEMYDEATH);
+        if(SoundManager.smInstance_)    SoundManager.smInstance_.PlaySound(SoundManager.Audio.ENEMYDEATH);
         if (fov) Destroy(fov.gameObject);
         if (pulse) Destroy(pulse.gameObject);
     }
