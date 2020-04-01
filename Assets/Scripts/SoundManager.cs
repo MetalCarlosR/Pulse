@@ -2,26 +2,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class SoundManager : MonoBehaviour
 {
 
     public static SoundManager smInstance_;
 
     [SerializeField]
-    private List<AudioSource> audioPool = new List<AudioSource>();
+    private List<AudioSource> FXSoundsPool = new List<AudioSource>();
+    [SerializeField]
+    private List<AudioSource> EnemyVoicePool = new List<AudioSource>();
 
-    public enum Audio
+
+    public enum FXSounds
     {
-        SHOOT,
-        SHOOTENEMY,
-        DOOR,
-        ENEMYDEATH,
-        PLAYERDEATH,
-        WALKING,
-        LASER,
-        LASERSWITCH
+        PLAYERSHOT, ENEMYSHOT, DOOR, ENEMYDEATH,
+        PLAYERDEATH, WALKING, LASER, LASERSWITCH
     }
+    public enum EnemyVoice { VOICE_1, VOICE_2, VOICE_3 }
 
     void Awake()
     {
@@ -36,19 +33,34 @@ public class SoundManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    public void PlaySound(Audio audio)
+    public void PlaySound(FXSounds audio)
     {
-        audioPool[Convert.ToInt32(audio)].Play();
+        FXSoundsPool[Convert.ToInt32(audio)].Play();
+    }
+    //public void PlayEnemyVoice(EnemyVoice enemy)
+    //{
+    //    EnemyVoicePool[Convert.ToInt32(enemy)].Play();
+    //}
+
+    public bool EnemyVoicePlaying()
+    {
+        int i = 0;
+        while (i < EnemyVoicePool.Count && !EnemyVoicePool[i].isPlaying)
+            i++;
+        Debug.Log(i);
+        Debug.Log("ec=" + EnemyVoicePool.Count);
+        if (i == EnemyVoicePool.Count) return false;
+        else return true;
     }
 
-    public void StopSound(Audio audio)
+    public void StopSound(FXSounds audio)
     {
-        audioPool[Convert.ToInt32(audio)].Stop();
+        FXSoundsPool[Convert.ToInt32(audio)].Stop();
     }
 
     public void PlayWalking()
     {
-        AudioSource walking = audioPool[Convert.ToInt32(Audio.WALKING)];
+        AudioSource walking = FXSoundsPool[Convert.ToInt32(FXSounds.WALKING)];
         if (!walking.isPlaying)
         {
             walking.Play();
@@ -57,7 +69,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlayLaser()
     {
-        AudioSource walking = audioPool[Convert.ToInt32(Audio.LASER)];
+        AudioSource walking = FXSoundsPool[Convert.ToInt32(FXSounds.LASER)];
         if (!walking.isPlaying)
         {
             walking.Play();
@@ -66,6 +78,6 @@ public class SoundManager : MonoBehaviour
 
     public void StopWalking()
     {
-        audioPool[Convert.ToInt32(Audio.WALKING)].Stop();
+        FXSoundsPool[Convert.ToInt32(FXSounds.WALKING)].Stop();
     }
 }

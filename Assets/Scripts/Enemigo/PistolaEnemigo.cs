@@ -12,6 +12,6 @@ public class PistolaEnemigo : MonoBehaviour
     public void Shoot()
     {
         Instantiate(bala, pistola.position, Quaternion.Euler(transform.localEulerAngles)).GetComponent<Bullet>().SetBounce(0);
-        SoundManager.smInstance_.PlaySound(SoundManager.Audio.SHOOTENEMY);
+        SoundManager.smInstance_.PlaySound(SoundManager.FXSounds.ENEMYSHOT);
     }
 }

@@ -34,11 +34,9 @@ public class Laser : MonoBehaviour
         coll.enabled = true;
         laserRenderer.enabled = true;
         laser.Play();
-        //SoundManager.smInstance_.PlaySound(SoundManager.Audio.LASER);
         yield return new WaitForSeconds(ratio);
         coll.enabled = false;
         laserRenderer.enabled = false;
-        //SoundManager.smInstance_.StopSound(SoundManager.Audio.LASER);
         laser.Stop();
         yield return new WaitForSeconds(ratio);
         StartCoroutine(LaserIntermitente());

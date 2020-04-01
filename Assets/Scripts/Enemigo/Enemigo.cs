@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 public class Enemigo : MonoBehaviour
 {
@@ -14,11 +16,13 @@ public class Enemigo : MonoBehaviour
     private string layer_ = "";
     [SerializeField]
     private PulseEnemigo pulse;
-
     private bool pause_ = false;
     private Transform player;
     private PistolaEnemigo gun;
     private Rigidbody2D rb;
+    [SerializeField]
+    List<AudioSource> EnemyVoicePool;
+    public enum EnemyVoice { VOICE_1, VOICE_2, VOICE_3 }
 
     public enum State
     {
@@ -33,7 +37,8 @@ public class Enemigo : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer(layer_);
         gun = GetComponent<PistolaEnemigo>();
         rb = GetComponent<Rigidbody2D>();
-        if (GameManager.gmInstance_ != null) {
+        if (GameManager.gmInstance_ != null)
+        {
             player = GameManager.gmInstance_.GetPlayerTransform();
             GameManager.gmInstance_.AddEntity(gameObject);
             pulse = GameManager.gmInstance_.createPulse();
@@ -92,6 +97,7 @@ public class Enemigo : MonoBehaviour
                         transform.up = direction;
                         if (state_ != State.Atacking)
                         {
+                            PlayEnemyVoice();
                             SetState(State.Atacking);
                         }
                     }
@@ -114,7 +120,7 @@ public class Enemigo : MonoBehaviour
 
     private void OnDestroy()
     {
-        if(SoundManager.smInstance_)    SoundManager.smInstance_.PlaySound(SoundManager.Audio.ENEMYDEATH);
+        if (SoundManager.smInstance_) SoundManager.smInstance_.PlaySound(SoundManager.FXSounds.ENEMYDEATH);
         if (fov) Destroy(fov.gameObject);
         if (pulse) Destroy(pulse.gameObject);
     }
@@ -175,5 +181,22 @@ public class Enemigo : MonoBehaviour
             }
             state_ = state;
         }
+    }
+    public bool EnemyVoicePlaying()
+    {
+        int i = 0;
+        while (i < EnemyVoicePool.Count && !EnemyVoicePool[i].isPlaying)
+            i++;
+        Debug.Log(i);
+        Debug.Log("ec=" + EnemyVoicePool.Count);
+        if (i == EnemyVoicePool.Count) return false;
+        else return true;
+    }
+    public void PlayEnemyVoice()
+    {
+        Random r = new Random();
+        int i = r.Next(0, EnemyVoicePool.Count);
+        if (!EnemyVoicePlaying())
+            EnemyVoicePool[i].Play();
     }
 }

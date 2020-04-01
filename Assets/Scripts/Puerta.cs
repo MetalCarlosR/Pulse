@@ -47,7 +47,7 @@ public class Puerta : MonoBehaviour
 
         if (!open)
         {
-            SoundManager.smInstance_.PlaySound(SoundManager.Audio.DOOR);
+            SoundManager.smInstance_.PlaySound(SoundManager.FXSounds.DOOR);
             StartCoroutine(DoorRotation(rotaionBegin, rotationEnd, 1f));
         }
     }
