@@ -21,9 +21,7 @@ public class Enemigo : MonoBehaviour
     private AudioSource voices;
     [SerializeField]
     private AudioClip[] EnemyVoicePool = new AudioClip[3];
-    private AudioSource fire;
-    [SerializeField]
-    private AudioClip fire_;
+
    
 
     public enum State
@@ -39,8 +37,7 @@ public class Enemigo : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer(layer_);
         gun = GetComponent<PistolaEnemigo>();
         rb = GetComponent<Rigidbody2D>();
-        voices = GetComponent<AudioSource>();
-        fire = GetComponent<AudioSource>();
+        voices = GetComponent<AudioSource>();       
         if (GameManager.gmInstance_ != null)
         {
             player = GameManager.gmInstance_.GetPlayerTransform();
@@ -144,9 +141,7 @@ public class Enemigo : MonoBehaviour
     IEnumerator AttackPlayer()
     {
         while (true)
-        {
-            fire.clip = fire_;
-            fire.Play();
+        {           
             yield return new WaitForSeconds(rateOfFire);
             gun.Shoot();
         }

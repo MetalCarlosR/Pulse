@@ -8,10 +8,18 @@ public class PistolaEnemigo : MonoBehaviour
     private Transform pistola = null;
     [SerializeField]
     private GameObject bala = null;
+    private AudioSource fire;
+    [SerializeField]
+    private AudioClip fire_;
+    private void Start()
+    {
+        fire = pistola.GetComponent<AudioSource>();
+    }
 
     public void Shoot()
     {
         Instantiate(bala, pistola.position, Quaternion.Euler(transform.localEulerAngles)).GetComponent<Bullet>().SetBounce(0);
-        SoundManager.smInstance_.PlaySound(SoundManager.FXSounds.ENEMYSHOT , transform.position);
+        fire.clip = fire_;
+        fire.Play();
     }
 }
