@@ -22,8 +22,10 @@ public class Daga : MonoBehaviour
         if (canAttack && enabled)
         {
             canAttack = false;
+            SoundManager.smInstance_.PlaySound(SoundManager.FXSounds.DAGA, transform.position);
             StopAllCoroutines();
             StartCoroutine(DagaAttack(daga, rotation, rotation + offset, 0));
+            
         }
     }
 
