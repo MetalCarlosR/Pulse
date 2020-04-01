@@ -5,9 +5,9 @@ using UnityEngine;
 public class CambioArma : MonoBehaviour
 {
     [SerializeField]
-    private Daga daga;
+    private Daga daga = null;
     [SerializeField]
-    private Pistola pistola;
+    private Pistola pistola = null;
     void Start()
     {
         pistola.enabled = false;

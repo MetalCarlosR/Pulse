@@ -122,7 +122,10 @@ public class GameManager : MonoBehaviour
     {
         entities.Add(entity);
     }
-
+    public void RemoveEntity(GameObject entity)
+    {
+        entities.Remove(entity);
+    }
 
     public void TogglePause()
     {
@@ -135,7 +138,6 @@ public class GameManager : MonoBehaviour
         {
             paused = true;
             Time.timeScale = 0;
-            //UIManager_.OnPause();
             foreach (GameObject obj in entities)
             {
                 obj.SendMessage("OnPause");
@@ -150,7 +152,6 @@ public class GameManager : MonoBehaviour
             paused = false;
             Time.timeScale = 1;
             Debug.Log("B");
-            //UIManager_.OnResume();
             foreach (GameObject obj in entities)
             {
                 obj.SendMessage("OnResume");

@@ -9,8 +9,6 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField]
     private List<AudioSource> FXSoundsPool = new List<AudioSource>();
-    [SerializeField]
-    private List<AudioSource> EnemyVoicePool = new List<AudioSource>();
 
 
     public enum FXSounds
@@ -18,7 +16,6 @@ public class SoundManager : MonoBehaviour
         PLAYERSHOT, ENEMYSHOT, DOOR, ENEMYDEATH,
         PLAYERDEATH, WALKING, LASER, LASERSWITCH
     }
-    public enum EnemyVoice { VOICE_1, VOICE_2, VOICE_3 }
 
     void Awake()
     {
@@ -33,24 +30,12 @@ public class SoundManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    public void PlaySound(FXSounds audio)
+    public void PlaySound(FXSounds audio , Vector3 point)
     {
-        FXSoundsPool[Convert.ToInt32(audio)].Play();
-    }
-    //public void PlayEnemyVoice(EnemyVoice enemy)
-    //{
-    //    EnemyVoicePool[Convert.ToInt32(enemy)].Play();
-    //}
+        AudioSource.PlayClipAtPoint(FXSoundsPool[Convert.ToInt32(audio)].clip, point);
+       
 
-    public bool EnemyVoicePlaying()
-    {
-        int i = 0;
-        while (i < EnemyVoicePool.Count && !EnemyVoicePool[i].isPlaying)
-            i++;
-        Debug.Log(i);
-        Debug.Log("ec=" + EnemyVoicePool.Count);
-        if (i == EnemyVoicePool.Count) return false;
-        else return true;
+        //FXSoundsPool[Convert.ToInt32(audio)].Play();
     }
 
     public void StopSound(FXSounds audio)
@@ -61,15 +46,6 @@ public class SoundManager : MonoBehaviour
     public void PlayWalking()
     {
         AudioSource walking = FXSoundsPool[Convert.ToInt32(FXSounds.WALKING)];
-        if (!walking.isPlaying)
-        {
-            walking.Play();
-        }
-    }
-
-    public void PlayLaser()
-    {
-        AudioSource walking = FXSoundsPool[Convert.ToInt32(FXSounds.LASER)];
         if (!walking.isPlaying)
         {
             walking.Play();

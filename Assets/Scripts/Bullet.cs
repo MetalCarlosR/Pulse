@@ -16,15 +16,15 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            Destroy(collision.gameObject);
-            Destroy();
+            collision.gameObject.GetComponent<Enemigo>().Death();
+            Destroy(gameObject);
         }
         else if (collision.gameObject.tag == "Player")
         {
-            Destroy();
             collision.gameObject.GetComponent<PlayerController>().Die();
+            Destroy(gameObject);
         }
-        if (bounces_ == 0) Destroy();
+        if (bounces_ == 0) Destroy(gameObject);
 
         bounces_--;
     }
@@ -32,10 +32,5 @@ public class Bullet : MonoBehaviour
     public void SetBounce(int bounces)
     {
         bounces_ = bounces;
-    }
-
-    private void Destroy()
-    {
-        Destroy(gameObject);
     }
 }

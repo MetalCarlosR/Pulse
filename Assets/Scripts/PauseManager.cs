@@ -6,6 +6,7 @@ public class PauseManager : MonoBehaviour
 {
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) GameManager.gmInstance_.TogglePause(); 
+        if (Input.GetKeyDown(KeyCode.Escape)) GameManager.gmInstance_.TogglePause();
+        if (Input.GetKeyDown(KeyCode.L)) GameManager.gmInstance_.ReloadScene();
     }
 }
