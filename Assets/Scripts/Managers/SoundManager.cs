@@ -11,6 +11,7 @@ public class SoundManager : MonoBehaviour
     private List<AudioSource> FXSoundsPool = new List<AudioSource>();
 
 
+
     public enum FXSounds
     {
         PLAYERSHOT, ENEMYSHOT, DOOR, ENEMYDEATH,
@@ -57,4 +58,11 @@ public class SoundManager : MonoBehaviour
     {
         FXSoundsPool[Convert.ToInt32(FXSounds.WALKING)].Stop();
     }
+
+
+    public void OnDeathReset()
+    {
+        StopWalking();
+    }
+
 }

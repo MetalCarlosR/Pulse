@@ -88,6 +88,7 @@ public class PlayerController : MonoBehaviour
     {
         Pistola pistola = GetComponent<Pistola>();
         gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
+        SoundManager.smInstance_.StopWalking();
         if (pistola)
         {
             pistola.enabled = false;
