@@ -18,6 +18,8 @@ public class Enemigo : MonoBehaviour
     private Transform player;
     private PistolaEnemigo gun;
     private Rigidbody2D rb;
+    private MovEnemigo movEnemigo;
+    private Vector3 start , upStart;
     private AudioSource voices;
     [SerializeField]
     private AudioClip[] EnemyVoicePool = new AudioClip[3];
@@ -37,7 +39,10 @@ public class Enemigo : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer(layer_);
         gun = GetComponent<PistolaEnemigo>();
         rb = GetComponent<Rigidbody2D>();
-        voices = GetComponent<AudioSource>();       
+        voices = GetComponent<AudioSource>();
+        movEnemigo = GetComponent<MovEnemigo>();
+        start = transform.position;
+        upStart = transform.up;
         if (GameManager.gmInstance_ != null)
         {
             player = GameManager.gmInstance_.GetPlayerTransform();
@@ -115,7 +120,12 @@ public class Enemigo : MonoBehaviour
             {
                 SetState(State.Alerted);
             }
+            if (state_ == State.Alerted)
+            {
+                movEnemigo.SetPath(player.position);
+            }
         }
+
     }
 
     public void Death()
@@ -148,16 +158,19 @@ public class Enemigo : MonoBehaviour
 
     }
 
-    void ChasePlayer()
+    IEnumerator ChasePlayer()
     {
-        // PATHFINDING NAVMESH O A*
+        Debug.Log("Chase");
+        movEnemigo.SetPath(player.position);
+        yield return new WaitForSeconds(5f);
         SetState(State.Lost);
     }
 
     IEnumerator LostPlayer()
     {
-        rb.velocity = Vector2.zero;
+        movEnemigo.ClearPath();
         yield return new WaitForSeconds(5f);
+        movEnemigo.SetPath(start);
         SetState(State.Patrolling);
     }
 
@@ -172,7 +185,7 @@ public class Enemigo : MonoBehaviour
                     fov.setMaterial(fovMatPat);
                     break;
                 case State.Alerted:
-                    ChasePlayer();
+                    StartCoroutine(ChasePlayer());
                     fov.setMaterial(fovMatAlerted);
                     break;
                 case State.Lost:

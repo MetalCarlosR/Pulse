@@ -12,12 +12,12 @@ public class Camara : MonoBehaviour
     private Material fovMatPat = null, fovMatAlerted = null;
     [SerializeField]
     private string layer_ = "";
-    private AudioSource camera;
+    private AudioSource camaraFX;
 
     private bool pause_ = false;
     private Transform player;
 
-    public enum State
+    private enum State
     {
         Patrolling,
         Alerted
@@ -37,7 +37,7 @@ public class Camara : MonoBehaviour
             fov.gameObject.layer = this.gameObject.layer;
         }
         SetState(State.Patrolling);
-        camera = GetComponent<AudioSource>();
+        camaraFX = GetComponent<AudioSource>();
     }
 
 
@@ -119,7 +119,7 @@ public class Camara : MonoBehaviour
             }
         }
     }
-    public void SetState(State state)
+    private void SetState(State state)
     {
         if (state_ != state)
         {
@@ -132,7 +132,7 @@ public class Camara : MonoBehaviour
                 case State.Alerted:
                     FoundEnemy();
                     fov.setMaterial(fovMatAlerted);
-                    camera.Play();
+                    camaraFX.Play();
                     break;
             }
             state_ = state;

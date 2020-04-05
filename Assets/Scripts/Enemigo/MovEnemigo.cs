@@ -1,19 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.AI;
 
 public class MovEnemigo : MonoBehaviour
 {
     [SerializeField]
     private Vector2[] posiciones;
+    private NavMeshAgent navMesh = null;
+
     void Start()
     {
-        
-    }
+        navMesh = GetComponent<NavMeshAgent>();
 
-    
-    void Update()
+        navMesh.updateRotation = false;
+        navMesh.updateUpAxis = false;
+    }
+    public void SetPath(Vector3 pos)
     {
-        
+        navMesh.SetDestination(pos);
+    }
+    public void ClearPath()
+    {
+        navMesh.ResetPath();
     }
 }

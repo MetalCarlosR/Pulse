@@ -9,6 +9,7 @@ public class Pulse : MonoBehaviour
     private MeshRenderer mesh;
     private int speed;
     private float ortSize, trSize;
+    private bool active = false;
     [SerializeField]
     private Camera cam;
 
@@ -46,12 +47,14 @@ public class Pulse : MonoBehaviour
             {
                 player.UsePulse(true);
                 StopAllCoroutines();
+                active = true;
                 if (mesh.enabled == false) mesh.enabled = true;
                 StartCoroutine(PulseCam(cam.orthographicSize, ortSize * 2f, transform.localScale.x, 4, (((ortSize * 2f) - cam.orthographicSize) / ortSize)));
             }
             else if (Input.GetKeyUp(KeyCode.Space))
             {
                 StopAllCoroutines();
+                active = false;
                 StartCoroutine(PulseCam(cam.orthographicSize, ortSize, transform.localScale.x, trSize, (cam.orthographicSize - ortSize) / ortSize));
             }
         }
@@ -85,7 +88,7 @@ public class Pulse : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Enemigo enemy = collision.GetComponent<Enemigo>();
-        if (enemy) enemy.SetPulseState(true);
+        if (enemy && active) enemy.SetPulseState(true);
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
