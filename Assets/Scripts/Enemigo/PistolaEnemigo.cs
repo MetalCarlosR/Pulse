@@ -10,7 +10,7 @@ public class PistolaEnemigo : MonoBehaviour
     private GameObject bala = null;
     private AudioSource fire;
     [SerializeField]
-    private AudioClip fire_;
+    private AudioClip fire_ = null;
     private void Start()
     {
         fire = pistola.GetComponent<AudioSource>();
