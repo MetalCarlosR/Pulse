@@ -34,6 +34,7 @@ public class Enemigo : MonoBehaviour
         Atacking
     }
     private State state_ = State.Alerted;
+    private State prevState_;
     void Start()
     {
         gameObject.layer = LayerMask.NameToLayer(layer_);
@@ -91,9 +92,9 @@ public class Enemigo : MonoBehaviour
     {
         if (!pause_)
         {
+            Vector3 direction = (player.position - transform.position);
             if (Vector3.Distance(transform.position, player.position) < limit)
             {
-                Vector3 direction = (player.position - transform.position);
                 if (Vector3.Angle(transform.up, direction) < fovSet / 2)
                 {
                     RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, limit);
@@ -103,8 +104,10 @@ public class Enemigo : MonoBehaviour
                         transform.up = direction;
                         if (state_ != State.Atacking)
                         {
+                            if(prevState_ == State.Alerted) movEnemigo.SetPath(player.position);
                             SetState(State.Atacking);
                         }
+                        else if (state_ == State.Atacking && prevState_ == State.Alerted) movEnemigo.SetPath(player.position);
                     }
                     else if (state_ == State.Atacking)
                     {
@@ -122,6 +125,7 @@ public class Enemigo : MonoBehaviour
             }
             if (state_ == State.Alerted)
             {
+                transform.up = direction;
                 movEnemigo.SetPath(player.position);
             }
         }
@@ -178,6 +182,7 @@ public class Enemigo : MonoBehaviour
     {
         if (state_ != state)
         {
+            prevState_ = state_;
             StopAllCoroutines();
             switch (state)
             {
