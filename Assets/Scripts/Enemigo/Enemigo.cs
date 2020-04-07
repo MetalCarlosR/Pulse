@@ -19,7 +19,6 @@ public class Enemigo : MonoBehaviour
     private PistolaEnemigo gun;
     private Rigidbody2D rb;
     private MovEnemigo movEnemigo;
-    private Vector3 start , upStart;
     private AudioSource voices;
     [SerializeField]
     private AudioClip[] EnemyVoicePool = new AudioClip[3];
@@ -33,7 +32,7 @@ public class Enemigo : MonoBehaviour
         Lost,
         Atacking
     }
-    private State state_ = State.Alerted;
+    private State state_ = State.Lost;
     private State prevState_;
     void Start()
     {
@@ -42,8 +41,6 @@ public class Enemigo : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         voices = GetComponent<AudioSource>();
         movEnemigo = GetComponent<MovEnemigo>();
-        start = transform.position;
-        upStart = transform.up;
         if (GameManager.gmInstance_ != null)
         {
             player = GameManager.gmInstance_.GetPlayerTransform();
@@ -104,10 +101,10 @@ public class Enemigo : MonoBehaviour
                         transform.up = direction;
                         if (state_ != State.Atacking)
                         {
-                            if(prevState_ == State.Alerted) movEnemigo.SetPath(player.position);
+                            if(prevState_ == State.Alerted) movEnemigo.ChasePlayer(player.position);
                             SetState(State.Atacking);
                         }
-                        else if (state_ == State.Atacking && prevState_ == State.Alerted) movEnemigo.SetPath(player.position);
+                        else if (state_ == State.Atacking && prevState_ == State.Alerted) movEnemigo.ChasePlayer(player.position);
                     }
                     else if (state_ == State.Atacking)
                     {
@@ -125,8 +122,7 @@ public class Enemigo : MonoBehaviour
             }
             if (state_ == State.Alerted)
             {
-                transform.up = direction;
-                movEnemigo.SetPath(player.position);
+                movEnemigo.ChasePlayer(player.position);
             }
         }
 
@@ -165,7 +161,7 @@ public class Enemigo : MonoBehaviour
     IEnumerator ChasePlayer()
     {
         Debug.Log("Chase");
-        movEnemigo.SetPath(player.position);
+        movEnemigo.ChasePlayer(player.position);
         yield return new WaitForSeconds(5f);
         SetState(State.Lost);
     }
@@ -174,7 +170,7 @@ public class Enemigo : MonoBehaviour
     {
         movEnemigo.ClearPath();
         yield return new WaitForSeconds(5f);
-        movEnemigo.SetPath(start);
+        movEnemigo.Patroll();
         SetState(State.Patrolling);
     }
 

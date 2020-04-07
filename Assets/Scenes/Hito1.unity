@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -15724,6 +15724,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 'Boton '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877360220879818249, guid: 01abd77577ace814b845474b15e7a63d,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877360220879818249, guid: 01abd77577ace814b845474b15e7a63d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6877360220879818293, guid: 01abd77577ace814b845474b15e7a63d,
         type: 3}

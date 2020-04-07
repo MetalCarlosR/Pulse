@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 
     private UIManager UIManager_;
 
-    private GameObject FieldOfViewPool , PulsePool, player_;
+    private GameObject FieldOfViewPool , PulsePool, player_ ;
 
     List<GameObject> entities;
     private Camera camara;
@@ -104,7 +104,6 @@ public class GameManager : MonoBehaviour
         UIManager_ = UImanager;
     }
 
-
     public FieldOfView createFieldofView()
     {
         FieldOfView newFov;
@@ -117,6 +116,12 @@ public class GameManager : MonoBehaviour
         PulseEnemigo newPulse;
         newPulse = Instantiate(pulsePrefab, PulsePool.transform).GetComponent<PulseEnemigo>();
         return newPulse;
+    }
+
+    public void SetEscenario(Transform escenario)
+    {
+        FieldOfViewPool.transform.parent = escenario;
+        PulsePool.transform.parent = escenario;
     }
 
     public void AddEntity(GameObject entity)

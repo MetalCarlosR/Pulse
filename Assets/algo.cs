@@ -5,7 +5,7 @@ public class algo : MonoBehaviour
 {
     NavMeshAgent navMesh;
     [SerializeField]
-    private Transform player;
+    private Transform player = null;
 
     bool algob = true;
     void Start()
