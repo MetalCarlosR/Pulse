@@ -56,9 +56,10 @@ public class Pulse : MonoBehaviour
             {
                 StopAllCoroutines();
                 SoundManager.smInstance_.StopSound(SoundManager.FXSounds.PULSESTART);
-                SoundManager.smInstance_.PlaySound(SoundManager.FXSounds.PULSEEND);
+                float duration = (cam.orthographicSize - ortSize) / ortSize;
+                SoundManager.smInstance_.StopPulseAtTime(1 - duration);
                 active = false;
-                StartCoroutine(PulseCam(cam.orthographicSize, ortSize, transform.localScale.x, trSize, (cam.orthographicSize - ortSize) / ortSize));
+                StartCoroutine(PulseCam(cam.orthographicSize, ortSize, transform.localScale.x, trSize, duration));
             }
         }
         else

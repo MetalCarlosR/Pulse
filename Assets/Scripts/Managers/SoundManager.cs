@@ -61,5 +61,11 @@ public class SoundManager : MonoBehaviour
     {
         StopWalking();
     }
+    public void StopPulseAtTime(float time)
+    {
+        AudioSource pulseEnd = FXSoundsPool[Convert.ToInt32(FXSounds.PULSEEND)];
+        pulseEnd.time = time;
+        pulseEnd.Play();
+    }
 
 }
