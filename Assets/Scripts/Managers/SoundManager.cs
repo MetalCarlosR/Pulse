@@ -16,7 +16,7 @@ public class SoundManager : MonoBehaviour
     {
         PLAYERSHOT, ENEMYSHOT, DOOR, ENEMYDEATH,
         PLAYERDEATH, WALKING, LASER, LASERSWITCH,
-        DAGA
+        DAGA, PULSESTART, PULSEMID, PULSEEND
     }
 
     void Awake()
@@ -32,12 +32,9 @@ public class SoundManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    public void PlaySound(FXSounds audio , Vector3 point)
-    {
-        AudioSource.PlayClipAtPoint(FXSoundsPool[Convert.ToInt32(audio)].clip, point);
-       
-
-        //FXSoundsPool[Convert.ToInt32(audio)].Play();
+    public void PlaySound(FXSounds audio)
+    { 
+        FXSoundsPool[Convert.ToInt32(audio)].Play();
     }
 
     public void StopSound(FXSounds audio)

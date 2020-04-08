@@ -130,7 +130,7 @@ public class Enemigo : MonoBehaviour
 
     public void Death()
     {
-        if (SoundManager.smInstance_) SoundManager.smInstance_.PlaySound(SoundManager.FXSounds.ENEMYDEATH, transform.position);
+        if (SoundManager.smInstance_) SoundManager.smInstance_.PlaySound(SoundManager.FXSounds.ENEMYDEATH);
         Destroy(gameObject);
     }
     private void OnDestroy()

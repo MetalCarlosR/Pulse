@@ -23,7 +23,7 @@ public class Pistola : MonoBehaviour
         if (enabled)
         {
             Instantiate(bala, pistola.position, Quaternion.Euler(transform.localEulerAngles)).GetComponent<Bullet>().SetBounce(1);
-            SoundManager.smInstance_.PlaySound(SoundManager.FXSounds.PLAYERSHOT , transform.position);
+            SoundManager.smInstance_.PlaySound(SoundManager.FXSounds.PLAYERSHOT);
         }
     }
     public void Laser(bool laser)

@@ -70,6 +70,7 @@ public class Pulse : MonoBehaviour
         float time = 0;
         while (time < duration)
         {
+            SoundManager.smInstance_.PlaySound(SoundManager.FXSounds.PULSESTART);
             float size = Mathf.Lerp(beginSize, endSize, time / duration); ;
             cam.orthographicSize = Mathf.Lerp(beginCam, endCam, time / duration);
             transform.localScale = new Vector2(size, size);
