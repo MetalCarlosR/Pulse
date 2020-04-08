@@ -46,6 +46,7 @@ public class Pulse : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 player.UsePulse(true);
+                SoundManager.smInstance_.PlaySound(SoundManager.FXSounds.PULSESTART);
                 StopAllCoroutines();
                 active = true;
                 if (mesh.enabled == false) mesh.enabled = true;
@@ -54,6 +55,8 @@ public class Pulse : MonoBehaviour
             else if (Input.GetKeyUp(KeyCode.Space))
             {
                 StopAllCoroutines();
+                SoundManager.smInstance_.StopSound(SoundManager.FXSounds.PULSESTART);
+                SoundManager.smInstance_.PlaySound(SoundManager.FXSounds.PULSEEND);
                 active = false;
                 StartCoroutine(PulseCam(cam.orthographicSize, ortSize, transform.localScale.x, trSize, (cam.orthographicSize - ortSize) / ortSize));
             }
@@ -70,7 +73,6 @@ public class Pulse : MonoBehaviour
         float time = 0;
         while (time < duration)
         {
-            SoundManager.smInstance_.PlaySound(SoundManager.FXSounds.PULSESTART);
             float size = Mathf.Lerp(beginSize, endSize, time / duration); ;
             cam.orthographicSize = Mathf.Lerp(beginCam, endCam, time / duration);
             transform.localScale = new Vector2(size, size);
