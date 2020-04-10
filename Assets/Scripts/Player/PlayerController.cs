@@ -11,10 +11,8 @@ public class PlayerController : MonoBehaviour
 
     private bool pause_ = false;
     private bool pulse_ = false;
-    [SerializeField]
     private FieldOfView fov;
-    [SerializeField]
-    private float fovSet = 0, limit = 0;
+    private float fovSet = 360, limit = 50;
 
     private Pistola gun;
     private Daga daga;

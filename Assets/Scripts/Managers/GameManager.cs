@@ -11,12 +11,13 @@ public class GameManager : MonoBehaviour
 
     private UIManager UIManager_;
 
-    private GameObject FieldOfViewPool , PulsePool, player_ ;
+    private GameObject FieldOfViewPool, PulsePool, player_;
 
     List<GameObject> entities;
     private Camera camara;
     public static GameManager gmInstance_;
 
+    private int ammo_ = 5, startAmmo_;
 
     bool paused = false;
 
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
         PulsePool = new GameObject();
         FieldOfViewPool.name = "FieldOfViewPool";
         PulsePool.name = "PulsePool";
+        startAmmo_ = ammo_;
     }
     public void PlayerDeath()
     {
@@ -63,6 +65,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         Debug.Log(SceneManager.GetActiveScene().name);
+        ammo_ = startAmmo_;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -133,6 +136,15 @@ public class GameManager : MonoBehaviour
         entities.Remove(entity);
     }
 
+    public void Shoot()
+    {
+        ammo_--;
+    }
+
+    public bool EmptyGun()
+    {
+        return ammo_ <= 0;
+    }
     public void TogglePause()
     {
         if (paused) ResumeGame();

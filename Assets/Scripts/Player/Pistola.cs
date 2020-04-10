@@ -20,8 +20,9 @@ public class Pistola : MonoBehaviour
     }
     public void Shoot()
     {
-        if (enabled)
+        if (enabled && !GameManager.gmInstance_.EmptyGun())
         {
+            GameManager.gmInstance_.Shoot();
             Instantiate(bala, pistola.position, Quaternion.Euler(transform.localEulerAngles)).GetComponent<Bullet>().SetBounce(1);
             SoundManager.smInstance_.PlaySound(SoundManager.FXSounds.PLAYERSHOT);
         }

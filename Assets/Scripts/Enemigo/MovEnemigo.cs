@@ -17,13 +17,14 @@ public class MovEnemigo : MonoBehaviour
         navMesh.updateUpAxis = false;
         if (nodes.Count >= 2)
         {
+            GetComponent<Enemigo>().StartDelay();
             index = Random.Range(0, nodes.Count);
             Patroll();
         }
         else
         {
             Debug.LogWarning("Error no nodes found on" + this);
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
 
     }
@@ -40,6 +41,7 @@ public class MovEnemigo : MonoBehaviour
             transform.up = navMesh.destination - transform.position;
             if (Vector2.Distance(transform.position, navMesh.destination) < 2) NextNode();
         }
+        if (transform.rotation.x != 0 || transform.rotation.y != 0) transform.rotation = Quaternion.Euler(0, 0, transform.eulerAngles.z);
     }
     public void ChasePlayer(Vector3 pos)
     {

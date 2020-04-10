@@ -22,7 +22,7 @@ public class Enemigo : MonoBehaviour
     private AudioSource voices;
     [SerializeField]
     private AudioClip[] EnemyVoicePool = new AudioClip[3];
-
+    private bool started = false;
    
 
     public enum State
@@ -34,8 +34,9 @@ public class Enemigo : MonoBehaviour
     }
     private State state_ = State.Lost;
     private State prevState_;
-    void Start()
+    public void StartDelay()
     {
+        started = true;
         gameObject.layer = LayerMask.NameToLayer(layer_);
         gun = GetComponent<PistolaEnemigo>();
         rb = GetComponent<Rigidbody2D>();
@@ -135,9 +136,13 @@ public class Enemigo : MonoBehaviour
     }
     private void OnDestroy()
     {
-        if (GameManager.gmInstance_) GameManager.gmInstance_.RemoveEntity(gameObject);
-        if (fov) Destroy(fov.gameObject);
-        if (pulse) Destroy(pulse.gameObject);
+        if (started)
+        {
+            if (GameManager.gmInstance_) GameManager.gmInstance_.RemoveEntity(gameObject);
+            if (fov) Destroy(fov.gameObject);
+            if (pulse) Destroy(pulse.gameObject);
+        }
+       
     }
     private void OnPause()
     {
