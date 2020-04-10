@@ -7,12 +7,15 @@ public class PulseEnemigo : MonoBehaviour
     private Vector3 startingSize;
     private float growthPerSecond = 1.8f;
     private Transform assignEnemy;
+    private AudioSource heartbeat;
 
 
     void Start()
     {
         startingSize = transform.localScale;
+        heartbeat = GetComponent<AudioSource>();
         StartCoroutine(Reset());
+        
     }
 
 
@@ -25,6 +28,7 @@ public class PulseEnemigo : MonoBehaviour
     private IEnumerator Reset()
     {
         ResetAll();
+        if(enabled)heartbeat.Play();
         yield return new WaitForSeconds(2f);
         StartCoroutine(Reset());
     }
