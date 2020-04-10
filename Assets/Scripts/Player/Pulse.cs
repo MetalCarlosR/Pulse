@@ -22,7 +22,7 @@ public class Pulse : MonoBehaviour
         if (GameManager.gmInstance_)
         {
             cam = GameManager.gmInstance_.GetCamera();
-            if(cam) ortSize = cam.orthographicSize;
+            if (cam) ortSize = cam.orthographicSize;
         }
         else
         {
@@ -70,8 +70,10 @@ public class Pulse : MonoBehaviour
     }
 
     IEnumerator PulseCam(float beginCam, float endCam, float beginSize, float endSize, float duration)
-    {
+    {        
+        Debug.Log(beginSize + "  " + endSize);
         float time = 0;
+        if (endSize < 4) SoundManager.smInstance_.StopSound(SoundManager.FXSounds.PULSEMID);
         while (time < duration)
         {
             float size = Mathf.Lerp(beginSize, endSize, time / duration); ;
@@ -80,13 +82,17 @@ public class Pulse : MonoBehaviour
             time += Time.deltaTime;
             yield return null;
         }
+        if (endSize == 4) SoundManager.smInstance_.PlaySound(SoundManager.FXSounds.PULSEMID);
         if (endSize == trSize)
         {
             mesh.enabled = false;
             player.UsePulse(false);
         }
+        
         cam.orthographicSize = endCam;
         transform.localScale = new Vector2(endSize, endSize);
+
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
