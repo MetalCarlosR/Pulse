@@ -23,7 +23,7 @@ public class MovEnemigo : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Error no nodes found on" + this);
+            Debug.LogWarning("Error no nodes found on" + this + ". Destroying" + this);
             Destroy(gameObject);
         }
 
