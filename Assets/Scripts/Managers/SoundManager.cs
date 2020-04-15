@@ -15,7 +15,7 @@ public class SoundManager : MonoBehaviour
     public enum FXSounds
     {
         PLAYERSHOT, ENEMYSHOT, DOOR, ENEMYDEATH,
-        PLAYERDEATH, WALKING, LASER, LASERSWITCH,
+        PLAYERDEATH, WALKING, LASERSWITCH,
         DAGA, PULSESTART, PULSEMID, PULSEEND
     }
 
