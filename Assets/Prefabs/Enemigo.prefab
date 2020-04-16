@@ -160,6 +160,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 479ca310416243e4790838d6f9740a61, type: 3}
   - {fileID: 8300000, guid: e6bd65a7af11790469513eab9a934d19, type: 3}
   - {fileID: 8300000, guid: 34cd88c08a105f345984ae2483449c56, type: 3}
+  step: {fileID: 8300000, guid: dd3869d0a3e1f4c48a5fc0c61c82fb47, type: 3}
 --- !u!114 &2296551788389932639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,16 +225,16 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 0.604
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 0
-  MaxDistance: 22
+  MinDistance: 1
+  MaxDistance: 14
   Pan2D: 0
-  rolloffMode: 2
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0

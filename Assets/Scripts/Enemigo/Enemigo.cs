@@ -19,11 +19,13 @@ public class Enemigo : MonoBehaviour
     private PistolaEnemigo gun;
     private Rigidbody2D rb;
     private MovEnemigo movEnemigo;
-    private AudioSource voices;
+    private AudioSource voices; private AudioSource steps;
     [SerializeField]
     private AudioClip[] EnemyVoicePool = new AudioClip[3];
+    [SerializeField]
+    private AudioClip step;
     private bool started = false;
-   
+
 
     public enum State
     {
@@ -41,6 +43,8 @@ public class Enemigo : MonoBehaviour
         gun = GetComponent<PistolaEnemigo>();
         rb = GetComponent<Rigidbody2D>();
         voices = GetComponent<AudioSource>();
+        steps = GetComponent<AudioSource>(); steps.clip = step;
+       //¿ponemos dos tipos de audios para los pasos?
         movEnemigo = GetComponent<MovEnemigo>();
         if (GameManager.gmInstance_ != null)
         {
@@ -102,7 +106,7 @@ public class Enemigo : MonoBehaviour
                         transform.up = direction;
                         if (state_ != State.Atacking)
                         {
-                            if(prevState_ == State.Alerted) movEnemigo.ChasePlayer(player.position);
+                            if (prevState_ == State.Alerted) movEnemigo.ChasePlayer(player.position);
                             SetState(State.Atacking);
                         }
                         else if (state_ == State.Atacking && prevState_ == State.Alerted) movEnemigo.ChasePlayer(player.position);
@@ -132,6 +136,7 @@ public class Enemigo : MonoBehaviour
     public void Death()
     {
         if (SoundManager.smInstance_) SoundManager.smInstance_.PlaySound(SoundManager.FXSounds.ENEMYDEATH);
+        steps.Stop();
         Destroy(gameObject);
     }
     private void OnDestroy()
@@ -142,7 +147,7 @@ public class Enemigo : MonoBehaviour
             if (fov) Destroy(fov.gameObject);
             if (pulse) Destroy(pulse.gameObject);
         }
-       
+
     }
     private void OnPause()
     {
@@ -156,7 +161,7 @@ public class Enemigo : MonoBehaviour
     IEnumerator AttackPlayer()
     {
         while (true)
-        {           
+        {
             yield return new WaitForSeconds(rateOfFire);
             gun.Shoot();
         }
@@ -184,6 +189,11 @@ public class Enemigo : MonoBehaviour
         if (state_ != state)
         {
             prevState_ = state_;
+            if (prevState_ == State.Lost && !steps.isPlaying)
+            {
+                steps.Play();
+            }
+            //TO DO
             StopAllCoroutines();
             switch (state)
             {
@@ -202,7 +212,6 @@ public class Enemigo : MonoBehaviour
                     StartCoroutine(AttackPlayer());
                     fov.setMaterial(fovMatAtacking);
                     break;
-
             }
             state_ = state;
         }
