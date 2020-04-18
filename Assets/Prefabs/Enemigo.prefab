@@ -77,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: -49356369
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: db3ba4efa4916264891e2a35515519ea, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -103,9 +103,9 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
+    border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.16}
+    oldSize: {x: 0.5714286, y: 0.5714286}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -154,7 +154,7 @@ MonoBehaviour:
   fovMatPat: {fileID: 2100000, guid: 6c20c177428817645acdda77532b3d7c, type: 2}
   fovMatAlerted: {fileID: 2100000, guid: 51dd8fd1ede9c414d8560df951b4f6ad, type: 2}
   fovMatAtacking: {fileID: 2100000, guid: a238df406ca91ee43852676be7494d92, type: 2}
-  layer_: Enemigos
+  layer_: Jugador
   pulse: {fileID: 4328990365136060843, guid: c8da73be1b1578f449bb09c268af9457, type: 3}
   EnemyVoicePool:
   - {fileID: 8300000, guid: 479ca310416243e4790838d6f9740a61, type: 3}
@@ -188,7 +188,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4a3e61b458d3054aaa86841c923a9bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodes: []
+  nodes:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!195 &8389037845830336274
 NavMeshAgent:
   m_ObjectHideFlags: 0
