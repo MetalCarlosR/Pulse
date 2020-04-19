@@ -16,8 +16,10 @@ public class PlayerController : MonoBehaviour
 
     private Pistola gun;
     private Daga daga;
+    private Animator animator;
     void Start()
     {
+        animator = GetComponent<Animator>();
         gun = GetComponent<Pistola>();
         rb = GetComponent<Rigidbody2D>();
         daga = GetComponentInChildren<Daga>();
@@ -52,11 +54,13 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButtonDown("Fire1") && !pulse_)
             {
                 daga.Attack();
-                gun.Shoot();                
+                gun.Shoot();
+                animator.SetTrigger("Ataque");
             }
             if (Input.GetButtonDown("Fire2") && !pulse_)
             {
                 gun.Laser(true);
+                animator.SetTrigger("Ataque");
             }
             else if (Input.GetButtonUp("Fire2"))
             {

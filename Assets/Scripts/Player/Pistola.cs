@@ -12,16 +12,19 @@ public class Pistola : MonoBehaviour
     bool laser_ = false;
 
     LineRenderer line_;
-
+    private Animator animator;
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         line_ = pistola.GetComponent<LineRenderer>();
     }
     public void Shoot()
     {
+        animator.SetBool("Munición", false);
         if (enabled && !GameManager.gmInstance_.EmptyGun())
         {
+            animator.SetBool("Munición", true);
             GameManager.gmInstance_.Shoot();
             Instantiate(bala, pistola.position, Quaternion.Euler(transform.localEulerAngles)).GetComponent<Bullet>().SetBounce(1);
             SoundManager.smInstance_.PlaySound(SoundManager.FXSounds.PLAYERSHOT);

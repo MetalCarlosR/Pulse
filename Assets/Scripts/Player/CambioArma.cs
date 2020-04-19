@@ -8,34 +8,21 @@ public class CambioArma : MonoBehaviour
     private Daga daga = null;
     [SerializeField]
     private Pistola pistola = null;
-    [SerializeField]
-    private Sprite spriteDaga;
-    [SerializeField]
-    private Sprite spritePistola;
-
+    private Animator animator;
     void Start()
     {
+        animator = GetComponent<Animator>();
         pistola.enabled = false;
-        
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
+            animator.SetTrigger("Cambio arma");
             daga.gameObject.SetActive(!daga.gameObject.activeSelf);
             daga.enabled = !daga.enabled;
             pistola.enabled = !pistola.enabled;
-        }
-        if (daga.enabled)
-        {
-            SpriteRenderer sR = this.gameObject.GetComponent<SpriteRenderer>();
-            sR.sprite = spriteDaga;
-        }
-        else
-        {
-            SpriteRenderer sR = this.gameObject.GetComponent<SpriteRenderer>();
-            sR.sprite = spritePistola;
         }
     }
 }
