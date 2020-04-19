@@ -67,21 +67,24 @@ public class Enemigo : MonoBehaviour
 
     private void Update()
     {
-        if (fov != null)
+        if (started)
         {
-            if (fovSet != 360)
+            if (fov != null)
             {
-                fov.SetAngle(-transform.right);
+                if (fovSet != 360)
+                {
+                    fov.SetAngle(-transform.right);
+                }
+                fov.SetOrigin(transform.position);
             }
-            fov.SetOrigin(transform.position);
-        }
-        if (player != null)
-        {
-            FindPlayer();
-        }
-        else
-        {
-            player = GameManager.gmInstance_.GetPlayerTransform();
+            if (player != null)
+            {
+                FindPlayer();
+            }
+            else
+            {
+                player = GameManager.gmInstance_.GetPlayerTransform();
+            }
         }
     }
 

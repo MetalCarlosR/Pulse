@@ -154,7 +154,7 @@ MonoBehaviour:
   fovMatPat: {fileID: 2100000, guid: 6c20c177428817645acdda77532b3d7c, type: 2}
   fovMatAlerted: {fileID: 2100000, guid: 51dd8fd1ede9c414d8560df951b4f6ad, type: 2}
   fovMatAtacking: {fileID: 2100000, guid: a238df406ca91ee43852676be7494d92, type: 2}
-  layer_: Jugador
+  layer_: Enemigos
   pulse: {fileID: 4328990365136060843, guid: c8da73be1b1578f449bb09c268af9457, type: 3}
   EnemyVoicePool:
   - {fileID: 8300000, guid: 479ca310416243e4790838d6f9740a61, type: 3}
@@ -188,12 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4a3e61b458d3054aaa86841c923a9bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodes:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  nodes: []
 --- !u!195 &8389037845830336274
 NavMeshAgent:
   m_ObjectHideFlags: 0
