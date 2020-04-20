@@ -8,15 +8,16 @@ public class SoundManager : MonoBehaviour
     public static SoundManager smInstance_;
 
     [SerializeField]
-    private List<AudioSource> FXSoundsPool = new List<AudioSource>();
+    private List<AudioClip> FXSoundsPool = new List<AudioClip>();
 
 
 
     public enum FXSounds
     {
-        PLAYERSHOT, ENEMYSHOT, DOOR, ENEMYDEATH,
-        PLAYERDEATH, WALKING, LASERSWITCH,
-        DAGA, PULSESTART, PULSEMID, PULSEEND
+        ENEMY_VOICE1, ENEMY_VOICE2,
+        ENEMY_VOICE3, ENEMY_DEATH,
+        PULSE_START, PULSE_MID,
+        PULSE_END
     }
 
     void Awake()
@@ -32,40 +33,8 @@ public class SoundManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    public void PlaySound(FXSounds audio)
-    { 
-        FXSoundsPool[Convert.ToInt32(audio)].Play();
-    }
-
-    public void StopSound(FXSounds audio)
+    public AudioClip GetClip(FXSounds sound)
     {
-        FXSoundsPool[Convert.ToInt32(audio)].Stop();
+        return FXSoundsPool[Convert.ToInt32(sound)];
     }
-
-    public void PlayWalking()
-    {
-        AudioSource walking = FXSoundsPool[Convert.ToInt32(FXSounds.WALKING)];
-        if (!walking.isPlaying)
-        {
-            walking.Play();
-        }
-    }
-
-    public void StopWalking()
-    {
-        FXSoundsPool[Convert.ToInt32(FXSounds.WALKING)].Stop();
-    }
-
-
-    public void OnDeathReset()
-    {
-        StopWalking();
-    }
-    public void StopPulseAtTime(float time)
-    {
-        AudioSource pulseEnd = FXSoundsPool[Convert.ToInt32(FXSounds.PULSEEND)];
-        pulseEnd.time = time;
-        pulseEnd.Play();
-    }
-
 }

@@ -7,10 +7,12 @@ public class Puerta : MonoBehaviour
     bool jugador, open;
 
     private float rot;
+    private AudioSource source;
 
     private void Start()
     {
         open = false;
+        source = GetComponent<AudioSource>();
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -47,7 +49,7 @@ public class Puerta : MonoBehaviour
 
         if (!open)
         {
-            SoundManager.smInstance_.PlaySound(SoundManager.FXSounds.DOOR);
+            source.Play();
             StartCoroutine(DoorRotation(rotaionBegin, rotationEnd, 1f));
         }
     }

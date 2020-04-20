@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Daga : MonoBehaviour
 {
-    BoxCollider2D daga;
-    float rotation;
-    bool canAttack = true;
-    int offset = 90;
+    private BoxCollider2D daga;
+    private float rotation;
+    private bool canAttack = true;
+    private int offset = 90;
+    private AudioSource source;
     private void Start()
     {
         daga = GetComponent<BoxCollider2D>();
+        source = GetComponent<AudioSource>();
         daga.enabled = false;
         transform.rotation = Quaternion.identity;
         rotation = transform.rotation.z;
@@ -22,10 +24,10 @@ public class Daga : MonoBehaviour
         if (canAttack && enabled)
         {
             canAttack = false;
-            SoundManager.smInstance_.PlaySound(SoundManager.FXSounds.DAGA);
+            source.Play();
             StopAllCoroutines();
             StartCoroutine(DagaAttack(daga, rotation, rotation + offset, 0));
-            
+
         }
     }
 

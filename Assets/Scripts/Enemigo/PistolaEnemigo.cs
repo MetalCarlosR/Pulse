@@ -9,8 +9,6 @@ public class PistolaEnemigo : MonoBehaviour
     [SerializeField]
     private GameObject bala = null;
     private AudioSource fire;
-    [SerializeField]
-    private AudioClip fire_ = null;
     private void Start()
     {
         fire = pistola.GetComponent<AudioSource>();
@@ -19,7 +17,6 @@ public class PistolaEnemigo : MonoBehaviour
     public void Shoot()
     {
         Instantiate(bala, pistola.position, Quaternion.Euler(transform.localEulerAngles)).GetComponent<Bullet>().SetBounce(0);
-        fire.clip = fire_;
         fire.Play();
     }
 }

@@ -50,7 +50,6 @@ public class GameManager : MonoBehaviour
     public void PlayerDeath()
     {
         Time.timeScale = 0;
-        SoundManager.smInstance_.OnDeathReset();
         if (UIManager_ != null)
         {
             UIManager_.RespawnMenu();

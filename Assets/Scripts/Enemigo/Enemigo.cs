@@ -19,11 +19,11 @@ public class Enemigo : MonoBehaviour
     private PistolaEnemigo gun;
     private Rigidbody2D rb;
     private MovEnemigo movEnemigo;
-    private AudioSource voices; private AudioSource steps;
+    private AudioSource voices;
     [SerializeField]
-    private AudioClip[] EnemyVoicePool = new AudioClip[3];
-    [SerializeField]
-    private AudioClip step;
+    private AudioSource steps;
+
+    private AudioClip[] EnemyVoicePool = new AudioClip[4];
     private bool started = false;
 
 
@@ -35,7 +35,7 @@ public class Enemigo : MonoBehaviour
         Atacking
     }
     private State state_ = State.Lost;
-    private State prevState_;
+    private State prevState_ = State.Alerted;
     public void StartDelay()
     {
         started = true;
@@ -43,7 +43,6 @@ public class Enemigo : MonoBehaviour
         gun = GetComponent<PistolaEnemigo>();
         rb = GetComponent<Rigidbody2D>();
         voices = GetComponent<AudioSource>();
-        steps = GetComponent<AudioSource>(); steps.clip = step;
        //¿ponemos dos tipos de audios para los pasos?
         movEnemigo = GetComponent<MovEnemigo>();
         if (GameManager.gmInstance_ != null)
@@ -60,6 +59,13 @@ public class Enemigo : MonoBehaviour
             fov.gameObject.layer = this.gameObject.layer;
 
             SetPulseState(false);
+        }
+        if (SoundManager.smInstance_)
+        {
+            EnemyVoicePool[0] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.ENEMY_VOICE1);
+            EnemyVoicePool[1] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.ENEMY_VOICE2);
+            EnemyVoicePool[2] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.ENEMY_VOICE3);
+            EnemyVoicePool[3] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.ENEMY_DEATH);
         }
         SetState(State.Patrolling);
     }
@@ -138,8 +144,8 @@ public class Enemigo : MonoBehaviour
 
     public void Death()
     {
-        if (SoundManager.smInstance_) SoundManager.smInstance_.PlaySound(SoundManager.FXSounds.ENEMYDEATH);
         steps.Stop();
+        AudioSource.PlayClipAtPoint(EnemyVoicePool[3], transform.position);
         Destroy(gameObject);
     }
     private void OnDestroy()
@@ -192,9 +198,9 @@ public class Enemigo : MonoBehaviour
         if (state_ != state)
         {
             prevState_ = state_;
-            if (prevState_ == State.Lost && !steps.isPlaying)
+            if (prevState_ == State.Lost && !voices.isPlaying)
             {
-                steps.Play();
+                PlayEnemyVoice();
             }
             //TO DO
             StopAllCoroutines();

@@ -17,12 +17,15 @@ public class PlayerController : MonoBehaviour
     private Pistola gun;
     private Daga daga;
     private Animator animator;
+
+    private AudioSource walking;
     void Start()
     {
         animator = GetComponent<Animator>();
         gun = GetComponent<Pistola>();
         rb = GetComponent<Rigidbody2D>();
         daga = GetComponentInChildren<Daga>();
+        walking = GetComponent<AudioSource>();
         if (GameManager.gmInstance_ != null)
         {
             GameManager.gmInstance_.SetPlayer(gameObject);
@@ -42,6 +45,15 @@ public class PlayerController : MonoBehaviour
     {
         if (!pause_)
         {
+            rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed_, Input.GetAxis("Vertical") * speed_);
+            if (rb.velocity.y != 0 || rb.velocity.x != 0)
+            {
+                PlayWalking();
+            }
+            else
+            {
+                walking.Stop();
+            }
             LookAtMouse();
             if (fov != null)
             {
@@ -55,12 +67,13 @@ public class PlayerController : MonoBehaviour
             {
                 daga.Attack();
                 gun.Shoot();
+                //animator.SetBool("Munición", true);
+                //animator.SetBool("Munición", false);
                 animator.SetTrigger("Ataque");
             }
             if (Input.GetButtonDown("Fire2") && !pulse_)
             {
                 gun.Laser(true);
-                animator.SetTrigger("Ataque");
             }
             else if (Input.GetButtonUp("Fire2"))
             {
@@ -68,16 +81,12 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    void FixedUpdate()
+
+    private void PlayWalking()
     {
-        rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed_, Input.GetAxis("Vertical") * speed_);
-        if(rb.velocity.y != 0 || rb.velocity.x != 0)
+        if (!walking.isPlaying)
         {
-            SoundManager.smInstance_.PlayWalking();
-        }
-        else
-        {
-            SoundManager.smInstance_.StopWalking();
+            walking.Play();
         }
     }
 
@@ -90,7 +99,7 @@ public class PlayerController : MonoBehaviour
     {
         Pistola pistola = GetComponent<Pistola>();
         gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
-        SoundManager.smInstance_.StopWalking();
+        walking.Stop();
         if (pistola)
         {
             pistola.enabled = false;

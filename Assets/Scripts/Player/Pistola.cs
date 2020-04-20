@@ -13,11 +13,13 @@ public class Pistola : MonoBehaviour
 
     LineRenderer line_;
     private Animator animator;
+    private AudioSource fire;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         line_ = pistola.GetComponent<LineRenderer>();
+        fire = pistola.GetComponent<AudioSource>();
     }
     public void Shoot()
     {
@@ -27,7 +29,7 @@ public class Pistola : MonoBehaviour
             animator.SetBool("Munición", true);
             GameManager.gmInstance_.Shoot();
             Instantiate(bala, pistola.position, Quaternion.Euler(transform.localEulerAngles)).GetComponent<Bullet>().SetBounce(1);
-            SoundManager.smInstance_.PlaySound(SoundManager.FXSounds.PLAYERSHOT);
+            fire.Play();
         }
     }
     public void Laser(bool laser)
@@ -47,12 +49,12 @@ public class Pistola : MonoBehaviour
             RaycastHit2D hit;
             Vector3[] posHit = new Vector3[3];
 
-            posHit[0] = transform.position;
+            posHit[0] = pistola.position;
 
-            hit = Physics2D.Raycast(transform.position, transform.up);
+            hit = Physics2D.Raycast(pistola.position, pistola.up);
             posHit[1] = hit.point;
 
-            Vector3 angleHit = Vector3.Reflect(transform.up, hit.normal);
+            Vector3 angleHit = Vector3.Reflect(pistola.up, hit.normal);
 
             hit = Physics2D.Raycast(hit.point, angleHit);
             posHit[2] = hit.point;

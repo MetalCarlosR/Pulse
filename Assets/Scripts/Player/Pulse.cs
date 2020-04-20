@@ -12,12 +12,18 @@ public class Pulse : MonoBehaviour
     private bool active = false;
     [SerializeField]
     private Camera cam;
+
+    private AudioSource source;
+
+    private AudioClip[] clips = new AudioClip[3];
+
     void Start()
     {
         player = GetComponentInParent<PlayerController>();
         pistola = GetComponentInParent<Pistola>();
         beginSize = transform.localScale.x;
         mesh = GetComponent<MeshRenderer>();
+        source = GetComponent<AudioSource>();
         if (GameManager.gmInstance_)
         {
             cam = GameManager.gmInstance_.GetCamera();
@@ -26,6 +32,16 @@ public class Pulse : MonoBehaviour
         else
         {
             Debug.LogError("Warning no GameManager found"); enabled = false; return;
+        }
+        if (SoundManager.smInstance_)
+        {
+            clips[0] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.PULSE_START);   
+            clips[1] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.PULSE_MID);   
+            clips[2] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.PULSE_END);   
+        }
+        else
+        {
+            Debug.LogError("Warning no SoundManager found"); enabled = false; return;
         }
         if (player && pistola && mesh)
         {
@@ -45,7 +61,7 @@ public class Pulse : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 player.UsePulse(true);
-                SoundManager.smInstance_.PlaySound(SoundManager.FXSounds.PULSESTART);
+                PlayPulse(0);
                 StopAllCoroutines();
                 active = true;
                 if (mesh.enabled == false) mesh.enabled = true;
@@ -54,9 +70,9 @@ public class Pulse : MonoBehaviour
             else if (Input.GetKeyUp(KeyCode.Space))
             {
                 StopAllCoroutines();
-                SoundManager.smInstance_.StopSound(SoundManager.FXSounds.PULSESTART);
+                source.Stop();
                 float duration = (cam.orthographicSize - ortSize) / ortSize;
-                SoundManager.smInstance_.StopPulseAtTime(1 - duration);
+                StopPulseAtTime(1 - duration);
                 active = false;
                 StartCoroutine(PulseCam(cam.orthographicSize, ortSize, transform.localScale.x, beginSize, duration));
             }
@@ -71,7 +87,6 @@ public class Pulse : MonoBehaviour
     IEnumerator PulseCam(float beginCam, float endCam, float beginSize, float endSize, float duration)
     {
         float time = 0;
-        SoundManager.smInstance_.StopSound(SoundManager.FXSounds.PULSEMID);
         while (time < duration)
         {
             float size = Mathf.Lerp(beginSize, endSize, time / duration); ;
@@ -80,7 +95,7 @@ public class Pulse : MonoBehaviour
             time += Time.deltaTime;
             yield return null;
         }
-        if (endSize == maxSize) SoundManager.smInstance_.PlaySound(SoundManager.FXSounds.PULSEMID);
+        if (endSize == maxSize) PlayPulse(1);
         if (endSize == this.beginSize)
         {
             mesh.enabled = false;
@@ -91,6 +106,21 @@ public class Pulse : MonoBehaviour
         transform.localScale = new Vector2(endSize, endSize);
 
 
+    }
+
+    private void PlayPulse(int i)
+    {
+        if (i == 1) source.loop = true;
+        source.clip = clips[i];
+        source.Play();
+    }
+
+    private void StopPulseAtTime(float time)
+    {
+        source.loop = false;
+        source.clip = clips[2];
+        source.time = time;
+        source.Play();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
