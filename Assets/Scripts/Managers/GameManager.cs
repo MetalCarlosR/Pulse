@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
         FieldOfViewPool.name = "FieldOfViewPool";
         PulsePool.name = "PulsePool";
         startAmmo_ = ammo_;
+       
     }
     public void PlayerDeath()
     {
@@ -104,6 +105,7 @@ public class GameManager : MonoBehaviour
     public void SetUImanager(UIManager UImanager)
     {
         UIManager_ = UImanager;
+        gmInstance_.SetAmmunition(ammo_);
     }
 
     public FieldOfView createFieldofView()
@@ -138,6 +140,7 @@ public class GameManager : MonoBehaviour
     public void Shoot()
     {
         ammo_--;
+        gmInstance_.SetAmmunition(ammo_);
     }
 
     public bool EmptyGun()
@@ -189,5 +192,25 @@ public class GameManager : MonoBehaviour
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    public void SetDaga(bool activado)
+    {
+        UIManager_.SetDaga(activado);
+    }
+
+    public void ActivatePulse(bool activado)
+    {
+        UIManager_.ActivatePulse(activado);
+    }
+
+    public void TurnInterface(bool on)
+    {
+        UIManager_.TurnInterface(on);
+    }
+
+    public void SetAmmunition(int num)
+    {
+        UIManager_.SetAmmunition(num);
     }
 }

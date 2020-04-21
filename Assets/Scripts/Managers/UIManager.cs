@@ -6,7 +6,10 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject RespawnUI = null, pauseMenu = null;
+    GameObject RespawnUI = null, pauseMenu = null, interfaz = null, daga = null, pistola = null, pulse = null;
+    [SerializeField]
+    Text Ammunition = null;
+    
     private void Start()
     {
         if (GameManager.gmInstance_ != null)
@@ -52,4 +55,37 @@ public class UIManager : MonoBehaviour
     {
         pauseMenu.SetActive(false);
     }
+
+
+    public void SetDaga(bool activado)
+    {
+        if (activado)
+        {
+            daga.SetActive(true);
+            pistola.SetActive(false);
+        }
+        else
+        {
+            daga.SetActive(false);
+            pistola.SetActive(true);
+        }
+    }
+
+    public void ActivatePulse(bool activado)
+    {
+        pulse.SetActive(activado);
+    }
+
+    public void TurnInterface(bool on)
+    {
+        interfaz.SetActive(on);
+    }
+
+    public void SetAmmunition(int num)
+    {
+        Ammunition.text = "x " + num;
+    }
+
+
+    
 }

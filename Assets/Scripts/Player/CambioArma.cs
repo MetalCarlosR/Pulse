@@ -13,6 +13,7 @@ public class CambioArma : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         pistola.enabled = false;
+        GameManager.gmInstance_.SetDaga(daga.enabled);
     }
 
     void Update()
@@ -23,6 +24,8 @@ public class CambioArma : MonoBehaviour
             daga.gameObject.SetActive(!daga.gameObject.activeSelf);
             daga.enabled = !daga.enabled;
             pistola.enabled = !pistola.enabled;
+            GameManager.gmInstance_.SetDaga(daga.enabled);
+            
         }
     }
 }
