@@ -59,8 +59,11 @@ public class UIManager : MonoBehaviour
 
     public void SetWeapon(bool activado)
     {
-        daga.SetActive(activado);
-        pistola.SetActive(!activado);
+        if (daga && pistola)
+        {
+            daga.SetActive(activado);
+            pistola.SetActive(!activado);
+        }
     }
 
     public void ActivatePulse(bool activado)

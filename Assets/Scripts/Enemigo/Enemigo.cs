@@ -21,7 +21,7 @@ public class Enemigo : MonoBehaviour
     private MovEnemigo movEnemigo;
     private AudioSource voices;
     [SerializeField]
-    private AudioSource steps;
+    private AudioSource steps = null;
 
     private AudioClip[] EnemyVoicePool = new AudioClip[4];
     private bool started = false;

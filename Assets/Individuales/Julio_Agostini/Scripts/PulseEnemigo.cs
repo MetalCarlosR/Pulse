@@ -8,6 +8,8 @@ public class PulseEnemigo : MonoBehaviour
     private float growthPerSecond = 1.8f;
     private Transform assignEnemy;
     private AudioSource heartbeat;
+    [SerializeField]
+    private float waitTime = 2f;
 
 
     void Start()
@@ -29,7 +31,7 @@ public class PulseEnemigo : MonoBehaviour
     {
         ResetAll();
         if(enabled)heartbeat.Play();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(waitTime);
         StartCoroutine(Reset());
     }
     public void ResetAll()
