@@ -194,9 +194,9 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    public void SetDaga(bool activado)
+    public void SetWeapon(bool activado)
     {
-        UIManager_.SetDaga(activado);
+        UIManager_.SetWeapon(activado);
     }
 
     public void ActivatePulse(bool activado)
