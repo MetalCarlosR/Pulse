@@ -122234,6 +122234,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7943091572148078260, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7943091572148078256, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -124020,34 +124025,6 @@ PrefabInstance:
       propertyPath: nodes.Array.data[5]
       value: 
       objectReference: {fileID: 630750487}
-    - target: {fileID: 5668069761844117317, guid: 106736dc44b77614a912095aed9cf61f,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 7e181917cba1f1c4ea50f3ffa12d6195,
-        type: 3}
-    - target: {fileID: 5668069761844117317, guid: 106736dc44b77614a912095aed9cf61f,
-        type: 3}
-      propertyPath: m_FlipX
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5668069761844117317, guid: 106736dc44b77614a912095aed9cf61f,
-        type: 3}
-      propertyPath: m_FlipY
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1352441276845946807, guid: 106736dc44b77614a912095aed9cf61f,
-        type: 3}
-      propertyPath: spriteDaga
-      value: 
-      objectReference: {fileID: 21300000, guid: 7e181917cba1f1c4ea50f3ffa12d6195,
-        type: 3}
-    - target: {fileID: 1352441276845946807, guid: 106736dc44b77614a912095aed9cf61f,
-        type: 3}
-      propertyPath: spritePistola
-      value: 
-      objectReference: {fileID: 21300000, guid: b3756dd0183e75245987db9b72148e7a,
-        type: 3}
     - target: {fileID: 3270135627175731372, guid: 92210dc51b465ca4f813d301c99a842b,
         type: 3}
       propertyPath: m_Color.r
@@ -124099,6 +124076,34 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 0.5714286
       objectReference: {fileID: 0}
+    - target: {fileID: 5668069761844117317, guid: 106736dc44b77614a912095aed9cf61f,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7e181917cba1f1c4ea50f3ffa12d6195,
+        type: 3}
+    - target: {fileID: 5668069761844117317, guid: 106736dc44b77614a912095aed9cf61f,
+        type: 3}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668069761844117317, guid: 106736dc44b77614a912095aed9cf61f,
+        type: 3}
+      propertyPath: m_FlipY
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352441276845946807, guid: 106736dc44b77614a912095aed9cf61f,
+        type: 3}
+      propertyPath: spriteDaga
+      value: 
+      objectReference: {fileID: 21300000, guid: 7e181917cba1f1c4ea50f3ffa12d6195,
+        type: 3}
+    - target: {fileID: 1352441276845946807, guid: 106736dc44b77614a912095aed9cf61f,
+        type: 3}
+      propertyPath: spritePistola
+      value: 
+      objectReference: {fileID: 21300000, guid: b3756dd0183e75245987db9b72148e7a,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92210dc51b465ca4f813d301c99a842b, type: 3}
 --- !u!1 &1743023832
