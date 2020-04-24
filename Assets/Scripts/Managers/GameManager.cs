@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     private Camera camara;
     public static GameManager gmInstance_;
 
-    private int ammo_ = 5, startAmmo_;
+    private int ammo_, startAmmo_ = 5;
 
     bool paused = false;
 
@@ -45,8 +45,7 @@ public class GameManager : MonoBehaviour
         PulsePool = new GameObject();
         FieldOfViewPool.name = "FieldOfViewPool";
         PulsePool.name = "PulsePool";
-        startAmmo_ = ammo_;
-       
+        ammo_ = startAmmo_;
     }
     public void PlayerDeath()
     {
@@ -63,9 +62,9 @@ public class GameManager : MonoBehaviour
 
     public void ReloadScene()
     {
+        Debug.Log(ammo_);
         Time.timeScale = 1;
-        Debug.Log(SceneManager.GetActiveScene().name);
-        ammo_ = startAmmo_;
+        Debug.Log(SceneManager.GetActiveScene().name);    
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
