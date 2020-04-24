@@ -23,10 +23,9 @@ public class Pistola : MonoBehaviour
     }
     public void Shoot()
     {
-        animator.SetBool("Munición", false);
         if (enabled && !GameManager.gmInstance_.EmptyGun())
         {
-            animator.SetBool("Munición", true);
+            animator.SetTrigger("Ataque");
             GameManager.gmInstance_.Shoot();
             Instantiate(bala, pistola.position, Quaternion.Euler(transform.localEulerAngles)).GetComponent<Bullet>().SetBounce(1);
             fire.Play();

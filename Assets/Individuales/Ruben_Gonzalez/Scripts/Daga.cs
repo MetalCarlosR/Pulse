@@ -9,10 +9,12 @@ public class Daga : MonoBehaviour
     private bool canAttack = true;
     private int offset = 90;
     private AudioSource source;
+    private Animator animator;
     private void Start()
     {
         daga = GetComponent<BoxCollider2D>();
         source = GetComponent<AudioSource>();
+        animator = GetComponentInParent<Animator>();
         daga.enabled = false;
         transform.rotation = Quaternion.identity;
         rotation = transform.rotation.z;
@@ -25,6 +27,7 @@ public class Daga : MonoBehaviour
         {
             canAttack = false;
             source.Play();
+            animator.SetTrigger("Ataque");
             StopAllCoroutines();
             StartCoroutine(DagaAttack(daga, rotation, rotation + offset, 0));
 

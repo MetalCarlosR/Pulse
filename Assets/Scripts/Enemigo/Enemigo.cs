@@ -20,6 +20,7 @@ public class Enemigo : MonoBehaviour
     private Rigidbody2D rb;
     private MovEnemigo movEnemigo;
     private AudioSource voices;
+    private Animator animator;
     [SerializeField]
     private AudioSource steps = null;
 
@@ -43,6 +44,7 @@ public class Enemigo : MonoBehaviour
         gun = GetComponent<PistolaEnemigo>();
         rb = GetComponent<Rigidbody2D>();
         voices = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
        //¿ponemos dos tipos de audios para los pasos?
         movEnemigo = GetComponent<MovEnemigo>();
         if (GameManager.gmInstance_ != null)
@@ -169,6 +171,7 @@ public class Enemigo : MonoBehaviour
 
     IEnumerator AttackPlayer()
     {
+        animator.SetBool("Disparo", true);
         while (true)
         {
             yield return new WaitForSeconds(rateOfFire);
@@ -201,6 +204,9 @@ public class Enemigo : MonoBehaviour
             if (prevState_ == State.Lost && !voices.isPlaying)
             {
                 PlayEnemyVoice();
+            }
+            else if(prevState_ == State.Atacking){
+                animator.SetBool("Disparo", false);
             }
             //TO DO
             StopAllCoroutines();

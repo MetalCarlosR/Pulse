@@ -16,12 +16,10 @@ public class PlayerController : MonoBehaviour
 
     private Pistola gun;
     private Daga daga;
-    private Animator animator;
 
     private AudioSource walking;
     void Start()
     {
-        animator = GetComponent<Animator>();
         gun = GetComponent<Pistola>();
         rb = GetComponent<Rigidbody2D>();
         daga = GetComponentInChildren<Daga>();
@@ -67,9 +65,6 @@ public class PlayerController : MonoBehaviour
             {
                 daga.Attack();
                 gun.Shoot();
-                //animator.SetBool("Munición", true);
-                //animator.SetBool("Munición", false);
-                animator.SetTrigger("Ataque");
             }
             if (Input.GetButtonDown("Fire2") && !pulse_)
             {
