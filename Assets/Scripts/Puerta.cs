@@ -5,14 +5,13 @@ using UnityEngine;
 public class Puerta : MonoBehaviour
 {
     bool jugador, open;
-
+    private AudioSource doorSound;
     private float rot;
-    private AudioSource source;
 
     private void Start()
     {
         open = false;
-        source = GetComponent<AudioSource>();
+        doorSound = GetComponent<AudioSource>();        
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -36,7 +35,7 @@ public class Puerta : MonoBehaviour
             if (transform.position.x > player.transform.position.x) rotationEnd = rotaionBegin + 90;
             else rotationEnd = rotaionBegin - 90;
         }
-        else if(rotaionBegin == 90)
+        else if (rotaionBegin == 90)
         {
             if (transform.position.y > player.transform.position.y) rotationEnd = rotaionBegin - 90;
             else rotationEnd = rotaionBegin + 90;
@@ -49,7 +48,8 @@ public class Puerta : MonoBehaviour
 
         if (!open)
         {
-            source.Play();
+            doorSound.Play();
+            Debug.Log("playing");
             StartCoroutine(DoorRotation(rotaionBegin, rotationEnd, 1f));
         }
     }
@@ -58,6 +58,7 @@ public class Puerta : MonoBehaviour
     {
         float time = 0;
         open = !open;
+
         while (time < duration)
         {
             transform.rotation = Quaternion.Euler(0, 0, Mathf.Lerp(begin, end, time / duration));

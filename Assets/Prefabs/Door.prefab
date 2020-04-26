@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6395133698238684674}
   - component: {fileID: 6395133698238684675}
   - component: {fileID: -1601318569374726755}
-  m_Layer: 2
+  m_Layer: 9
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6395133698238684673}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: -0.8000001, z: -11.6875}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6395133698328310351}
@@ -58,7 +58,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.71115506, y: 2.1738405}
+  m_Size: {x: 0.71115506, y: 2.33}
   m_EdgeRadius: 0
 --- !u!114 &6395133698238684675
 MonoBehaviour:
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 6395133698328310345}
   - component: {fileID: 6089710803077276907}
   m_Layer: 9
-  m_Name: New Sprite (2)
+  m_Name: DoorCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -194,8 +194,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6395133698328310348}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.8000001, z: 11.6875}
-  m_LocalScale: {x: 0.3, y: 2, z: 1}
+  m_LocalPosition: {x: -0.03, y: 0.91, z: 11.6875}
+  m_LocalScale: {x: 0.5, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 6395133698238684672}
   m_RootOrder: 0

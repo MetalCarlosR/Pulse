@@ -23,7 +23,6 @@ public class Enemigo : MonoBehaviour
     private Animator animator;
     [SerializeField]
     private AudioSource steps = null;
-
     private AudioClip[] EnemyVoicePool = new AudioClip[4];
     private bool started = false;
 
