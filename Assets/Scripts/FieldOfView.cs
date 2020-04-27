@@ -46,6 +46,7 @@ public class FieldOfView : MonoBehaviour
             }
             else
             {
+                //hit = Physics2D.Raycast(hit.point , Vec3FromAngle(angle),mask);
                 ver = hit.point;
             }
             vertices[verIndex] = ver;
@@ -101,4 +102,6 @@ public class FieldOfView : MonoBehaviour
     {
         GetComponent<MeshRenderer>().material = mat;
     }
+
+
 }
