@@ -49,7 +49,6 @@ public class Puerta : MonoBehaviour
         if (!open)
         {
             doorSound.Play();
-            Debug.Log("playing");
             StartCoroutine(DoorRotation(rotaionBegin, rotationEnd, 1f));
         }
     }
