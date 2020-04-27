@@ -21,7 +21,7 @@ public class Puerta : MonoBehaviour
         }
     }
 
-    void MovPuerta(Transform player)
+    public void MovPuerta(Transform player)
     {
         float rotationEnd = 0;
         float rotaionBegin = transform.localEulerAngles.z;
