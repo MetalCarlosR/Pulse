@@ -67,4 +67,16 @@ public class MovEnemigo : MonoBehaviour
         patrol = false;
         navMesh.ResetPath();
     }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Puerta door = collision.GetComponent<Puerta>();
+
+        Debug.Log("E");
+        if (door)
+        {
+            door.MovPuerta(transform);
+        }
+    }
 }
