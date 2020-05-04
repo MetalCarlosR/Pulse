@@ -45,14 +45,12 @@ public class MovEnemigo : MonoBehaviour
     }
     public void ChasePlayer(Vector3 pos)
     {
-        navMesh.speed = 3.5f;
         chase = true;
         patrol = false;
         navMesh.SetDestination(pos);
     }
     public void Patroll()
     {
-        navMesh.speed = 1.5f;
         patrol = true;
         chase = false;
         navMesh.SetDestination(nodes[index].position);

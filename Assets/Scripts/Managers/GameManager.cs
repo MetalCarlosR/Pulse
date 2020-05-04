@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     private int ammo_, startAmmo_ = 5;
 
-    bool paused = false, death = false;
+    bool paused = false;
 
     private void Awake()
     {
@@ -50,7 +50,6 @@ public class GameManager : MonoBehaviour
     public void PlayerDeath()
     {
         Time.timeScale = 0;
-        death = true;
         if (UIManager_ != null)
         {
             UIManager_.RespawnMenu();
@@ -65,7 +64,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log(ammo_);
         Time.timeScale = 1;
-        Debug.Log(SceneManager.GetActiveScene().name);
+        Debug.Log(SceneManager.GetActiveScene().name);    
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -154,14 +153,14 @@ public class GameManager : MonoBehaviour
     }
     public void PauseGame()
     {
-        if (!paused && !death)
+        if (!paused)
         {
             paused = true;
             Time.timeScale = 0;
             foreach (GameObject obj in entities)
             {
                 obj.SendMessage("OnPause");
-            }
+            }            
         }
     }
 

@@ -48,7 +48,7 @@ public class FieldOfView : MonoBehaviour
             }
             else
             {
-                //if (player_) GetNextPoint(ref hit);
+                if (player_) GetNextPoint(ref hit);
                 ver = hit.point;
             }
             vertices[verIndex] = ver;

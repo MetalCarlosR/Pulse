@@ -15,8 +15,8 @@ public class SoundManager : MonoBehaviour
     public enum FXSounds
     {
         ENEMY_VOICE1, ENEMY_VOICE2,
-        ENEMY_VOICE3, ENEMY_DEATH, 
-        PULSE_START,
+        ENEMY_VOICE3, ENEMY_DEATH,
+        DOOR, PULSE_START,
         PULSE_MID, PULSE_END
     }
 
