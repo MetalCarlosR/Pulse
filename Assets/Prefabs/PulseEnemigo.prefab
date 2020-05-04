@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4328990365136060842}
   - component: {fileID: 4328990365136060843}
   - component: {fileID: 1853436361663779103}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PulseEnemigo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
