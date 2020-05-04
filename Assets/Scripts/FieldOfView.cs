@@ -18,6 +18,8 @@ public class FieldOfView : MonoBehaviour
 
     [SerializeField]
     private LayerMask mask = 0;
+
+    private bool player_ = true;
     private void Start()
     {
         mesh = new Mesh();
@@ -31,14 +33,14 @@ public class FieldOfView : MonoBehaviour
     {
         float angle = startAngle;
         int verIndex = 1;
-        int triaIndex = 0;        
+        int triaIndex = 0;
 
         vertices[0] = origin_;
 
         for (int i = 0; i <= rayCount; i++)
         {
             Vector3 ver;
-            RaycastHit2D hit = Physics2D.Raycast(origin_, Vec3FromAngle(angle), viewDistance , mask);
+            RaycastHit2D hit = Physics2D.Raycast(origin_, Vec3FromAngle(angle), viewDistance, mask);
 
             if (hit.collider == null)
             {
@@ -46,7 +48,7 @@ public class FieldOfView : MonoBehaviour
             }
             else
             {
-                //hit = Physics2D.Raycast(hit.point , Vec3FromAngle(angle),mask);
+                //if (player_) GetNextPoint(ref hit);
                 ver = hit.point;
             }
             vertices[verIndex] = ver;
@@ -64,7 +66,12 @@ public class FieldOfView : MonoBehaviour
 
         mesh.vertices = vertices;
         mesh.triangles = triangles;
-        mesh.bounds = new Bounds(origin_ , Vector3.one * 1000f);
+        mesh.bounds = new Bounds(origin_, Vector3.one * 1000f);
+    }
+
+    private void GetNextPoint(ref RaycastHit2D hit)
+    {
+        hit.point -= hit.normal/2;
     }
 
     private Vector3 Vec3FromAngle(float angle)
@@ -92,16 +99,15 @@ public class FieldOfView : MonoBehaviour
         startAngle = AngleFromVec3(aimDir) - fov / 2f;
     }
 
-    public void SetInstance(float limit , float fov)
+    public void SetInstance(float limit, float fov, bool player = true)
     {
         this.fov = fov;
         angleIncrease = fov / rayCount;
+        player_ = player;
         viewDistance = limit;
     }
     public void setMaterial(Material mat)
     {
         GetComponent<MeshRenderer>().material = mat;
     }
-
-
 }

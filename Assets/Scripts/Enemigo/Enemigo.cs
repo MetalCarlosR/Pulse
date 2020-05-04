@@ -55,7 +55,7 @@ public class Enemigo : MonoBehaviour
             pulse.name = "Pulse" + this.name;
             fov = GameManager.gmInstance_.createFieldofView();
             fov.name = "FieldOfView" + this.name;
-            fov.SetInstance(limit, fovSet);
+            fov.SetInstance(limit, fovSet, false);
             fov.gameObject.layer = gameObject.layer;
             fov.gameObject.layer = this.gameObject.layer;
 

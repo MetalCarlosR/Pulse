@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private FieldOfView fov;
     private float fovSet = 360, limit = 50;
 
+    [SerializeField]
+    private GameObject black;
     private Pistola gun;
     private Daga daga;
 
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         daga = GetComponentInChildren<Daga>();
         walking = GetComponent<AudioSource>();
+        black.SetActive(true);
         if (GameManager.gmInstance_ != null)
         {
             GameManager.gmInstance_.SetPlayer(gameObject);
