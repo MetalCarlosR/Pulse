@@ -19,7 +19,6 @@ public class FieldOfView : MonoBehaviour
     [SerializeField]
     private LayerMask mask = 0;
 
-    private bool player_ = true;
     private void Start()
     {
         mesh = new Mesh();
@@ -48,7 +47,6 @@ public class FieldOfView : MonoBehaviour
             }
             else
             {
-                if (player_) GetNextPoint(ref hit);
                 ver = hit.point;
             }
             vertices[verIndex] = ver;
@@ -99,11 +97,10 @@ public class FieldOfView : MonoBehaviour
         startAngle = AngleFromVec3(aimDir) - fov / 2f;
     }
 
-    public void SetInstance(float limit, float fov, bool player = true)
+    public void SetInstance(float limit, float fov)
     {
         this.fov = fov;
         angleIncrease = fov / rayCount;
-        player_ = player;
         viewDistance = limit;
     }
     public void setMaterial(Material mat)

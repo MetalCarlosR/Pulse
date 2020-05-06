@@ -32,7 +32,7 @@ public class Camara : MonoBehaviour
             GameManager.gmInstance_.AddEntity(gameObject);
             fov = GameManager.gmInstance_.createFieldofView();
             fov.name = "FieldOfView" + this.name;
-            fov.SetInstance(limit, fovSet, false);
+            fov.SetInstance(limit, fovSet);
             fov.gameObject.layer = gameObject.layer;
             fov.gameObject.layer = this.gameObject.layer;
         }
