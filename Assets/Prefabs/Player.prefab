@@ -921,6 +921,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5668069761844117322}
     m_Modifications:
+    - target: {fileID: 1952326614100929029, guid: a8dac9fa221917d43a49e5584fd05bc3,
+        type: 3}
+      propertyPath: m_Name
+      value: Daga
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952326614100929029, guid: a8dac9fa221917d43a49e5584fd05bc3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952326614100929029, guid: a8dac9fa221917d43a49e5584fd05bc3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2798609365084612500, guid: a8dac9fa221917d43a49e5584fd05bc3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -976,15 +991,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1952326614100929029, guid: a8dac9fa221917d43a49e5584fd05bc3,
+    - target: {fileID: 5151414807513711058, guid: a8dac9fa221917d43a49e5584fd05bc3,
         type: 3}
-      propertyPath: m_Name
-      value: Daga
-      objectReference: {fileID: 0}
-    - target: {fileID: 1952326614100929029, guid: a8dac9fa221917d43a49e5584fd05bc3,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8dac9fa221917d43a49e5584fd05bc3, type: 3}
