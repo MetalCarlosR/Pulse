@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class MenuManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject initialButtons, settings, howToPlay, backgroundGroup, back; /*exit, , audioSettings, back;*/
+    GameObject initialButtons, settings, howToPlay, backgroundGroup, back, audio; /*exit, , audioSettings, back;*/
+    [SerializeField]
+    AudioMixer musicAM, fxSoundAM;
     private bool ini;
     private void Start()
     {
@@ -30,6 +33,7 @@ public class MenuManager : MonoBehaviour
             settings.SetActive(true);
             howToPlay.SetActive(false);
             backgroundGroup.SetActive(true);
+            audio.SetActive(false);
             ini = true;
         }
     }
@@ -41,5 +45,23 @@ public class MenuManager : MonoBehaviour
         back.SetActive(true);
         backgroundGroup.SetActive(false);
         ini = false;
+    }
+
+    public void Audio()
+    {
+        audio.SetActive(true);
+        ini = false;
+        settings.SetActive(false);
+        backgroundGroup.SetActive(false);
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        musicAM.SetFloat("MusicVolume", volume);
+       
+    }
+    public void SetFXVolume (float volume)
+    {
+        fxSoundAM.SetFloat("FXVolume",volume);
     }
 }
