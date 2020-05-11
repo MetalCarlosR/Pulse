@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
     public void SetUImanager(UIManager UImanager)
     {
         UIManager_ = UImanager;
-        gmInstance_.SetAmmunition(ammo_);
+        gmInstance_.SetAmmunition();
     }
 
     public FieldOfView createFieldofView()
@@ -139,9 +139,14 @@ public class GameManager : MonoBehaviour
     public void Shoot()
     {
         ammo_--;
-        gmInstance_.SetAmmunition(ammo_);
+        gmInstance_.SetAmmunition();
     }
 
+    public void AddAmmo(int ammo)
+    {
+        ammo_ += ammo;
+        gmInstance_.SetAmmunition();
+    }
     public bool EmptyGun()
     {
         return ammo_ <= 0;
@@ -208,8 +213,8 @@ public class GameManager : MonoBehaviour
         UIManager_.TurnInterface(on);
     }
 
-    public void SetAmmunition(int num)
+    public void SetAmmunition()
     {
-        UIManager_.SetAmmunition(num);
+        UIManager_.SetAmmunition(ammo_);
     }
 }
