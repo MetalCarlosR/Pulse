@@ -57,11 +57,13 @@ public class MenuManager : MonoBehaviour
 
     public void SetMusicVolume(float volume)
     {
+        if (volume == -30) volume = -80;
         musicAM.SetFloat("MusicVolume", volume);
-       
+
     }
-    public void SetFXVolume (float volume)
+    public void SetFXVolume(float volume)
     {
-        fxSoundAM.SetFloat("FXVolume",volume);
+        if (volume == -20) volume = -80;
+        fxSoundAM.SetFloat("FXVolume", volume);
     }
 }
