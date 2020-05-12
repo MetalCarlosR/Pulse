@@ -5,9 +5,9 @@ using UnityEngine.Audio;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject initialButtons, settings, howToPlay, backgroundGroup, back, audio; /*exit, , audioSettings, back;*/
+    GameObject initialButtons = null, settings = null , howToPlay = null, backgroundGroup = null, back = null, audioPanel = null; /*exit, , audioSettings, back;*/
     [SerializeField]
-    AudioMixer musicAM, fxSoundAM;
+    AudioMixer musicAM = null, fxSoundAM = null;
     private bool ini;
     private void Start()
     {
@@ -33,7 +33,7 @@ public class MenuManager : MonoBehaviour
             settings.SetActive(true);
             howToPlay.SetActive(false);
             backgroundGroup.SetActive(true);
-            audio.SetActive(false);
+            audioPanel.SetActive(false);
             ini = true;
         }
     }
@@ -49,7 +49,7 @@ public class MenuManager : MonoBehaviour
 
     public void Audio()
     {
-        audio.SetActive(true);
+        audioPanel.SetActive(true);
         ini = false;
         settings.SetActive(false);
         backgroundGroup.SetActive(false);
