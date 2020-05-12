@@ -45,7 +45,6 @@ public class Daga : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             collision.gameObject.GetComponent<Enemigo>().Death();
-            Destroy(gameObject);
         }
     }
 }
