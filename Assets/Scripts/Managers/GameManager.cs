@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         Debug.Log(SceneManager.GetActiveScene().name);    
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SoundManager.smInstance_.SetFXVolume(true);
     }
 
     public Transform GetPlayerTransform()

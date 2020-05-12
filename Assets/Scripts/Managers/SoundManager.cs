@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 public class SoundManager : MonoBehaviour
 {
 
@@ -9,8 +10,8 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField]
     private List<AudioClip> FXSoundsPool = new List<AudioClip>();
-
-
+    [SerializeField]
+    private AudioMixer fXSound;
 
     public enum FXSounds
     {
@@ -36,5 +37,11 @@ public class SoundManager : MonoBehaviour
     public AudioClip GetClip(FXSounds sound)
     {
         return FXSoundsPool[Convert.ToInt32(sound)];
+    }
+
+    public void SetFXVolume(bool on) //Configurar el sonido de la muerte del jugador
+    {
+        if (on) fXSound.SetFloat("FXVolume", 0);
+        else fXSound.SetFloat("FXVolume", -80);
     }
 }

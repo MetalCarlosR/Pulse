@@ -104,6 +104,7 @@ public class PlayerController : MonoBehaviour
         }
         enabled = false;
         GameManager.gmInstance_.PlayerDeath();
+        SoundManager.smInstance_.SetFXVolume(false);
     }
 
     private void OnPause()

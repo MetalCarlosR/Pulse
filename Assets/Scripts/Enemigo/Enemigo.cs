@@ -58,7 +58,6 @@ public class Enemigo : MonoBehaviour
             fov.SetInstance(limit, fovSet);
             fov.gameObject.layer = gameObject.layer;
             fov.gameObject.layer = this.gameObject.layer;
-
             SetPulseState(false);
         }
         if (SoundManager.smInstance_)
@@ -176,7 +175,6 @@ public class Enemigo : MonoBehaviour
             yield return new WaitForSeconds(rateOfFire);
             gun.Shoot();
         }
-
     }
 
     IEnumerator ChasePlayer()
