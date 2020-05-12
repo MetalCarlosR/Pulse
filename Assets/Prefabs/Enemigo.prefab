@@ -190,8 +190,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!195 &8389037845830336274
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -499,7 +497,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7985d7c48e382764fb61f5ecb4dd8189, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.036
   m_Pitch: 1
   Loop: 0

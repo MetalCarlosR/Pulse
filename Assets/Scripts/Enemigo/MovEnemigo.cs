@@ -72,8 +72,6 @@ public class MovEnemigo : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Puerta door = collision.GetComponent<Puerta>();
-
-        Debug.Log("E");
         if (door)
         {
             door.MovPuerta(transform);
