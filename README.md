@@ -29,3 +29,9 @@
 	LASER PISTOLA 	- RATÓN 2 / CLICK DERECHO
 	CAMBIAR ARMA	- C
 	PULSE 		- SPACE / BARRA ESPACIADORA
+
+
+# CREDITOS 
+
+	Additional sound effects from https://www.zapsplat.com
+	Addional sprites for level 1 https://free-game-assets.itch.io/free-tds-tilesets-buildings-and-furniture
