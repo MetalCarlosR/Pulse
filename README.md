@@ -1,4 +1,4 @@
- # DESARROLLADORES
+ # RESUMEN
 
 	Pulse es un juego en 2D con vista cenital basado en el sigilo y en la capacidad auditiva del avatar, 
 	representada además de forma visual para mejorar la experiencia del jugador. El jugador deberá usar la 
@@ -12,7 +12,7 @@
 
 	El juego está en desarrollo por lo que contará de errores y funcionalidades sin terminar.
 
-# DEVELOPERS
+# DESARROLLADORES
 
 	- Carlos Romero García
 	- Rubén Gonzáles Ortiz
