@@ -23,7 +23,7 @@ public class Enemigo : MonoBehaviour
     private Animator animator;
     [SerializeField]
     private AudioSource steps = null;
-    private AudioClip[] EnemyVoicePool = new AudioClip[4];
+    private AudioClip[] EnemyVoicePool = new AudioClip[5];
     private bool started = false;
 
 
@@ -44,7 +44,6 @@ public class Enemigo : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         voices = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
-       //¿ponemos dos tipos de audios para los pasos?
         movEnemigo = GetComponent<MovEnemigo>();
         if (GameManager.gmInstance_ != null)
         {
@@ -62,10 +61,11 @@ public class Enemigo : MonoBehaviour
         }
         if (SoundManager.smInstance_)
         {
-            EnemyVoicePool[0] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.ENEMY_VOICE1);
+            EnemyVoicePool[0] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.ENEMY_VOICE0);
             EnemyVoicePool[1] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.ENEMY_VOICE2);
             EnemyVoicePool[2] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.ENEMY_VOICE3);
-            EnemyVoicePool[3] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.ENEMY_DEATH);
+            EnemyVoicePool[2] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.ENEMY_VOICE3);
+            EnemyVoicePool[4] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.ENEMY_DEATH);
         }
         SetState(State.Patrolling);
     }
@@ -146,7 +146,7 @@ public class Enemigo : MonoBehaviour
     public void Death()
     {
         steps.Stop();
-        AudioSource.PlayClipAtPoint(EnemyVoicePool[3], transform.position);
+        AudioSource.PlayClipAtPoint(EnemyVoicePool[4], transform.position);
         Destroy(gameObject);
     }
     private void OnDestroy()
@@ -232,7 +232,7 @@ public class Enemigo : MonoBehaviour
 
     public void PlayEnemyVoice()
     {
-        voices.clip = EnemyVoicePool[Random.Range(0, 3)];
+        voices.clip = EnemyVoicePool[Random.Range(0, 4)];
         voices.Play();
     }
 }

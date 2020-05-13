@@ -44,9 +44,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FXSoundsPool:
-  - {fileID: 8300000, guid: 479ca310416243e4790838d6f9740a61, type: 3}
-  - {fileID: 8300000, guid: e6bd65a7af11790469513eab9a934d19, type: 3}
-  - {fileID: 8300000, guid: 34cd88c08a105f345984ae2483449c56, type: 3}
+  - {fileID: 8300000, guid: 8ed254c476489074b9d8e0d7359243d4, type: 3}
+  - {fileID: 8300000, guid: b0e42d69118a10b4f9b76a47b8040214, type: 3}
+  - {fileID: 8300000, guid: 55f0f63a99ddc3a4780ee1c2e6d8b2d6, type: 3}
+  - {fileID: 8300000, guid: 7f4e81d9b419f584d973ea8aa583d9c6, type: 3}
   - {fileID: 8300000, guid: f15a7750ba34ad44ab7d5009173b98c7, type: 3}
   - {fileID: 8300000, guid: d5fab2318ad75504ca9afb51ff15bb13, type: 3}
   - {fileID: 8300000, guid: 790ce00df5381384989cdf82b374de1f, type: 3}
