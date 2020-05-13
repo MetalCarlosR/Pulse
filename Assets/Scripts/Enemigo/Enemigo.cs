@@ -34,7 +34,7 @@ public class Enemigo : MonoBehaviour
         Lost,
         Atacking
     }
-    private State state_ = State.Lost;
+    private State state_ = State.Atacking;
     private State prevState_ = State.Alerted;
     public void StartDelay()
     {
@@ -96,7 +96,6 @@ public class Enemigo : MonoBehaviour
 
     public void SetPulseState(bool state)
     {
-        Debug.Log("e");
         if (!state) pulse.ResetAll();
         pulse.enabled = state;
     }
@@ -232,6 +231,7 @@ public class Enemigo : MonoBehaviour
 
     public void PlayEnemyVoice()
     {
+        Debug.Log("e");
         voices.clip = EnemyVoicePool[Random.Range(0, 4)];
         voices.Play();
     }
