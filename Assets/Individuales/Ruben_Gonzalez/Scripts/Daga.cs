@@ -42,9 +42,10 @@ public class Daga : MonoBehaviour
     //}
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        Enemigo e = collision.gameObject.GetComponent<Enemigo>();
+        if (e)
         {
-            collision.gameObject.GetComponent<Enemigo>().Death();
+            e.Death();
         }
     }
 }

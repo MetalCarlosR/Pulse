@@ -96,6 +96,7 @@ public class Enemigo : MonoBehaviour
 
     public void SetPulseState(bool state)
     {
+        Debug.Log("e");
         if (!state) pulse.ResetAll();
         pulse.enabled = state;
     }

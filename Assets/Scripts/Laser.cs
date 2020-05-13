@@ -46,7 +46,9 @@ public class Laser : MonoBehaviour
     {
         PlayerController detectorJugador = collision.GetComponent<PlayerController>();
         if (detectorJugador)
+        {
             laser.Stop();
             detectorJugador.Die();
+        }    
     }
 }

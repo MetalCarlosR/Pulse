@@ -628,7 +628,7 @@ GameObject:
   - component: {fileID: 800758401}
   - component: {fileID: 800758402}
   - component: {fileID: 817296982}
-  m_Layer: 8
+  m_Layer: 2
   m_Name: Pulse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
