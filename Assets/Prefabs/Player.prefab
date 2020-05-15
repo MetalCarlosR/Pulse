@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 5668069761414816662}
   - component: {fileID: 1876833387}
   - component: {fileID: 3161135688221615855}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Pistola
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -828,6 +828,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5668069761844117322}
     m_Modifications:
+    - target: {fileID: 1952326614100929029, guid: a8dac9fa221917d43a49e5584fd05bc3,
+        type: 3}
+      propertyPath: m_Name
+      value: Daga
+      objectReference: {fileID: 0}
     - target: {fileID: 2798609365084612500, guid: a8dac9fa221917d43a49e5584fd05bc3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -882,11 +887,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1952326614100929029, guid: a8dac9fa221917d43a49e5584fd05bc3,
-        type: 3}
-      propertyPath: m_Name
-      value: Daga
       objectReference: {fileID: 0}
     - target: {fileID: 2728236546974226059, guid: a8dac9fa221917d43a49e5584fd05bc3,
         type: 3}

@@ -58,6 +58,13 @@ public class MenuManager : MonoBehaviour
         backgroundGroup.SetActive(false);
     }
 
+
+
+
+
+
+    // MOVERLOS AL SOUND MANAGER
+
     public void SetMusicVolume(float volume)
     {
         if (volume == -30) volume = -80;
@@ -71,5 +78,4 @@ public class MenuManager : MonoBehaviour
         soundManager.GetFXVolume(volume);
         fxVolume = volume;
     }
-   
 }

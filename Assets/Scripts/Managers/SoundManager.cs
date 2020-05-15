@@ -10,8 +10,10 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField]
     private List<AudioClip> FXSoundsPool = new List<AudioClip>();
+
+    // CREAR LOS MÉTODOS PARA CAMBIAR EL VOLUMEN
     [SerializeField]
-    private AudioMixer fXSound;
+    private AudioMixer musicAM = null, fxSoundAM = null;
     private float fxVolume = 0;
 
 
@@ -49,8 +51,8 @@ public class SoundManager : MonoBehaviour
     public void SetFXVolume(bool on) //Configurar el sonido de la muerte del jugador
     {
         //menuManager = gameObject.GetComponent<MenuManager>();
-        if (on) fXSound.SetFloat("FXVolume", fxVolume);
-        else fXSound.SetFloat("FXVolume", -80);
+        if (on) fxSoundAM.SetFloat("FXVolume", fxVolume);
+        else fxSoundAM.SetFloat("FXVolume", -80);
     }
     public void GetFXVolume(float volume) { fxVolume = volume; }
 }

@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        paused = false;
         entities = new List<GameObject>();
         FieldOfViewPool = new GameObject();
         PulsePool = new GameObject();
@@ -70,9 +71,9 @@ public class GameManager : MonoBehaviour
 
     public void ReloadScene()
     {
-        Debug.Log(ammo_);
         Time.timeScale = 1;
-        Debug.Log(SceneManager.GetActiveScene().name);    
+        Debug.Log(SceneManager.GetActiveScene().name);
+        SoundManager.smInstance_.SetFXVolume(true);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         SoundManager.smInstance_.SetFXVolume(true);
     }
