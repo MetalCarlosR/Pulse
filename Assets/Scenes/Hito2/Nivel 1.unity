@@ -124928,6 +124928,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7943091572148078260, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7943091572148078256, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -125035,6 +125040,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4952170439923434083, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4952170439923434083, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ReloadScene
       objectReference: {fileID: 0}
@@ -125043,6 +125053,12 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4952170439923434083, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3648562890854971307, guid: f1d635091723a1b4684ec1dd5e1b7731,
+        type: 3}
     - target: {fileID: 76081886, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -126756,7 +126772,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1419322569
 MonoBehaviour:
   m_ObjectHideFlags: 0
