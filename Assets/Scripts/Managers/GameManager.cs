@@ -7,7 +7,7 @@ using UnityEditor;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject fovPrefab = null, pulsePrefab = null;
+    private GameObject fovPrefab = null, pulsePrefab = null, mueblesPadre = null;
 
     private UIManager UIManager_;
 
@@ -46,6 +46,14 @@ public class GameManager : MonoBehaviour
         FieldOfViewPool.name = "FieldOfViewPool";
         PulsePool.name = "PulsePool";
         ammo_ = startAmmo_;
+        if (mueblesPadre)
+        {
+            mueblesPadre.layer = LayerMask.NameToLayer("Muebles");
+            foreach(Transform child in mueblesPadre.transform)
+            {
+                child.gameObject.layer = LayerMask.NameToLayer("Muebles");
+            }
+        }
     }
     public void PlayerDeath()
     {
