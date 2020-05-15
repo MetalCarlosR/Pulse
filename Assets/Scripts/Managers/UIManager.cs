@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject RespawnUI = null, pauseMenu = null, interfaz = null, daga = null, pistola = null, pulse = null;
+    GameObject RespawnUI = null, pause = null, menu = null, interfaz = null, daga = null, pistola = null, pulse = null;
     [SerializeField]
     Text Ammunition = null;
-    
+
     private void Start()
     {
         if (GameManager.gmInstance_ != null)
@@ -21,10 +21,11 @@ public class UIManager : MonoBehaviour
         {
             Debug.LogError("Warnign GameManager was null when trying to access it from " + this);
         }
-        if (RespawnUI  && pauseMenu)
+        if (RespawnUI && pause)
         {
             RespawnUI.SetActive(false);
-            pauseMenu.SetActive(false);
+            pause.SetActive(false);
+            menu.SetActive(false);
         }
         else
         {
@@ -37,6 +38,7 @@ public class UIManager : MonoBehaviour
         if (RespawnUI != null)
         {
             RespawnUI.SetActive(true);
+            menu.SetActive(true);
         }
         else
         {
@@ -48,12 +50,14 @@ public class UIManager : MonoBehaviour
     public void OnPause()
     {
         Debug.Log("UI Pause menu");
-        pauseMenu.SetActive(true);
+        pause.SetActive(true);
+        menu.SetActive(true);
     }
 
     public void OnResume()
     {
-        pauseMenu.SetActive(false);
+        pause.SetActive(false);
+        menu.SetActive(false);
     }
 
 
@@ -82,5 +86,5 @@ public class UIManager : MonoBehaviour
     }
 
 
-    
+
 }

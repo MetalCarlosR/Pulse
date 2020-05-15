@@ -12,6 +12,9 @@ public class SoundManager : MonoBehaviour
     private List<AudioClip> FXSoundsPool = new List<AudioClip>();
     [SerializeField]
     private AudioMixer fXSound;
+    private float fxVolume = 0;
+
+
 
     public enum FXSounds
     {
@@ -20,6 +23,10 @@ public class SoundManager : MonoBehaviour
         DOOR, PULSE_START,
         PULSE_MID, PULSE_END
     }
+    //private void Start()
+    //{
+    //    menuManager = gameObject.GetComponent<MenuManager>();
+    //}
 
     void Awake()
     {
@@ -41,7 +48,9 @@ public class SoundManager : MonoBehaviour
 
     public void SetFXVolume(bool on) //Configurar el sonido de la muerte del jugador
     {
-        if (on) fXSound.SetFloat("FXVolume", 0);
+        //menuManager = gameObject.GetComponent<MenuManager>();
+        if (on) fXSound.SetFloat("FXVolume", fxVolume);
         else fXSound.SetFloat("FXVolume", -80);
     }
+    public void GetFXVolume(float volume) { fxVolume = volume; }
 }

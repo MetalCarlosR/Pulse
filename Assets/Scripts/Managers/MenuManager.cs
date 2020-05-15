@@ -8,7 +8,10 @@ public class MenuManager : MonoBehaviour
     GameObject initialButtons = null, settings = null , howToPlay = null, backgroundGroup = null, back = null, audioPanel = null; /*exit, , audioSettings, back;*/
     [SerializeField]
     AudioMixer musicAM = null, fxSoundAM = null;
+    [SerializeField]
+    SoundManager soundManager;
     private bool ini;
+    private float fxVolume;
     private void Start()
     {
         ini = true;
@@ -65,5 +68,8 @@ public class MenuManager : MonoBehaviour
     {
         if (volume == -20) volume = -80;
         fxSoundAM.SetFloat("FXVolume", volume);
+        soundManager.GetFXVolume(volume);
+        fxVolume = volume;
     }
+   
 }
