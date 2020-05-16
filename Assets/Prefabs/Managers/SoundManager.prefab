@@ -53,4 +53,5 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 790ce00df5381384989cdf82b374de1f, type: 3}
   - {fileID: 8300000, guid: 6f4109bdc2cf0094eb7a59df60994ca6, type: 3}
   - {fileID: 8300000, guid: 2fa6f4939239dd544a9995d5c1111809, type: 3}
-  fXSound: {fileID: 24100000, guid: 25f591446ccdf69498b6aa25871123fd, type: 2}
+  musicAM: {fileID: 24100000, guid: 0747872677264ce41bc87303b73545e8, type: 2}
+  fxSoundAM: {fileID: 24100000, guid: 25f591446ccdf69498b6aa25871123fd, type: 2}

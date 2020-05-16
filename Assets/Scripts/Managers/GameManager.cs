@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
         if (mueblesPadre)
         {
             mueblesPadre.layer = LayerMask.NameToLayer("Muebles");
-            foreach(Transform child in mueblesPadre.transform)
+            foreach (Transform child in mueblesPadre.transform)
             {
                 child.gameObject.layer = LayerMask.NameToLayer("Muebles");
             }
@@ -73,9 +73,8 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         Debug.Log(SceneManager.GetActiveScene().name);
-        SoundManager.smInstance_.SetFXVolume(true);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        SoundManager.smInstance_.SetFXVolume(true);
+        SoundManager.smInstance_.PublicSetFxVolume(true);
     }
 
     public Transform GetPlayerTransform()
@@ -175,7 +174,7 @@ public class GameManager : MonoBehaviour
             foreach (GameObject obj in entities)
             {
                 obj.SendMessage("OnPause");
-            }            
+            }
         }
     }
 
