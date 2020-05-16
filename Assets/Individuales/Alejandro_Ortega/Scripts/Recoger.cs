@@ -19,6 +19,7 @@ public class Recoger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Destroy(this.gameObject);
-        Debug.Log("Munición +1");
+        GameManager.gmInstance_.AddAmmo(1);
+        //Debug.Log("Munición +1");
     }
 }
