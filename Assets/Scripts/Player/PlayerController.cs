@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour
     private GameObject black;
     private Pistola gun;
     private Daga daga;
-
     private AudioSource walking;
     void Start()
     {
@@ -103,10 +102,19 @@ public class PlayerController : MonoBehaviour
             pistola.enabled = false;
         }
         enabled = false;
-        GameManager.gmInstance_.PlayerDeath();
-        SoundManager.smInstance_.PublicSetFxVolume(false);
+        walking.loop = false;
+        walking.clip = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.PLAYER_DEATH);
+        StartCoroutine(PlayerDeathSound());
     }
 
+    private IEnumerator PlayerDeathSound()
+    {
+        walking.Play();
+        GameManager.gmInstance_.PlayerDeath();
+        yield return new WaitForSeconds(3.5f);
+        SoundManager.smInstance_.PublicSetFxVolume(false);
+
+    }
     private void OnPause()
     {
         pause_ = true;

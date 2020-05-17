@@ -91,6 +91,8 @@ public class Enemigo : MonoBehaviour
             {
                 player = GameManager.gmInstance_.GetPlayerTransform();
             }
+            if (rb.velocity.y != 0 || rb.velocity.x != 0) steps.Play();
+            else steps.Stop();
         }
     }
 
@@ -202,7 +204,8 @@ public class Enemigo : MonoBehaviour
             {
                 PlayEnemyVoice();
             }
-            else if(prevState_ == State.Atacking){
+            else if (prevState_ == State.Atacking)
+            {
                 animator.SetBool("Disparo", false);
             }
             //TO DO
