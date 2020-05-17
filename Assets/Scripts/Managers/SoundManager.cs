@@ -29,8 +29,16 @@ public class SoundManager : MonoBehaviour
 
     void Awake()
     {
-        fxSlider.value = PlayerPrefs.GetFloat("FXVolume", 4);
-        musicSlider.value = PlayerPrefs.GetFloat("MusicVolume", 0);
+        smInstance_ = this;
+        if (fxSlider && musicSlider)
+        {
+            fxVolume = PlayerPrefs.GetFloat("FXVolume", 4);
+            musicVolume = PlayerPrefs.GetFloat("MusicVolume", 0);
+            fxSoundAM.SetFloat("FXVolume", fxVolume);
+            musicAM.SetFloat("MusicVolume", musicVolume);
+            fxSlider.value = fxVolume;
+            musicSlider.value = musicVolume;
+        }
     }
 
     public AudioClip GetClip(FXSounds sound)
