@@ -35,9 +35,9 @@ public class Pulse : MonoBehaviour
         }
         if (SoundManager.smInstance_)
         {
-            clips[0] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.PULSE_START);   
-            clips[1] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.PULSE_MID);   
-            clips[2] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.PULSE_END);   
+            clips[0] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.PULSE_START);
+            clips[1] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.PULSE_MID);
+            clips[2] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.PULSE_END);
         }
         else
         {
@@ -60,6 +60,7 @@ public class Pulse : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                GameManager.gmInstance_.ActivatePulse(true);
                 player.UsePulse(true);
                 PlayPulse(0);
                 StopAllCoroutines();
@@ -69,6 +70,7 @@ public class Pulse : MonoBehaviour
             }
             else if (Input.GetKeyUp(KeyCode.Space))
             {
+                GameManager.gmInstance_.ActivatePulse(false);
                 StopAllCoroutines();
                 source.Stop();
                 float duration = (cam.orthographicSize - ortSize) / ortSize;

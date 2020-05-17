@@ -125767,11 +125767,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 7943091572148078260, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7943091572148078256, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -125877,35 +125872,55 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4952170439923434083, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5,
+    - target: {fileID: 6110725454627630490, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      propertyPath: m_AnchorMin.x
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4952170439923434083, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5,
+    - target: {fileID: 6110725454627630490, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ReloadScene
+      propertyPath: m_AnchorMax.x
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4952170439923434083, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5,
+    - target: {fileID: 6110725454627630490, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4952170439923434083, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5,
+    - target: {fileID: 7509643729941022017, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 3648562890854971307, guid: f1d635091723a1b4684ec1dd5e1b7731,
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509643729941022017, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5,
         type: 3}
-    - target: {fileID: 76081886, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 3648562890854971307, guid: f1d635091723a1b4684ec1dd5e1b7731,
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509643729941022017, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5,
         type: 3}
-    - target: {fileID: 76081886, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ResumeGame
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101274529233171088, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101274529233171088, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8015362803394169679, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8015362803394169679, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5, type: 3}

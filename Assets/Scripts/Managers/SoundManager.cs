@@ -12,7 +12,7 @@ public class SoundManager : MonoBehaviour
     private List<AudioClip> FXSoundsPool = new List<AudioClip>();
     [SerializeField]
     private AudioMixer musicAM, fxSoundAM;
-    private float fxVolume;
+    private float fxVolume, musicVolume;
 
 
     public enum FXSounds
@@ -64,6 +64,11 @@ public class SoundManager : MonoBehaviour
     {
         if (volume == -30) volume = -80;
         musicAM.SetFloat("MusicVolume", volume);
+        musicVolume = volume;
     }
-
+    public float GetVolume(bool music_fx)
+    {
+        if (music_fx) return musicVolume;
+        else return fxVolume;  
+    }
 }

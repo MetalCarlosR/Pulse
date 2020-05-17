@@ -6,10 +6,11 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject RespawnUI = null, pause = null, menu = null, interfaz = null, daga = null, pistola = null, pulse = null;
+    GameObject RespawnUI = null, pause = null, menu = null, interfaz = null, daga = null, pistola = null, pulse = null,
+        background = null;
     [SerializeField]
     Text Ammunition = null;
-
+ 
     private void Start()
     {
         if (GameManager.gmInstance_ != null)
@@ -23,9 +24,13 @@ public class UIManager : MonoBehaviour
         }
         if (RespawnUI && pause)
         {
+
+            interfaz.SetActive(true);
             RespawnUI.SetActive(false);
             pause.SetActive(false);
             menu.SetActive(false);
+            background.SetActive(false);
+
         }
         else
         {
@@ -39,6 +44,8 @@ public class UIManager : MonoBehaviour
         {
             RespawnUI.SetActive(true);
             menu.SetActive(true);
+            background.SetActive(true);
+            interfaz.SetActive(false);
         }
         else
         {
@@ -46,18 +53,21 @@ public class UIManager : MonoBehaviour
         }
 
     }
-
     public void OnPause()
     {
         Debug.Log("UI Pause menu");
         pause.SetActive(true);
         menu.SetActive(true);
+        background.SetActive(true);
+        interfaz.SetActive(false);
     }
 
     public void OnResume()
     {
         pause.SetActive(false);
         menu.SetActive(false);
+        background.SetActive(false);
+        interfaz.SetActive(true);
     }
 
 
@@ -84,7 +94,4 @@ public class UIManager : MonoBehaviour
     {
         Ammunition.text = "x " + num;
     }
-
-
-
 }
