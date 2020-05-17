@@ -30,6 +30,10 @@ public class SoundManager : MonoBehaviour
     void Awake()
     {
         smInstance_ = this;
+       
+    }
+    private void Start()
+    {
         if (fxSlider && musicSlider)
         {
             fxVolume = PlayerPrefs.GetFloat("FXVolume", 4);
