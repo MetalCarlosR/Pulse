@@ -194,6 +194,7 @@ public class GameManager : MonoBehaviour
 
     public void ChangeScene(string scene)
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(scene, LoadSceneMode.Single);
     }
 
