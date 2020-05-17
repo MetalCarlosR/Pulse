@@ -282,6 +282,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4117633157147397898, guid: c6555ad05b7eb0a448b85c8080661988,
+        type: 3}
+      propertyPath: fxSlider
+      value: 
+      objectReference: {fileID: 1019527804}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6555ad05b7eb0a448b85c8080661988, type: 3}
 --- !u!114 &946452764 stripped
@@ -294,6 +299,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64e200833b394ae4fad8d82e153c4512, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1019527804 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7227711454043857141, guid: 95654e1245e701e4cbf8ca968e5280c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 7227711453065534928}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1267336342

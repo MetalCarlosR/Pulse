@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
+
 public class SoundManager : MonoBehaviour
 {
 
@@ -13,6 +15,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     private AudioMixer musicAM, fxSoundAM;
     private float fxVolume, musicVolume;
+    [SerializeField]
+    private Slider fxSlider, musicSlider; 
 
 
     public enum FXSounds
@@ -25,15 +29,8 @@ public class SoundManager : MonoBehaviour
 
     void Awake()
     {
-        if (smInstance_ == null)
-        {
-            smInstance_ = this;
-        }
-        else if (smInstance_ != this)
-        {
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(this);
+        fxSlider.value = PlayerPrefs.GetFloat("FXVolume", 4);
+        musicSlider.value = PlayerPrefs.GetFloat("MusicVolume", 0);
     }
 
     public AudioClip GetClip(FXSounds sound)
@@ -58,6 +55,7 @@ public class SoundManager : MonoBehaviour
             fxVolume = volume;
             fxSoundAM.SetFloat("FXVolume", fxVolume);
         }
+        PlayerPrefs.SetFloat("FXVolume", fxVolume);
     }
 
     public void SetMusicVolume(float volume)
@@ -65,6 +63,7 @@ public class SoundManager : MonoBehaviour
         if (volume == -30) volume = -80;
         musicAM.SetFloat("MusicVolume", volume);
         musicVolume = volume;
+        PlayerPrefs.SetFloat("MusicVolume", volume);
     }
     public float GetVolume(bool music_fx)
     {
