@@ -5,11 +5,13 @@ using UnityEngine.Audio;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject initialButtons = null, settings = null, howToPlay = null, backgroundGroup = null, back = null, audioPanel = null, save = null, continueB = null; /*exit, , audioSettings, back;*/
+    GameObject initialButtons = null, settings = null, howToPlay = null, backgroundGroup = null, back = null, audioPanel = null; /*exit, , audioSettings, back;*/
     [SerializeField]
     private Slider fxSlider = null, musicSlider = null;
     [SerializeField]
     private Toggle cheat = null;
+    [SerializeField]
+    Button Exit = null, continueB = null, save = null;
     private bool ini;
     private float fxVolume;
     private void Start()
@@ -17,12 +19,12 @@ public class MenuManager : MonoBehaviour
         ini = true;
         if (!GameManager.gmInstance_.IsGameLoaded())
         {
-            continueB.GetComponent<Button>().enabled = false;
+            continueB.enabled = false;
             continueB.GetComponentInChildren<Text>().color = Color.gray;
         }
         else
         {
-            continueB.GetComponent<Button>().onClick.AddListener(delegate { GameManager.gmInstance_.Continue(); });
+            continueB.onClick.AddListener(delegate { GameManager.gmInstance_.Continue(); });
         }
         if (SoundManager.smInstance_)
         {
@@ -32,8 +34,9 @@ public class MenuManager : MonoBehaviour
             fxSlider.onValueChanged.AddListener(delegate { SoundManager.smInstance_.SetFXVolume(fxSlider.value); });
             musicSlider.onValueChanged.AddListener(delegate { SoundManager.smInstance_.SetMusicVolume(musicSlider.value); });
         }
-        save.GetComponent<Button>().onClick.AddListener(delegate { SoundManager.smInstance_.Save(); });
+        save.onClick.AddListener(delegate { SoundManager.smInstance_.Save(); });
         cheat.onValueChanged.AddListener(delegate { GameManager.gmInstance_.ActivateCheats(cheat.isOn); });
+        Exit.onClick.AddListener(delegate { GameManager.gmInstance_.ExitGame(); });
     }
     public void Settings()
     {
@@ -72,7 +75,6 @@ public class MenuManager : MonoBehaviour
         Clean();
         audioPanel.SetActive(true);
         ini = false;
-        save.SetActive(true);
         back.SetActive(true);
     }
 
