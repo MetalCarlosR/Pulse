@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     private GameObject FieldOfViewPool, PulsePool, player_, mueblesPadre, EnemiesPool, NodesPool;
 
-    private SaveManager.GameSave saveGame = null, lvlLoader = null;
+    private SaveManager.GameSave saveGame = null;
 
     [SerializeField]
     private TextAsset jsonlvl1 = null, jsonlvl2 = null;
@@ -80,32 +80,23 @@ public class GameManager : MonoBehaviour
         else SaveManager.Save(2, ammo_, enemies, player_.transform.position);
     }
 
-    void loadFromSave()
+    void chooseLvl(string lvl)
     {
-        ammo_ = saveGame.ammo_;
-        Instantiate(PlayerPrefab, saveGame.playerPos_, Quaternion.identity);
+        SaveManager.GameSave lvlLoader = new SaveManager.GameSave();
 
-        int i = 0;
-        foreach (SaveManager.EnemySettings e in saveGame.enemies_)
-        {
-            EnemigoManager enemy = Instantiate(EnemigoPrefab, e.tr_, Quaternion.identity).GetComponent<EnemigoManager>();
-            enemy.transform.parent = EnemiesPool.transform;
-            enemy.name = "Enemigo" + i;
-            enemy.LoadEnemy(e.nodes_.nodes, e.nodes_.count, e.state, e.prevstate);
-            i++;
-        }
-    }
-
-    void loadLvl(string lvl)
-    {
         if (lvl == "Nivel 1") lvlLoader = JsonUtility.FromJson<SaveManager.GameSave>(jsonlvl1.text);
         else lvlLoader = JsonUtility.FromJson<SaveManager.GameSave>(jsonlvl2.text);
 
-        ammo_ = lvlLoader.ammo_;
-        Instantiate(PlayerPrefab, lvlLoader.playerPos_, Quaternion.identity);
+        loadLvl(lvlLoader);
+    }
+    void loadLvl(SaveManager.GameSave lvlLoader_)
+    {
+
+        ammo_ = lvlLoader_.ammo_;
+        Instantiate(PlayerPrefab, lvlLoader_.playerPos_, Quaternion.identity);
 
         int i = 0;
-        foreach (SaveManager.EnemySettings e in lvlLoader.enemies_)
+        foreach (SaveManager.EnemySettings e in lvlLoader_.enemies_)
         {
             EnemigoManager enemy = Instantiate(EnemigoPrefab, e.tr_, Quaternion.identity).GetComponent<EnemigoManager>();
             enemy.transform.parent = EnemiesPool.transform;
@@ -133,7 +124,7 @@ public class GameManager : MonoBehaviour
     private void ChangedActiveScene(Scene current, Scene next)
     {
         game = false;
-        if (next.name == "Menu" && currentScene == "Nivel 1")
+        if (next.name == "Menu" && currentScene != "FinishScene")
         {
             LoadSave();
             continueG = false;
@@ -153,8 +144,8 @@ public class GameManager : MonoBehaviour
             EnemiesPool.name = "EnemiesPool";
             NodesPool.name = "NodesPool";
             ammo_ = startAmmo_;
-            if (continueG) loadFromSave();
-            //else loadLvl(next.name);
+            if (continueG) loadLvl(saveGame);
+            //else chooseLvl(next.name);
         }
         currentScene = next.name;
     }
