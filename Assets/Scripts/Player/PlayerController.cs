@@ -92,17 +92,20 @@ public class PlayerController : MonoBehaviour
     }
     public void Die()
     {
-        Pistola pistola = GetComponent<Pistola>();
-        gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
-        walking.Stop();
-        if (pistola)
+        if (!GameManager.gmInstance_.TGM)
         {
-            pistola.enabled = false;
-        }
-        enabled = false;
-        walking.loop = false;
-        walking.clip = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.PLAYER_DEATH);
-        StartCoroutine(PlayerDeathSound());
+            Pistola pistola = GetComponent<Pistola>();
+            gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
+            walking.Stop();
+            if (pistola)
+            {
+                pistola.enabled = false;
+            }
+            enabled = false;
+            walking.loop = false;
+            walking.clip = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.PLAYER_DEATH);
+            StartCoroutine(PlayerDeathSound());
+        }  
     }
 
     private IEnumerator PlayerDeathSound()

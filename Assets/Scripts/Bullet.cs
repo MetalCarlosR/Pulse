@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour
             collision.gameObject.GetComponent<Enemigo>().Death();
             Destroy(gameObject);
         }
-        else if (collision.gameObject.tag == "Player" && !GameManager.gmInstance_.TGM)
+        else if (collision.gameObject.tag == "Player" )
         {
             collision.gameObject.GetComponent<PlayerController>().Die();
             Destroy(gameObject);
