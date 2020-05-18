@@ -9,13 +9,12 @@ public class PlayerController : MonoBehaviour
 
     private int speed_ = 10;
 
-    private bool pause_ = false;
     private bool pulse_ = false;
     private FieldOfView fov;
     private float fovSet = 360, limit = 50;
 
     [SerializeField]
-    private GameObject black;
+    private GameObject black = null;
     private Pistola gun;
     private Daga daga;
     private AudioSource walking;
@@ -29,7 +28,6 @@ public class PlayerController : MonoBehaviour
         if (GameManager.gmInstance_ != null)
         {
             GameManager.gmInstance_.SetPlayer(gameObject);
-            GameManager.gmInstance_.AddEntity(gameObject);
             fov = GameManager.gmInstance_.createFieldofView();
             fov.name = "FieldOfView" + name;
             fov.SetInstance(limit, fovSet);
@@ -43,7 +41,7 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        if (!pause_)
+        if (!GameManager.gmInstance_.paused)
         {
             rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed_, Input.GetAxis("Vertical") * speed_);
             if (rb.velocity.y != 0 || rb.velocity.x != 0)
@@ -115,14 +113,7 @@ public class PlayerController : MonoBehaviour
         SoundManager.smInstance_.PublicSetFxVolume(false);
 
     }
-    private void OnPause()
-    {
-        pause_ = true;
-    }
-    private void OnResume()
-    {
-        pause_ = false;
-    }
+
     public void UsePulse(bool pulse)
     {
         pulse_ = pulse;

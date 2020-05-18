@@ -2,10 +2,11 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MovEnemigo : MonoBehaviour
+public class EnemigoManager : MonoBehaviour
 {
     [SerializeField]
     private List<Transform> nodes = new List<Transform>();
+    private Enemigo enemigo = null;
     private int index = 0;
     private NavMeshAgent navMesh = null;
     private bool chase = false, patrol = false;
@@ -17,7 +18,8 @@ public class MovEnemigo : MonoBehaviour
         navMesh.updateUpAxis = false;
         if (nodes.Count >= 2)
         {
-            GetComponent<Enemigo>().StartDelay();
+            enemigo = GetComponent<Enemigo>();
+            enemigo.StartDelay();
             index = Random.Range(0, nodes.Count);
             Patroll();
         }
@@ -29,17 +31,21 @@ public class MovEnemigo : MonoBehaviour
 
     }
 
+    public Enemigo getEnemy()
+    {
+        return enemigo;
+    }
     private void Update()
     {
         if (chase)
         {
             transform.up = navMesh.destination - transform.position;
-            if (Vector2.Distance(transform.position, navMesh.destination) < 2) ClearPath();
+            if (Vector2.Distance(transform.position, navMesh.destination) < 0.5) ClearPath();
         }
         else if (patrol)
         {
             transform.up = navMesh.destination - transform.position;
-            if (Vector2.Distance(transform.position, navMesh.destination) < 2) NextNode();
+            if (Vector2.Distance(transform.position, navMesh.destination) < 0.5) NextNode();
         }
         if (transform.rotation.x != 0 || transform.rotation.y != 0) transform.rotation = Quaternion.Euler(0, 0, transform.eulerAngles.z);
     }
@@ -68,6 +74,50 @@ public class MovEnemigo : MonoBehaviour
         navMesh.ResetPath();
     }
 
+    public List<Vector3> GetNodes()
+    {
+        List<Vector3> nodesOut = new List<Vector3>();
+
+        foreach (Transform n in nodes)
+        {
+            nodesOut.Add(n.position);
+        }
+
+        return nodesOut;
+    }
+
+    public void LoadEnemy(List<Vector3> nodes_, int count , Enemigo.State state, Enemigo.State prevState)
+    {
+        List<Transform> newNodes = new List<Transform>(count);
+
+
+        for(int i = 0; i < count; i++)
+        {
+            GameObject node = new GameObject();
+            node.transform.position = nodes_[i];
+            newNodes.Add(node.transform);
+        }
+        nodes = newNodes;
+
+        navMesh = GetComponent<NavMeshAgent>();
+        navMesh.updateRotation = false;
+        navMesh.updateUpAxis = false;
+        if (nodes.Count >= 2)
+        {
+            enemigo = GetComponent<Enemigo>();
+            enemigo.StartDelay();
+            index = Random.Range(0, nodes.Count);
+            Patroll();
+
+            enemigo.SetState(state);
+            enemigo.SetPrevState(prevState);
+        }
+        else
+        {
+            Debug.LogWarning("Error no nodes found on" + this + ". Destroying" + this);
+            Destroy(gameObject);
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

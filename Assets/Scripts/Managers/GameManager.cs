@@ -7,25 +7,29 @@ using UnityEditor;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject fovPrefab = null, pulsePrefab = null, mueblesPadre = null;
+    private GameObject fovPrefab = null, pulsePrefab = null, EnemigoPrefab = null, PlayerPrefab = null;
 
     private UIManager UIManager_;
 
-    private GameObject FieldOfViewPool, PulsePool, player_;
+    private GameObject FieldOfViewPool, PulsePool, player_, mueblesPadre;
 
-    List<GameObject> entities;
+    private SaveManager.GameSave saveGame = null;
+
+    List<EnemigoManager> enemies;
+
     private Camera camara;
     public static GameManager gmInstance_;
 
     private int ammo_, startAmmo_ = 5;
 
-    bool paused = false;
+    public bool paused = false, continueG = false, game = false, dead = false;
 
     private void Awake()
     {
         if (gmInstance_ == null)
         {
             gmInstance_ = this;
+            Load();
             Debug.Log("GameManager Set");
         }
         else if (gmInstance_ != this)
@@ -34,27 +38,90 @@ public class GameManager : MonoBehaviour
         }
         DontDestroyOnLoad(this);
     }
+
+    void Update()
+    {
+        if (game)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape)) GameManager.gmInstance_.TogglePause();
+            if (Input.GetKeyDown(KeyCode.L)) GameManager.gmInstance_.ReloadScene();
+        }
+    }
+
+    public bool IsGameLoaded()
+    {
+        return saveGame != null;
+    }
+    void Load()
+    {
+        string loadString = SaveManager.Load();
+
+        if (loadString != null)
+        {
+            Debug.Log("GameLoaded " + loadString);
+
+            saveGame = JsonUtility.FromJson<SaveManager.GameSave>(loadString);
+        }
+    }
+
+    void Save()
+    {
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Nivel 1")) SaveManager.Save(1, ammo_, enemies, player_.transform.position);
+        else SaveManager.Save(2, ammo_, enemies, player_.transform.position);
+    }
+
+    void loadFromSave()
+    {
+        ammo_ = saveGame.ammo_;
+        Instantiate(PlayerPrefab, saveGame.playerPos_, Quaternion.identity);
+
+        foreach (SaveManager.EnemySettings e in saveGame.enemies_)
+        {
+            EnemigoManager enemy = Instantiate(EnemigoPrefab, e.tr_, Quaternion.identity).GetComponent<EnemigoManager>();
+            enemy.LoadEnemy(e.nodes_.nodes, e.nodes_.count, e.state, e.prevstate);
+
+        }
+    }
+
+    public void Continue()
+    {
+        if (saveGame != null)
+        {
+            continueG = true;
+            if (saveGame.level_ == 1) SceneManager.LoadScene("Nivel 1");
+            else SceneManager.LoadScene("Nivel 2");
+        }
+    }
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        paused = false;
-        entities = new List<GameObject>();
-        FieldOfViewPool = new GameObject();
-        PulsePool = new GameObject();
-        FieldOfViewPool.name = "FieldOfViewPool";
-        PulsePool.name = "PulsePool";
-        ammo_ = startAmmo_;
-        if (mueblesPadre)
+        game = false;
+        if (scene.name == "Menu")
         {
-            mueblesPadre.layer = LayerMask.NameToLayer("Muebles");
-            foreach (Transform child in mueblesPadre.transform)
-            {
-                child.gameObject.layer = LayerMask.NameToLayer("Muebles");
-            }
+            Load();
+            continueG = false;
         }
+        else
+        {
+            game = true;
+            dead = false;
+            paused = false;
+            enemies = new List<EnemigoManager>();
+            FieldOfViewPool = new GameObject();
+            PulsePool = new GameObject();
+            FieldOfViewPool.name = "FieldOfViewPool";
+            PulsePool.name = "PulsePool";
+            if (continueG)
+            {
+                loadFromSave();
+            }
+
+            else ammo_ = startAmmo_;
+        }
+
     }
     public void PlayerDeath()
     {
@@ -62,6 +129,7 @@ public class GameManager : MonoBehaviour
         if (UIManager_ != null)
         {
             UIManager_.RespawnMenu();
+            dead = true;
         }
         else
         {
@@ -85,6 +153,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            Debug.Log("PlayerNull");
             return null;
         }
     }
@@ -92,6 +161,7 @@ public class GameManager : MonoBehaviour
     {
         if (player.GetComponent<PlayerController>())
         {
+            Debug.Log("PlayerSet");
             player_ = player;
         }
         else
@@ -100,9 +170,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetCamera(Camera cam)
+    public Transform SetCamera(Camera cam)
     {
         camara = cam;
+        if (player_) return player_.transform;
+        else return null;
     }
 
     public Camera GetCamera()
@@ -136,15 +208,24 @@ public class GameManager : MonoBehaviour
         PulsePool.transform.parent = escenario;
     }
 
-    public void AddEntity(GameObject entity)
+    public void AddEnemy(EnemigoManager enemy)
     {
-        entities.Add(entity);
+        enemies.Add(enemy);
     }
-    public void RemoveEntity(GameObject entity)
+    public void RemoveEnemy(EnemigoManager enemy)
     {
-        entities.Remove(entity);
+        enemies.Remove(enemy);
     }
 
+    public void setMuebles(GameObject muebles)
+    {
+        mueblesPadre = muebles;
+        mueblesPadre.layer = LayerMask.NameToLayer("Muebles");
+        foreach (Transform child in mueblesPadre.transform)
+        {
+            child.gameObject.layer = LayerMask.NameToLayer("Muebles");
+        }
+    }
     public void Shoot()
     {
         ammo_--;
@@ -169,12 +250,9 @@ public class GameManager : MonoBehaviour
     {
         if (!paused)
         {
+            UIManager_.OnPause();
             paused = true;
             Time.timeScale = 0;
-            foreach (GameObject obj in entities)
-            {
-                obj.SendMessage("OnPause");
-            }
         }
     }
 
@@ -182,19 +260,16 @@ public class GameManager : MonoBehaviour
     {
         if (paused)
         {
+            UIManager_.OnResume();
             paused = false;
             Time.timeScale = 1;
-            Debug.Log("B");
-            foreach (GameObject obj in entities)
-            {
-                obj.SendMessage("OnResume");
-            }
         }
     }
 
     public void ChangeScene(string scene)
     {
         Time.timeScale = 1;
+        if (scene == "Menu" && !dead) Save();
         SceneManager.LoadScene(scene, LoadSceneMode.Single);
     }
 

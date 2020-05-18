@@ -14,7 +14,6 @@ public class Camara : MonoBehaviour
     private string layer_ = "";
     private AudioSource camaraFX;
 
-    private bool pause_ = false;
     private Transform player;
 
     private enum State
@@ -29,7 +28,7 @@ public class Camara : MonoBehaviour
         if (GameManager.gmInstance_ != null)
         {
             player = GameManager.gmInstance_.GetPlayerTransform();
-            GameManager.gmInstance_.AddEntity(gameObject);
+            //GameManager.gmInstance_.AddEntity(gameObject);
             fov = GameManager.gmInstance_.createFieldofView();
             fov.name = "FieldOfView" + this.name;
             fov.SetInstance(limit, fovSet);
@@ -63,7 +62,7 @@ public class Camara : MonoBehaviour
 
     void FindPlayer()
     {
-        if (!pause_)
+        if (!GameManager.gmInstance_.paused)
         {
             if (Vector3.Distance(transform.position, player.position) < limit)
             {
@@ -95,15 +94,6 @@ public class Camara : MonoBehaviour
                 SetState(State.Patrolling);
             }
         }
-    }
-
-    private void OnPause()
-    {
-        pause_ = true;
-    }
-    private void OnResume()
-    {
-        pause_ = false;
     }
 
     void FoundEnemy()

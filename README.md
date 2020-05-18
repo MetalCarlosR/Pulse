@@ -36,3 +36,4 @@
 	Additional sound effects from https://www.zapsplat.com
 	Addional sprites for level 1 https://free-game-assets.itch.io/free-tds-tilesets-buildings-and-furniture
 	Menu music from https://www.youtube.com/watch?v=nz8LSg80T0E
+	NavMesh2D from https://github.com/h8man/NavMeshPlus

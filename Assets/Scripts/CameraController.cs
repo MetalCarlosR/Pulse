@@ -4,19 +4,25 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField]
     private Transform player = null;
     Vector3 pos;
 
 
     private void Start()
     {
-        GameManager.gmInstance_.SetCamera(GetComponent<Camera>());  
+        if (GameManager.gmInstance_)
+        {
+            player = GameManager.gmInstance_.SetCamera(GetComponent<Camera>());
+        }
     }
 
     void Update()
     {
-        pos.Set(player.position.x, player.position.y ,-10);
-        transform.position = pos;
+        if (player)
+        {
+            pos.Set(player.position.x, player.position.y, -10);
+            transform.position = pos;
+        }
+        else player = GameManager.gmInstance_.SetCamera(GetComponent<Camera>());
     }
 }

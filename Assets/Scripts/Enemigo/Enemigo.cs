@@ -14,11 +14,10 @@ public class Enemigo : MonoBehaviour
     private string layer_ = "";
     [SerializeField]
     private PulseEnemigo pulse;
-    private bool pause_ = false;
     private Transform player;
     private PistolaEnemigo gun;
     private Rigidbody2D rb;
-    private MovEnemigo movEnemigo;
+    private EnemigoManager movEnemigo;
     private AudioSource voices;
     private Animator animator;
     [SerializeField]
@@ -44,11 +43,11 @@ public class Enemigo : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         voices = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
-        movEnemigo = GetComponent<MovEnemigo>();
+        movEnemigo = GetComponent<EnemigoManager>();
         if (GameManager.gmInstance_ != null)
         {
             player = GameManager.gmInstance_.GetPlayerTransform();
-            GameManager.gmInstance_.AddEntity(gameObject);
+            GameManager.gmInstance_.AddEnemy(movEnemigo);
             pulse = GameManager.gmInstance_.createPulse();
             pulse.SetEnemy(transform);
             pulse.name = "Pulse" + this.name;
@@ -101,9 +100,19 @@ public class Enemigo : MonoBehaviour
         if (!state) pulse.ResetAll();
         pulse.enabled = state;
     }
+
+    public State GetState()
+    {
+        return state_;
+    }
+    public State GetPrevState()
+    {
+        return prevState_;
+    }
+
     void FindPlayer()
     {
-        if (!pause_)
+        if (!GameManager.gmInstance_.paused)
         {
             Vector3 direction = (player.position - transform.position);
             if (Vector3.Distance(transform.position, player.position) < limit)
@@ -154,19 +163,11 @@ public class Enemigo : MonoBehaviour
     {
         if (started)
         {
-            if (GameManager.gmInstance_) GameManager.gmInstance_.RemoveEntity(gameObject);
+            if (GameManager.gmInstance_) GameManager.gmInstance_.RemoveEnemy(movEnemigo);
             if (fov) Destroy(fov.gameObject);
             if (pulse) Destroy(pulse.gameObject);
         }
 
-    }
-    private void OnPause()
-    {
-        pause_ = true;
-    }
-    private void OnResume()
-    {
-        pause_ = false;
     }
 
     IEnumerator AttackPlayer()
@@ -181,7 +182,6 @@ public class Enemigo : MonoBehaviour
 
     IEnumerator ChasePlayer()
     {
-        Debug.Log("Chase");
         movEnemigo.ChasePlayer(player.position);
         yield return new WaitForSeconds(5f);
         SetState(State.Lost);
@@ -195,6 +195,10 @@ public class Enemigo : MonoBehaviour
         SetState(State.Patrolling);
     }
 
+    public void SetPrevState(State prevState)
+    {
+        prevState_ = prevState;
+    }
     public void SetState(State state)
     {
         if (state_ != state)

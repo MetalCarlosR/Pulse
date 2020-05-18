@@ -47,3 +47,8 @@ MonoBehaviour:
     type: 3}
   pulsePrefab: {fileID: 4328990365136060840, guid: c8da73be1b1578f449bb09c268af9457,
     type: 3}
+  EnemigoPrefab: {fileID: 3270135627175731410, guid: 92210dc51b465ca4f813d301c99a842b,
+    type: 3}
+  PlayerPrefab: {fileID: 5668069761844117318, guid: 106736dc44b77614a912095aed9cf61f,
+    type: 3}
+  paused: 0

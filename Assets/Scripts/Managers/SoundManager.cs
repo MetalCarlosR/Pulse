@@ -13,11 +13,10 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     private List<AudioClip> FXSoundsPool = new List<AudioClip>();
     [SerializeField]
-    private AudioMixer musicAM, fxSoundAM;
-    private float fxVolume, musicVolume;
-    [SerializeField]
-    private Slider fxSlider, musicSlider; 
+    private AudioMixer musicAM = null, fxSoundAM = null;
 
+
+    public SaveManager.SettingsSave soundSettings;
 
     public enum FXSounds
     {
@@ -30,21 +29,50 @@ public class SoundManager : MonoBehaviour
 
     void Awake()
     {
-        smInstance_ = this;
-       
-    }
-    private void Start()
-    {
-        if (fxSlider && musicSlider)
+        if (smInstance_ == null)
         {
-            fxVolume = PlayerPrefs.GetFloat("FXVolume", 4);
-            musicVolume = PlayerPrefs.GetFloat("MusicVolume", 0);
-            fxSoundAM.SetFloat("FXVolume", fxVolume);
-            musicAM.SetFloat("MusicVolume", musicVolume);
-            fxSlider.value = fxVolume;
-            musicSlider.value = musicVolume;
+            smInstance_ = this;
+            Load();
+            Debug.Log("SoundManager Set");
+        }
+        else if (smInstance_ != this)
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(this);
+
+    }
+
+    void Load()
+    {
+        string loadString = SaveManager.LoadSettings();
+
+        if (loadString != null)
+        {
+            Debug.Log("SettingsLoaded " + loadString);
+
+            soundSettings = JsonUtility.FromJson<SaveManager.SettingsSave>(loadString);
+        }
+        else
+        {
+            soundSettings = new SaveManager.SettingsSave
+            {
+                fxVolume_ = 5,
+                musicVolume_ = 1
+            };
         }
     }
+
+    public void Save()
+    {
+        SaveManager.SaveSettings(soundSettings.fxVolume_, soundSettings.musicVolume_);
+    }
+    public void Start()
+    {
+        SetFXVolume(soundSettings.fxVolume_);
+        SetMusicVolume(soundSettings.musicVolume_);
+    }
+
 
     public AudioClip GetClip(FXSounds sound)
     {
@@ -54,7 +82,7 @@ public class SoundManager : MonoBehaviour
     public void PublicSetFxVolume(bool on)
     {
         if (!on) SetFXVolume(-20);
-        else SetFXVolume(fxVolume);
+        else SetFXVolume(soundSettings.fxVolume_);
     }
     public void SetFXVolume(float volume)
     {
@@ -65,22 +93,22 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-            fxVolume = volume;
-            fxSoundAM.SetFloat("FXVolume", fxVolume);
+            soundSettings.fxVolume_ = volume;
+            fxSoundAM.SetFloat("FXVolume", soundSettings.fxVolume_);
         }
-        PlayerPrefs.SetFloat("FXVolume", fxVolume);
+        PlayerPrefs.SetFloat("FXVolume", soundSettings.fxVolume_);
     }
 
     public void SetMusicVolume(float volume)
     {
         if (volume == -30) volume = -80;
         musicAM.SetFloat("MusicVolume", volume);
-        musicVolume = volume;
+        soundSettings.musicVolume_ = volume;
         PlayerPrefs.SetFloat("MusicVolume", volume);
     }
     public float GetVolume(bool music_fx)
     {
-        if (music_fx) return musicVolume;
-        else return fxVolume;  
+        if (music_fx) return soundSettings.musicVolume_;
+        else return soundSettings.fxVolume_;
     }
 }

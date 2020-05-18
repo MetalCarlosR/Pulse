@@ -16,7 +16,9 @@ public class UIManager : MonoBehaviour
         if (GameManager.gmInstance_ != null)
         {
             GameManager.gmInstance_.SetUImanager(this);
-            GameManager.gmInstance_.AddEntity(gameObject);
+            if (menu) {
+                menu.GetComponent<Button>().onClick.AddListener(delegate { GameManager.gmInstance_.ChangeScene("Menu"); });
+            }
         }
         else
         {
