@@ -62,7 +62,7 @@ public class Camara : MonoBehaviour
 
     void FindPlayer()
     {
-        if (!GameManager.gmInstance_.paused)
+        if (!GameManager.gmInstance_.IsGamePaused())
         {
             if (Vector3.Distance(transform.position, player.position) < limit)
             {

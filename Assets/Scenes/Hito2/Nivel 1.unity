@@ -56537,17 +56537,17 @@ PrefabInstance:
         type: 3}
       propertyPath: nodes.Array.data[1]
       value: 
-      objectReference: {fileID: 630750487}
+      objectReference: {fileID: 151261238}
     - target: {fileID: 2398022178442472175, guid: 92210dc51b465ca4f813d301c99a842b,
         type: 3}
       propertyPath: nodes.Array.data[2]
       value: 
-      objectReference: {fileID: 151261238}
+      objectReference: {fileID: 1542072096}
     - target: {fileID: 2398022178442472175, guid: 92210dc51b465ca4f813d301c99a842b,
         type: 3}
       propertyPath: nodes.Array.data[3]
       value: 
-      objectReference: {fileID: 1542072096}
+      objectReference: {fileID: 630750487}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92210dc51b465ca4f813d301c99a842b, type: 3}
 --- !u!4 &832946112 stripped
@@ -126088,6 +126088,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8710060512575377412, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2.0151367
+      objectReference: {fileID: 0}
+    - target: {fileID: 486077162199638991, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fdf2af4f9b3fef428b02d1cdb9cd0a5, type: 3}
 --- !u!4 &976653872 stripped
@@ -130631,7 +130641,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1683465168
 Transform:
   m_ObjectHideFlags: 0

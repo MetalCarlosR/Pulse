@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        if (!GameManager.gmInstance_.paused)
+        if (!GameManager.gmInstance_.IsGamePaused())
         {
             rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed_, Input.GetAxis("Vertical") * speed_);
             if (rb.velocity.y != 0 || rb.velocity.x != 0)

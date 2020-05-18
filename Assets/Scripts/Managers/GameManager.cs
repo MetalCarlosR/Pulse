@@ -11,9 +11,12 @@ public class GameManager : MonoBehaviour
 
     private UIManager UIManager_;
 
-    private GameObject FieldOfViewPool, PulsePool, player_, mueblesPadre;
+    private GameObject FieldOfViewPool, PulsePool, player_, mueblesPadre, EnemiesPool, NodesPool;
 
     private SaveManager.GameSave saveGame = null;
+
+    [SerializeField]
+    private TextAsset jsonlvl1 = null, jsonlvl2 = null;
 
     List<EnemigoManager> enemies;
 
@@ -22,14 +25,15 @@ public class GameManager : MonoBehaviour
 
     private int ammo_, startAmmo_ = 5;
 
-    public bool paused = false, continueG = false, game = false, dead = false;
+    private bool paused = false, continueG = false, game = false, dead = false;
 
+    private string currentScene = null;
     private void Awake()
     {
         if (gmInstance_ == null)
         {
             gmInstance_ = this;
-            Load();
+            LoadSave();
             Debug.Log("GameManager Set");
         }
         else if (gmInstance_ != this)
@@ -47,12 +51,17 @@ public class GameManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.L)) GameManager.gmInstance_.ReloadScene();
         }
     }
-
+    public bool IsGamePaused()
+    {
+        return paused;
+    }
     public bool IsGameLoaded()
     {
         return saveGame != null;
     }
-    void Load()
+
+
+    void LoadSave()
     {
         string loadString = SaveManager.Load();
 
@@ -64,22 +73,36 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
     void Save()
     {
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Nivel 1")) SaveManager.Save(1, ammo_, enemies, player_.transform.position);
         else SaveManager.Save(2, ammo_, enemies, player_.transform.position);
     }
 
-    void loadFromSave()
+    void chooseLvl(string lvl)
     {
-        ammo_ = saveGame.ammo_;
-        Instantiate(PlayerPrefab, saveGame.playerPos_, Quaternion.identity);
+        SaveManager.GameSave lvlLoader = new SaveManager.GameSave();
 
-        foreach (SaveManager.EnemySettings e in saveGame.enemies_)
+        if (lvl == "Nivel 1") lvlLoader = JsonUtility.FromJson<SaveManager.GameSave>(jsonlvl1.text);
+        else lvlLoader = JsonUtility.FromJson<SaveManager.GameSave>(jsonlvl2.text);
+
+        loadLvl(lvlLoader);
+    }
+    void loadLvl(SaveManager.GameSave lvlLoader_)
+    {
+
+        ammo_ = lvlLoader_.ammo_;
+        Instantiate(PlayerPrefab, lvlLoader_.playerPos_, Quaternion.identity);
+
+        int i = 0;
+        foreach (SaveManager.EnemySettings e in lvlLoader_.enemies_)
         {
             EnemigoManager enemy = Instantiate(EnemigoPrefab, e.tr_, Quaternion.identity).GetComponent<EnemigoManager>();
+            enemy.transform.parent = EnemiesPool.transform;
+            enemy.name = "Enemigo" + i;
             enemy.LoadEnemy(e.nodes_.nodes, e.nodes_.count, e.state, e.prevstate);
-
+            i++;
         }
     }
 
@@ -94,17 +117,19 @@ public class GameManager : MonoBehaviour
     }
     void OnEnable()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.activeSceneChanged += ChangedActiveScene;
     }
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+
+
+    private void ChangedActiveScene(Scene current, Scene next)
     {
         game = false;
-        if (scene.name == "Menu")
+        if (next.name == "Menu" && currentScene != "FinishScene")
         {
-            Load();
+            LoadSave();
             continueG = false;
         }
-        else
+        else if (next.name == "Nivel 1" || next.name == "Nivel 2")
         {
             game = true;
             dead = false;
@@ -112,17 +137,19 @@ public class GameManager : MonoBehaviour
             enemies = new List<EnemigoManager>();
             FieldOfViewPool = new GameObject();
             PulsePool = new GameObject();
+            EnemiesPool = new GameObject();
+            NodesPool = new GameObject();
             FieldOfViewPool.name = "FieldOfViewPool";
             PulsePool.name = "PulsePool";
-            if (continueG)
-            {
-                loadFromSave();
-            }
-
-            else ammo_ = startAmmo_;
+            EnemiesPool.name = "EnemiesPool";
+            NodesPool.name = "NodesPool";
+            ammo_ = startAmmo_;
+            if (continueG) loadLvl(saveGame);
+            //else chooseLvl(next.name);
         }
-
+        currentScene = next.name;
     }
+
     public void PlayerDeath()
     {
         Time.timeScale = 0;
@@ -217,6 +244,14 @@ public class GameManager : MonoBehaviour
         enemies.Remove(enemy);
     }
 
+    public void AddNodes(List<Transform> nodes, string name)
+    {
+        GameObject nodeParent = new GameObject();
+        nodeParent.transform.parent = NodesPool.transform;
+
+        nodeParent.name = "NodePool" + name;
+        foreach (Transform tr in nodes) tr.parent = nodeParent.transform;
+    }
     public void setMuebles(GameObject muebles)
     {
         mueblesPadre = muebles;
@@ -280,7 +315,7 @@ public class GameManager : MonoBehaviour
 
     private void OnDisable()
     {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.activeSceneChanged -= ChangedActiveScene;
     }
 
     public void SetWeapon(bool activado)
