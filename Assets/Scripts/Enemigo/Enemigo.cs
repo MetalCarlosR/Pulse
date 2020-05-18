@@ -167,7 +167,6 @@ public class Enemigo : MonoBehaviour
             if (fov) Destroy(fov.gameObject);
             if (pulse) Destroy(pulse.gameObject);
         }
-
     }
 
     IEnumerator AttackPlayer()

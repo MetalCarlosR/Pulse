@@ -8,6 +8,8 @@ public class MenuManager : MonoBehaviour
     GameObject initialButtons = null, settings = null, howToPlay = null, backgroundGroup = null, back = null, audioPanel = null, save = null, continueB = null; /*exit, , audioSettings, back;*/
     [SerializeField]
     private Slider fxSlider = null, musicSlider = null;
+    [SerializeField]
+    private Toggle cheat = null;
     private bool ini;
     private float fxVolume;
     private void Start()
@@ -31,49 +33,56 @@ public class MenuManager : MonoBehaviour
             musicSlider.onValueChanged.AddListener(delegate { SoundManager.smInstance_.SetMusicVolume(musicSlider.value); });
         }
         save.GetComponent<Button>().onClick.AddListener(delegate { SoundManager.smInstance_.Save(); });
+        cheat.onValueChanged.AddListener(delegate { GameManager.gmInstance_.ActivateCheats(cheat.isOn); });
     }
     public void Settings()
     {
-        initialButtons.SetActive(false);
+        Clean();
+        backgroundGroup.SetActive(true);
         settings.SetActive(true);
         back.SetActive(true);
     }
 
     public void Back()
     {
-        back.SetActive(false);
-        howToPlay.SetActive(false);
-        audioPanel.SetActive(false);
+        Clean();
+        backgroundGroup.SetActive(true);
         if (ini)
         {
-            settings.SetActive(false);
             initialButtons.SetActive(true);
-            back.SetActive(false);
         }
         else
         {
             settings.SetActive(true);
             back.SetActive(true);
-            backgroundGroup.SetActive(true);
             ini = true;
         }
     }
 
     public void HowToPlay()
     {
+        Clean();
         howToPlay.SetActive(true);
-        settings.SetActive(false);
         back.SetActive(true);
-        backgroundGroup.SetActive(false);
-        ini = false;
+        ini = true;
     }
 
     public void Audio()
     {
+        Clean();
         audioPanel.SetActive(true);
         ini = false;
         save.SetActive(true);
+        back.SetActive(true);
+    }
+
+    void Clean()
+    {
         settings.SetActive(false);
         backgroundGroup.SetActive(false);
+        initialButtons.SetActive(false);
+        back.SetActive(false);
+        howToPlay.SetActive(false);
+        audioPanel.SetActive(false);
     }
 }
