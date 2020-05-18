@@ -32,8 +32,7 @@ public class GameManager : MonoBehaviour
     private string currentScene = null;
 
     [Header("Cheats")]
-    [SerializeField]
-    private Transform endPoint;
+    public Transform endPoint;
     public bool TGM = false, Uammo = false, cheats = true;
     private void Awake()
     {
