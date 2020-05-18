@@ -98,6 +98,7 @@ public class EnemigoManager : MonoBehaviour
             newNodes.Add(node.transform);
         }
         nodes = newNodes;
+        GameManager.gmInstance_.AddNodes(nodes, gameObject.name);
 
         navMesh = GetComponent<NavMeshAgent>();
         navMesh.updateRotation = false;

@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 
     private UIManager UIManager_;
 
-    private GameObject FieldOfViewPool, PulsePool, player_, mueblesPadre;
+    private GameObject FieldOfViewPool, PulsePool, player_, mueblesPadre, EnemiesPool, NodesPool;
 
     private SaveManager.GameSave saveGame = null, lvlLoader = null;
 
@@ -85,11 +85,14 @@ public class GameManager : MonoBehaviour
         ammo_ = saveGame.ammo_;
         Instantiate(PlayerPrefab, saveGame.playerPos_, Quaternion.identity);
 
+        int i = 0;
         foreach (SaveManager.EnemySettings e in saveGame.enemies_)
         {
             EnemigoManager enemy = Instantiate(EnemigoPrefab, e.tr_, Quaternion.identity).GetComponent<EnemigoManager>();
+            enemy.transform.parent = EnemiesPool.transform;
+            enemy.name = "Enemigo" + i;
             enemy.LoadEnemy(e.nodes_.nodes, e.nodes_.count, e.state, e.prevstate);
-
+            i++;
         }
     }
 
@@ -101,11 +104,14 @@ public class GameManager : MonoBehaviour
         ammo_ = lvlLoader.ammo_;
         Instantiate(PlayerPrefab, lvlLoader.playerPos_, Quaternion.identity);
 
+        int i = 0;
         foreach (SaveManager.EnemySettings e in lvlLoader.enemies_)
         {
             EnemigoManager enemy = Instantiate(EnemigoPrefab, e.tr_, Quaternion.identity).GetComponent<EnemigoManager>();
+            enemy.transform.parent = EnemiesPool.transform;
+            enemy.name = "Enemigo" + i;
             enemy.LoadEnemy(e.nodes_.nodes, e.nodes_.count, e.state, e.prevstate);
-
+            i++;
         }
     }
 
@@ -140,8 +146,12 @@ public class GameManager : MonoBehaviour
             enemies = new List<EnemigoManager>();
             FieldOfViewPool = new GameObject();
             PulsePool = new GameObject();
+            EnemiesPool = new GameObject();
+            NodesPool = new GameObject();
             FieldOfViewPool.name = "FieldOfViewPool";
             PulsePool.name = "PulsePool";
+            EnemiesPool.name = "EnemiesPool";
+            NodesPool.name = "NodesPool";
             ammo_ = startAmmo_;
             if (continueG) loadFromSave();
             //else loadLvl(next.name);
@@ -243,6 +253,14 @@ public class GameManager : MonoBehaviour
         enemies.Remove(enemy);
     }
 
+    public void AddNodes(List<Transform> nodes, string name)
+    {
+        GameObject nodeParent = new GameObject();
+        nodeParent.transform.parent = NodesPool.transform;
+
+        nodeParent.name = "NodePool" + name;
+        foreach (Transform tr in nodes) tr.parent = nodeParent.transform;
+    }
     public void setMuebles(GameObject muebles)
     {
         mueblesPadre = muebles;
