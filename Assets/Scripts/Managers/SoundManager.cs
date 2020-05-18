@@ -73,7 +73,10 @@ public class SoundManager : MonoBehaviour
         SetMusicVolume(soundSettings.musicVolume_);
     }
 
-
+    public void PlayCLip(FXSounds clip)
+    {
+        AudioSource.PlayClipAtPoint(FXSoundsPool[Convert.ToInt32(clip)], transform.position);
+    }
     public AudioClip GetClip(FXSounds sound)
     {
         return FXSoundsPool[Convert.ToInt32(sound)];

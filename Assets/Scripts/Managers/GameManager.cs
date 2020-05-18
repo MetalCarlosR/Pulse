@@ -6,6 +6,7 @@ using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Prefabs")]
     [SerializeField]
     private GameObject fovPrefab = null, pulsePrefab = null, EnemigoPrefab = null, PlayerPrefab = null;
 
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     private SaveManager.GameSave saveGame = null;
 
+    [Header("Json")]
     [SerializeField]
     private TextAsset jsonlvl1 = null, jsonlvl2 = null;
 
@@ -28,6 +30,11 @@ public class GameManager : MonoBehaviour
     private bool paused = false, continueG = false, game = false, dead = false;
 
     private string currentScene = null;
+
+    [Header("Cheats")]
+    [SerializeField]
+    private Transform endPoint;
+    public bool TGM = false, Uammo = false, cheats = true;
     private void Awake()
     {
         if (gmInstance_ == null)
@@ -49,8 +56,55 @@ public class GameManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape)) GameManager.gmInstance_.TogglePause();
             if (Input.GetKeyDown(KeyCode.L)) GameManager.gmInstance_.ReloadScene();
+            if (cheats)
+            {
+                if (Input.GetKeyDown(KeyCode.F1)) Cheats(1);
+                if (Input.GetKeyDown(KeyCode.F2)) Cheats(2);
+                if (Input.GetKeyDown(KeyCode.F3)) Cheats(3);
+                if (Input.GetKeyDown(KeyCode.F4)) Cheats(4);
+                if (Input.GetKeyDown(KeyCode.F5)) Cheats(5);
+            }
         }
     }
+
+
+    public void ActivateCheats(bool b)
+    {
+        cheats = b;
+    }
+    void Cheats(int code)
+    {
+        SoundManager.smInstance_.PlayCLip(SoundManager.FXSounds.PULSE_END);
+        switch (code)
+        {
+            case 1:
+                player_.transform.position = endPoint.position;
+                break;
+            case 2:
+                foreach (EnemigoManager e in enemies) e.Death();
+                break;
+            case 3:
+                Collider2D[] coll = Physics2D.OverlapCircleAll(player_.transform.position, 100);
+
+                foreach (Collider2D col in coll)
+                {
+                    Enemigo enemy = col.GetComponent<Enemigo>();
+                    if (enemy)
+                    {
+                        enemy.SetState(Enemigo.State.Alerted);
+                    }
+                }
+                break;
+            case 4:
+                TGM = !TGM;
+                break;
+            case 5:
+                Uammo = !Uammo;
+                break;
+        }
+
+    }
+
     public bool IsGamePaused()
     {
         return paused;
@@ -124,7 +178,9 @@ public class GameManager : MonoBehaviour
     private void ChangedActiveScene(Scene current, Scene next)
     {
         game = false;
-        if (next.name == "Menu" && currentScene != "FinishScene")
+        dead = true;
+        Debug.Log(next.name);
+        if (next.name == "Menu")
         {
             LoadSave();
             continueG = false;
@@ -145,7 +201,7 @@ public class GameManager : MonoBehaviour
             NodesPool.name = "NodesPool";
             ammo_ = startAmmo_;
             if (continueG) loadLvl(saveGame);
-            //else chooseLvl(next.name);
+            else chooseLvl(next.name);
         }
         currentScene = next.name;
     }
@@ -263,8 +319,11 @@ public class GameManager : MonoBehaviour
     }
     public void Shoot()
     {
-        ammo_--;
-        gmInstance_.SetAmmunition();
+        if (!Uammo)
+        {
+            ammo_--;
+            gmInstance_.SetAmmunition();
+        }
     }
 
     public void AddAmmo(int ammo)
@@ -304,7 +363,7 @@ public class GameManager : MonoBehaviour
     public void ChangeScene(string scene)
     {
         Time.timeScale = 1;
-        if (scene == "Menu" && !dead) Save();
+        if (scene == "Menu" && !dead && (currentScene == "Nivel 1" || currentScene == "Nivel 2")) Save();
         SceneManager.LoadScene(scene, LoadSceneMode.Single);
     }
 
