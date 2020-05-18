@@ -112,7 +112,7 @@ public class Enemigo : MonoBehaviour
 
     void FindPlayer()
     {
-        if (!GameManager.gmInstance_.paused)
+        if (!GameManager.gmInstance_.IsGamePaused())
         {
             Vector3 direction = (player.position - transform.position);
             if (Vector3.Distance(transform.position, player.position) < limit)
