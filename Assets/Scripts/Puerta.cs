@@ -4,45 +4,51 @@ using UnityEngine;
 
 public class Puerta : MonoBehaviour
 {
-    bool jugador, open;
+    bool jugador, open = false;
     private AudioSource doorSound;
-    private float rot;
+
+
+    public bool GetOpen()
+    {
+        return open;
+    }
 
     private void Start()
     {
-        open = false;
-        doorSound = GetComponent<AudioSource>();        
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (Input.GetKeyDown(KeyCode.E) && collision.GetComponent<PlayerController>() && !open)
+        doorSound = GetComponent<AudioSource>();
+        if (GameManager.gmInstance_)
         {
-            MovPuerta(collision.transform);
+            GameManager.gmInstance_.AddDoor(this);
         }
     }
 
-    public void MovPuerta(Transform player)
+    public void SetPuerta(bool open_)
+    {
+        open = open_;
+    }
+
+    public void MovPuerta(Transform entity)
     {
         float rotationEnd = 0;
         float rotaionBegin = transform.localEulerAngles.z;
         if (rotaionBegin == 0)
         {
-            if (transform.position.x > player.transform.position.x) rotationEnd = rotaionBegin - 90;
+            if (transform.position.x > entity.transform.position.x) rotationEnd = rotaionBegin - 90;
             else rotationEnd = rotaionBegin + 90;
         }
         else if (rotaionBegin == 180 || rotaionBegin == -180)
         {
-            if (transform.position.x > player.transform.position.x) rotationEnd = rotaionBegin + 90;
+            if (transform.position.x > entity.transform.position.x) rotationEnd = rotaionBegin + 90;
             else rotationEnd = rotaionBegin - 90;
         }
         else if (rotaionBegin == 90)
         {
-            if (transform.position.y > player.transform.position.y) rotationEnd = rotaionBegin - 90;
+            if (transform.position.y > entity.transform.position.y) rotationEnd = rotaionBegin - 90;
             else rotationEnd = rotaionBegin + 90;
         }
         else
         {
-            if (transform.position.y > player.transform.position.y) rotationEnd = rotaionBegin + 90;
+            if (transform.position.y > entity.transform.position.y) rotationEnd = rotaionBegin + 90;
             else rotationEnd = rotaionBegin - 90;
         }
 
@@ -66,5 +72,10 @@ public class Puerta : MonoBehaviour
             yield return null;
         }
         transform.rotation = Quaternion.Euler(0, 0, end);
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.gmInstance_.RemoveDoor(this);
     }
 }

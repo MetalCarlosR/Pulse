@@ -128,5 +128,12 @@ public class PlayerController : MonoBehaviour
         return speed_;
     }
 
-
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        Puerta door = collision.GetComponent<Puerta>();
+        if (door && Input.GetKeyDown(KeyCode.E))
+        {
+            door.MovPuerta(transform);
+        }
+    }
 }

@@ -8,11 +8,11 @@ public class GameManager : MonoBehaviour
 {
     [Header("Prefabs")]
     [SerializeField]
-    private GameObject fovPrefab = null, pulsePrefab = null, EnemigoPrefab = null, PlayerPrefab = null;
+    private GameObject fovPrefab = null, pulsePrefab = null, EnemigoPrefab = null, PlayerPrefab = null , PuertaPrefab = null;
 
     private UIManager UIManager_;
 
-    private GameObject FieldOfViewPool, PulsePool, player_, mueblesPadre, EnemiesPool, NodesPool;
+    private GameObject FieldOfViewPool, PulsePool, player_, mueblesPadre, EnemiesPool, NodesPool , PuertaPool;
 
     private SaveManager.GameSave saveGame = null;
 
@@ -20,7 +20,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private TextAsset jsonlvl1 = null, jsonlvl2 = null;
 
-    List<EnemigoManager> enemies;
+    List<EnemigoManager> enemies = new List<EnemigoManager>();
+
+    List<Puerta> puertas_ = new List<Puerta>();
 
     private Camera camara;
     public static GameManager gmInstance_;
@@ -114,6 +116,8 @@ public class GameManager : MonoBehaviour
     }
 
 
+    // CARGA Y GUARDADO DEL JUEGO
+
     void LoadSave()
     {
         string loadString = SaveManager.Load();
@@ -129,8 +133,8 @@ public class GameManager : MonoBehaviour
 
     void Save()
     {
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Nivel 1")) SaveManager.Save(1, ammo_, enemies, player_.transform.position);
-        else SaveManager.Save(2, ammo_, enemies, player_.transform.position);
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Nivel 1")) SaveManager.Save(1, ammo_, enemies, player_.transform.position, puertas_);
+        else SaveManager.Save(2, ammo_, enemies, player_.transform.position, puertas_);
     }
 
     void chooseLvl(string lvl)
@@ -142,6 +146,7 @@ public class GameManager : MonoBehaviour
 
         loadLvl(lvlLoader);
     }
+
     void loadLvl(SaveManager.GameSave lvlLoader_)
     {
 
@@ -157,7 +162,21 @@ public class GameManager : MonoBehaviour
             enemy.LoadEnemy(e.nodes_.nodes, e.nodes_.count, e.state, e.prevstate);
             i++;
         }
+        i = 0;
+        foreach (SaveManager.PuertasStates p in lvlLoader_.puertas_)
+        {
+            Puerta puerta = Instantiate(PuertaPrefab, p.position_, Quaternion.Euler(p.rotation_)).GetComponent<Puerta>();
+            puerta.transform.parent = PuertaPool.transform;
+            puerta.name = "Puerta" + i;
+            puerta.SetPuerta(p.open_);
+            i++;
+        }
     }
+
+    /* -------------------- */
+
+
+    // MANEJO DE ESCENAS 
 
     public void Continue()
     {
@@ -168,6 +187,15 @@ public class GameManager : MonoBehaviour
             else SceneManager.LoadScene("Nivel 2");
         }
     }
+
+    public void ReloadScene()
+    {
+        Time.timeScale = 1;
+        Debug.Log(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SoundManager.smInstance_.PublicSetFxVolume(true);
+    }
+
     void OnEnable()
     {
         SceneManager.activeSceneChanged += ChangedActiveScene;
@@ -194,17 +222,42 @@ public class GameManager : MonoBehaviour
             PulsePool = new GameObject();
             EnemiesPool = new GameObject();
             NodesPool = new GameObject();
+            PuertaPool = new GameObject();
             FieldOfViewPool.name = "FieldOfViewPool";
             PulsePool.name = "PulsePool";
             EnemiesPool.name = "EnemiesPool";
             NodesPool.name = "NodesPool";
+            PuertaPool.name = "PuertaPool";
             ammo_ = startAmmo_;
-            if (continueG) loadLvl(saveGame);
-            else chooseLvl(next.name);
+            //if (continueG) loadLvl(saveGame);
+            //else chooseLvl(next.name);
         }
         currentScene = next.name;
     }
 
+    public void ChangeScene(string scene)
+    {
+        Time.timeScale = 1;
+        if (scene == "Menu" && !dead && (currentScene == "Nivel 1" || currentScene == "Nivel 2")) Save();
+        SceneManager.LoadScene(scene, LoadSceneMode.Single);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.activeSceneChanged -= ChangedActiveScene;
+    }
+
+    /* -------------------- */
+
+
+    // SETTERS Y GETTERS DE LOS OBJETOS EN ESCENA
+
+    // ---- PLAYER
     public void PlayerDeath()
     {
         Time.timeScale = 0;
@@ -219,14 +272,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ReloadScene()
-    {
-        Time.timeScale = 1;
-        Debug.Log(SceneManager.GetActiveScene().name);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        SoundManager.smInstance_.PublicSetFxVolume(true);
-    }
-
     public Transform GetPlayerTransform()
     {
         if (player_ != null)
@@ -239,6 +284,7 @@ public class GameManager : MonoBehaviour
             return null;
         }
     }
+
     public void SetPlayer(GameObject player)
     {
         if (player.GetComponent<PlayerController>())
@@ -252,6 +298,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /* -------------------- */
+
+
+    // ---- CAMARA
+
     public Transform SetCamera(Camera cam)
     {
         camara = cam;
@@ -263,12 +314,9 @@ public class GameManager : MonoBehaviour
     {
         return camara;
     }
+    /* -------------------- */
 
-    public void SetUImanager(UIManager UImanager)
-    {
-        UIManager_ = UImanager;
-        gmInstance_.SetAmmunition();
-    }
+    // ---- FOV Y PULSE
 
     public FieldOfView createFieldofView()
     {
@@ -284,11 +332,9 @@ public class GameManager : MonoBehaviour
         return newPulse;
     }
 
-    public void SetEscenario(Transform escenario)
-    {
-        FieldOfViewPool.transform.parent = escenario;
-        PulsePool.transform.parent = escenario;
-    }
+    /* -------------------- */
+
+    // ---- LISTAS
 
     public void AddEnemy(EnemigoManager enemy)
     {
@@ -299,6 +345,16 @@ public class GameManager : MonoBehaviour
         enemies.Remove(enemy);
     }
 
+    public void AddDoor(Puerta puerta)
+    {
+        puertas_.Add(puerta);
+    }
+
+    public void RemoveDoor(Puerta puerta)
+    {
+        puertas_.Remove(puerta);
+    }
+
     public void AddNodes(List<Transform> nodes, string name)
     {
         GameObject nodeParent = new GameObject();
@@ -307,7 +363,7 @@ public class GameManager : MonoBehaviour
         nodeParent.name = "NodePool" + name;
         foreach (Transform tr in nodes) tr.parent = nodeParent.transform;
     }
-    public void setMuebles(GameObject muebles)
+    public void addMuebles(GameObject muebles)
     {
         mueblesPadre = muebles;
         mueblesPadre.layer = LayerMask.NameToLayer("Muebles");
@@ -316,6 +372,42 @@ public class GameManager : MonoBehaviour
             child.gameObject.layer = LayerMask.NameToLayer("Muebles");
         }
     }
+
+    // ---- UI MANAGER
+
+    public void SetUImanager(UIManager UImanager)
+    {
+        UIManager_ = UImanager;
+        gmInstance_.SetAmmunition();
+    }
+    public void SetAmmunition()
+    {
+        UIManager_.SetAmmunition(ammo_);
+    }
+
+    public void SetWeapon(bool activado)
+    {
+        UIManager_.SetWeapon(activado);
+    }
+
+    public void ActivatePulse(bool activado)
+    {
+        UIManager_.ActivatePulse(activado);
+    }
+
+    public void TurnInterface(bool on)
+    {
+        UIManager_.TurnInterface(on);
+    }
+
+    /* -------------------- */
+    // ---- ARMA
+
+    public bool EmptyGun()
+    {
+        return ammo_ <= 0;
+    }
+
     public void Shoot()
     {
         if (!Uammo)
@@ -330,10 +422,22 @@ public class GameManager : MonoBehaviour
         ammo_ += ammo;
         gmInstance_.SetAmmunition();
     }
-    public bool EmptyGun()
+
+
+    /* -------------------- */
+
+    public void SetEscenario(Transform escenario)
     {
-        return ammo_ <= 0;
+        FieldOfViewPool.transform.parent = escenario;
+        PulsePool.transform.parent = escenario;
+        NodesPool.transform.parent = escenario;
+        EnemiesPool.transform.parent = escenario;
+        PuertaPool.transform.parent = escenario; 
     }
+
+
+    //  MANEJO DEL TIEMPO
+
     public void TogglePause()
     {
         if (paused) ResumeGame();
@@ -359,40 +463,5 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ChangeScene(string scene)
-    {
-        Time.timeScale = 1;
-        if (scene == "Menu" && !dead && (currentScene == "Nivel 1" || currentScene == "Nivel 2")) Save();
-        SceneManager.LoadScene(scene, LoadSceneMode.Single);
-    }
-
-    public void ExitGame()
-    {
-        Application.Quit();
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.activeSceneChanged -= ChangedActiveScene;
-    }
-
-    public void SetWeapon(bool activado)
-    {
-        UIManager_.SetWeapon(activado);
-    }
-
-    public void ActivatePulse(bool activado)
-    {
-        UIManager_.ActivatePulse(activado);
-    }
-
-    public void TurnInterface(bool on)
-    {
-        UIManager_.TurnInterface(on);
-    }
-
-    public void SetAmmunition()
-    {
-        UIManager_.SetAmmunition(ammo_);
-    }
+    /* -------------------- */
 }
