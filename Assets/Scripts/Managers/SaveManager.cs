@@ -21,7 +21,7 @@ public static class SaveManager
         }
     }
 
-    public static void Save(int level, int ammo, List<EnemigoManager> enemies, Vector3 playerPos)
+    public static void Save(int level, int ammo, List<EnemigoManager> enemies, Vector3 playerPos, List<Puerta> puertas)
     {
         List<EnemySettings> enemiesOut = new List<EnemySettings>();
 
@@ -35,13 +35,24 @@ public static class SaveManager
             eSettings.nodes_.count = eSettings.nodes_.nodes.Count;
             enemiesOut.Add(eSettings);
         }
+        List<PuertasStates> puertasOut = new List<PuertasStates>();
+
+        foreach (Puerta p in puertas )
+        {
+            PuertasStates pOut = new PuertasStates();
+            pOut.position_ = p.transform.position;
+            pOut.rotation_ = p.transform.localEulerAngles;
+            pOut.open_ = p.GetOpen();
+            puertasOut.Add(pOut);
+        }
 
         GameSave save = new GameSave
         {
             level_ = level,
             ammo_ = ammo,
             playerPos_ = playerPos,
-            enemies_ = enemiesOut
+            enemies_ = enemiesOut,
+            puertas_ = puertasOut
         };
 
         string jsonOut = JsonUtility.ToJson(save);
@@ -66,12 +77,20 @@ public static class SaveManager
         public Nodes nodes_;
     }
     [Serializable]
+    public struct PuertasStates
+    {
+        public Vector3 position_;
+        public Vector3 rotation_;
+        public bool open_;
+    }
+    [Serializable]
     public class GameSave
     {
         public int level_;
         public int ammo_;
         public Vector3 playerPos_;
         public List<EnemySettings> enemies_;
+        public List<PuertasStates> puertas_;
     }
 
     public static string LoadSettings()

@@ -51,5 +51,11 @@ MonoBehaviour:
     type: 3}
   PlayerPrefab: {fileID: 5668069761844117318, guid: 106736dc44b77614a912095aed9cf61f,
     type: 3}
+  PuertaPrefab: {fileID: 6395133698238684673, guid: 9855bc796fa271640b307e936b116c2a,
+    type: 3}
   jsonlvl1: {fileID: 4900000, guid: 12f7c695b84521c41a96b90f05988c1e, type: 3}
   jsonlvl2: {fileID: 0}
+  endPoint: {fileID: 0}
+  TGM: 0
+  Uammo: 0
+  cheats: 1
