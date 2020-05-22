@@ -13,20 +13,23 @@ public class EnemigoManager : MonoBehaviour
 
     void Start()
     {
-        navMesh = GetComponent<NavMeshAgent>();
-        navMesh.updateRotation = false;
-        navMesh.updateUpAxis = false;
-        if (nodes.Count >= 2)
+        if (!GameManager.gmInstance_.save)
         {
-            enemigo = GetComponent<Enemigo>();
-            enemigo.StartDelay();
-            index = Random.Range(0, nodes.Count);
-            Patroll();
-        }
-        else
-        {
-            Debug.LogWarning("Error no nodes found on" + this + ". Destroying" + this);
-            Destroy(gameObject);
+            navMesh = GetComponent<NavMeshAgent>();
+            navMesh.updateRotation = false;
+            navMesh.updateUpAxis = false;
+            if (nodes.Count >= 2)
+            {
+                enemigo = GetComponent<Enemigo>();
+                enemigo.StartDelay();
+                index = Random.Range(0, nodes.Count);
+                Patroll();
+            }
+            else
+            {
+                Debug.LogWarning("Error no nodes found on" + this + ". Destroying" + this);
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -90,12 +93,12 @@ public class EnemigoManager : MonoBehaviour
         return nodesOut;
     }
 
-    public void LoadEnemy(List<Vector3> nodes_, int count , Enemigo.State state, Enemigo.State prevState)
+    public void LoadEnemy(List<Vector3> nodes_, int count, Enemigo.State state, Enemigo.State prevState)
     {
         List<Transform> newNodes = new List<Transform>(count);
 
 
-        for(int i = 0; i < count; i++)
+        for (int i = 0; i < count; i++)
         {
             GameObject node = new GameObject();
             node.transform.position = nodes_[i];

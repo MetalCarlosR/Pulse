@@ -8,14 +8,16 @@ public class GameManager : MonoBehaviour
 {
     [Header("Prefabs")]
     [SerializeField]
-    private GameObject fovPrefab = null, pulsePrefab = null, EnemigoPrefab = null, PlayerPrefab = null , PuertaPrefab = null;
+    private GameObject fovPrefab = null, pulsePrefab = null, EnemigoPrefab = null, PlayerPrefab = null, PuertaPrefab = null, BotonPrefab = null, LaserPrefab = null;
 
     private UIManager UIManager_;
 
-    private GameObject FieldOfViewPool, PulsePool, player_, mueblesPadre, EnemiesPool, NodesPool , PuertaPool;
+    private GameObject FieldOfViewPool, PulsePool, player_, mueblesPadre, EnemiesPool, NodesPool, PuertaPool, BotonesPool, LaserPool;
 
     private SaveManager.GameSave saveGame = null;
 
+    [Header("Save")]
+    public bool save = false;
     [Header("Json")]
     [SerializeField]
     private TextAsset jsonlvl1 = null, jsonlvl2 = null;
@@ -23,6 +25,8 @@ public class GameManager : MonoBehaviour
     List<EnemigoManager> enemies = new List<EnemigoManager>();
 
     List<Puerta> puertas_ = new List<Puerta>();
+
+    List<Boton> botones_ = new List<Boton>();
 
     private Camera camara;
     public static GameManager gmInstance_;
@@ -34,7 +38,8 @@ public class GameManager : MonoBehaviour
     private string currentScene = null;
 
     [Header("Cheats")]
-    public Transform endPoint;
+    [SerializeField]
+    private Transform endPoint;
     public bool TGM = false, Uammo = false, cheats = true;
     private void Awake()
     {
@@ -106,6 +111,10 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void SetEnd(Transform end)
+    {
+        endPoint = end;
+    }
     public bool IsGamePaused()
     {
         return paused;
@@ -133,8 +142,8 @@ public class GameManager : MonoBehaviour
 
     void Save()
     {
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Nivel 1")) SaveManager.Save(1, ammo_, enemies, player_.transform.position, puertas_);
-        else SaveManager.Save(2, ammo_, enemies, player_.transform.position, puertas_);
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Nivel 1")) SaveManager.Save(1, ammo_, enemies, player_.transform.position, puertas_, botones_);
+        else SaveManager.Save(2, ammo_, enemies, player_.transform.position, puertas_, botones_);
     }
 
     void chooseLvl(string lvl)
@@ -170,6 +179,26 @@ public class GameManager : MonoBehaviour
             puerta.name = "Puerta" + i;
             puerta.SetPuerta(p.open_);
             i++;
+        }
+        i = 0;
+        foreach (SaveManager.BotonStates b in lvlLoader_.botones_)
+        {
+            Boton boton = Instantiate(BotonPrefab, b.position_, Quaternion.identity).GetComponent<Boton>();
+            boton.transform.parent = BotonesPool.transform;
+            boton.name = "Boton" + i;
+            i++;
+
+            if (b.active)
+            {
+                List<GameObject> LaserIn = new List<GameObject>();
+                foreach (SaveManager.LaserTr l in b.laser)
+                {
+                    GameObject laser = Instantiate(LaserPrefab, l.positon_, Quaternion.Euler(l.rotation_));
+                    LaserIn.Add(laser);
+                }
+                boton.SetButton(LaserIn, true);
+            }
+            else boton.SetButton(null, false);
         }
     }
 
@@ -221,16 +250,24 @@ public class GameManager : MonoBehaviour
             FieldOfViewPool = new GameObject();
             PulsePool = new GameObject();
             EnemiesPool = new GameObject();
+            BotonesPool = new GameObject();
             NodesPool = new GameObject();
             PuertaPool = new GameObject();
+            LaserPool = new GameObject();
             FieldOfViewPool.name = "FieldOfViewPool";
             PulsePool.name = "PulsePool";
             EnemiesPool.name = "EnemiesPool";
             NodesPool.name = "NodesPool";
             PuertaPool.name = "PuertaPool";
+            BotonesPool.name = "BotonesPool";
+            LaserPool.name = "LaserPool";
             ammo_ = startAmmo_;
-            //if (continueG) loadLvl(saveGame);
-            //else chooseLvl(next.name);
+            if (save)
+            {
+                if (continueG) loadLvl(saveGame);
+                else chooseLvl(next.name);
+            }
+
         }
         currentScene = next.name;
     }
@@ -355,6 +392,16 @@ public class GameManager : MonoBehaviour
         puertas_.Remove(puerta);
     }
 
+    public void AddButton(Boton boton)
+    {
+        botones_.Add(boton);
+    }
+
+    public void RemoveButton(Boton boton)
+    {
+        botones_.Remove(boton);
+    }
+
     public void AddNodes(List<Transform> nodes, string name)
     {
         GameObject nodeParent = new GameObject();
@@ -432,7 +479,9 @@ public class GameManager : MonoBehaviour
         PulsePool.transform.parent = escenario;
         NodesPool.transform.parent = escenario;
         EnemiesPool.transform.parent = escenario;
-        PuertaPool.transform.parent = escenario; 
+        PuertaPool.transform.parent = escenario;
+        BotonesPool.transform.parent = escenario;
+        LaserPool.transform.parent = escenario;
     }
 
 

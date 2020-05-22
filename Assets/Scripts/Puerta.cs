@@ -6,7 +6,7 @@ public class Puerta : MonoBehaviour
 {
     bool jugador, open = false;
     private AudioSource doorSound;
-
+    private Vector3 endRot;
 
     public bool GetOpen()
     {
@@ -22,6 +22,10 @@ public class Puerta : MonoBehaviour
         }
     }
 
+    public Vector3 GetEndRot()
+    {
+        return endRot;
+    }
     public void SetPuerta(bool open_)
     {
         open = open_;
@@ -56,14 +60,15 @@ public class Puerta : MonoBehaviour
         {
             doorSound.Play();
             StartCoroutine(DoorRotation(rotaionBegin, rotationEnd, 1f));
+            endRot = new Vector3(0, 0, rotationEnd);
+            open = !open;
         }
     }
 
     IEnumerator DoorRotation(float begin, float end, float duration)
     {
         float time = 0;
-        open = !open;
-
+        
         while (time < duration)
         {
             transform.rotation = Quaternion.Euler(0, 0, Mathf.Lerp(begin, end, time / duration));

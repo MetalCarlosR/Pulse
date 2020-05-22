@@ -21,7 +21,7 @@ public static class SaveManager
         }
     }
 
-    public static void Save(int level, int ammo, List<EnemigoManager> enemies, Vector3 playerPos, List<Puerta> puertas)
+    public static void Save(int level, int ammo, List<EnemigoManager> enemies, Vector3 playerPos, List<Puerta> puertas , List<Boton> botones)
     {
         List<EnemySettings> enemiesOut = new List<EnemySettings>();
 
@@ -41,9 +41,36 @@ public static class SaveManager
         {
             PuertasStates pOut = new PuertasStates();
             pOut.position_ = p.transform.position;
-            pOut.rotation_ = p.transform.localEulerAngles;
+            if (p.GetOpen()) pOut.rotation_ = p.GetEndRot();
+            else pOut.rotation_ = p.transform.localEulerAngles;
             pOut.open_ = p.GetOpen();
             puertasOut.Add(pOut);
+        }
+
+        List<BotonStates> botonOut = new List<BotonStates>();
+
+        foreach(Boton b in botones)
+        {
+            BotonStates bOut = new BotonStates();
+            bOut.position_ = b.transform.position;
+            if (b.IsActive())
+            {
+                bOut.active = true;
+                List<LaserTr> laserListOut = new List<LaserTr>();
+                foreach (GameObject l in b.GetLaser())
+                {
+                    LaserTr laserOut = new LaserTr();
+                    laserOut.positon_ = l.transform.position;
+                    laserOut.rotation_ = l.transform.localEulerAngles;
+                    laserListOut.Add(laserOut);
+                }
+                bOut.laser = laserListOut;
+            }
+            else {
+                bOut.active = false;
+                bOut.laser = null;
+            }
+            botonOut.Add(bOut);
         }
 
         GameSave save = new GameSave
@@ -52,7 +79,8 @@ public static class SaveManager
             ammo_ = ammo,
             playerPos_ = playerPos,
             enemies_ = enemiesOut,
-            puertas_ = puertasOut
+            puertas_ = puertasOut,
+            botones_ = botonOut
         };
 
         string jsonOut = JsonUtility.ToJson(save);
@@ -84,6 +112,19 @@ public static class SaveManager
         public bool open_;
     }
     [Serializable]
+    public struct LaserTr
+    {
+        public Vector3 positon_;
+        public Vector3 rotation_;
+    }
+    [Serializable]
+    public struct BotonStates
+    {
+        public List<LaserTr> laser;
+        public Vector3 position_;
+        public bool active;
+    }
+    [Serializable]
     public class GameSave
     {
         public int level_;
@@ -91,6 +132,7 @@ public static class SaveManager
         public Vector3 playerPos_;
         public List<EnemySettings> enemies_;
         public List<PuertasStates> puertas_;
+        public List<BotonStates> botones_;
     }
 
     public static string LoadSettings()

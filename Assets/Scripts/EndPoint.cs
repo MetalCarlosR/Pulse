@@ -6,6 +6,6 @@ public class EndPoint : MonoBehaviour
 {
     void Start()
     {
-        GameManager.gmInstance_.endPoint = transform;
+        GameManager.gmInstance_.SetEnd(transform);
     }
 }
