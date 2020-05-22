@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
         if (game)
         {
             if (Input.GetKeyDown(KeyCode.Escape)) GameManager.gmInstance_.TogglePause();
-            if (Input.GetKeyDown(KeyCode.L)) GameManager.gmInstance_.ReloadScene();
+            if (Input.GetButtonDown("Reload")) GameManager.gmInstance_.ReloadScene();
             if (cheats)
             {
                 if (Input.GetKeyDown(KeyCode.F1)) Cheats(1);

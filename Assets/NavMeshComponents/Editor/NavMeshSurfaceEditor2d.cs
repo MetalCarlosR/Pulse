@@ -38,7 +38,7 @@ namespace UnityEditor.AI
         {
             public readonly GUIContent m_LayerMask = new GUIContent("Include Layers");
 
-            public readonly GUIContent m_ShowInputGeom = new GUIContent("Show Input Geom");
+            public readonly GUIContent m_ShowGeom = new GUIContent("Show Geom");
             public readonly GUIContent m_ShowVoxels = new GUIContent("Show Voxels");
             public readonly GUIContent m_ShowRegions = new GUIContent("Show Regions");
             public readonly GUIContent m_ShowRawContours = new GUIContent("Show Raw Contours");

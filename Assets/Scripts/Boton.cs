@@ -34,7 +34,7 @@ public class Boton : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         PlayerController detectorJugador = collision.GetComponent<PlayerController>();
-        if (detectorJugador && Input.GetKeyDown(KeyCode.E) && active)
+        if (detectorJugador && Input.GetButtonDown("Use") && active)
         {
             source.Play();
             active = false;

@@ -18,7 +18,7 @@ public class CambioArma : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetButtonDown("WeaponChange"))
         {
             animator.SetTrigger("Cambio arma");
             daga.gameObject.SetActive(!daga.gameObject.activeSelf);

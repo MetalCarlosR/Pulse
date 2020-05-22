@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
             walking.loop = false;
             walking.clip = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.PLAYER_DEATH);
             StartCoroutine(PlayerDeathSound());
-        }  
+        }
     }
 
     private IEnumerator PlayerDeathSound()
@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         Puerta door = collision.GetComponent<Puerta>();
-        if (door && Input.GetKeyDown(KeyCode.E))
+        if (door && Input.GetButtonDown("Use"))
         {
             door.MovPuerta(transform);
         }

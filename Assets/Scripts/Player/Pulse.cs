@@ -58,7 +58,7 @@ public class Pulse : MonoBehaviour
     {
         if (cam)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetButtonDown("Pulse"))
             {
                 GameManager.gmInstance_.ActivatePulse(true);
                 player.UsePulse(true);
@@ -68,7 +68,7 @@ public class Pulse : MonoBehaviour
                 if (mesh.enabled == false) mesh.enabled = true;
                 StartCoroutine(PulseCam(cam.orthographicSize, ortSize * 2f, transform.localScale.x, maxSize, (((ortSize * 2f) - cam.orthographicSize) / ortSize)));
             }
-            else if (Input.GetKeyUp(KeyCode.Space))
+            else if (Input.GetButtonUp("Pulse"))
             {
                 GameManager.gmInstance_.ActivatePulse(false);
                 StopAllCoroutines();
