@@ -22,7 +22,7 @@ public class Enemigo : MonoBehaviour
     private Animator animator;
     [SerializeField]
     private AudioSource steps = null;
-    private AudioClip[] EnemyVoicePool = new AudioClip[5];
+    private AudioClip[] EnemyVoicePool = new AudioClip[8];
     private bool started = false;
 
 
@@ -61,10 +61,14 @@ public class Enemigo : MonoBehaviour
         if (SoundManager.smInstance_)
         {
             EnemyVoicePool[0] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.ENEMY_VOICE0);
-            EnemyVoicePool[1] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.ENEMY_VOICE2);
-            EnemyVoicePool[2] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.ENEMY_VOICE3);
-            EnemyVoicePool[2] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.ENEMY_VOICE3);
-            EnemyVoicePool[4] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.ENEMY_DEATH);
+            EnemyVoicePool[1] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.ENEMY_VOICE1);
+            EnemyVoicePool[2] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.ENEMY_VOICE2);
+            EnemyVoicePool[3] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.ENEMY_VOICE3);
+            EnemyVoicePool[4] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.ENEMY_VOICE4);
+            EnemyVoicePool[5] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.ENEMY_VOICE5);
+            EnemyVoicePool[6] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.ENEMY_VOICE6);
+            EnemyVoicePool[7] = SoundManager.smInstance_.GetClip(SoundManager.FXSounds.ENEMY_DEATH);
+
         }
         SetState(State.Patrolling);
     }
@@ -156,7 +160,7 @@ public class Enemigo : MonoBehaviour
     public void Death()
     {
         steps.Stop();
-        AudioSource.PlayClipAtPoint(EnemyVoicePool[4], transform.position);
+        AudioSource.PlayClipAtPoint(EnemyVoicePool[7], transform.position);
         Destroy(gameObject);
     }
     private void OnDestroy()
@@ -238,7 +242,7 @@ public class Enemigo : MonoBehaviour
     public void PlayEnemyVoice()
     {
         Debug.Log("e");
-        voices.clip = EnemyVoicePool[Random.Range(0, 4)];
+        voices.clip = EnemyVoicePool[Random.Range(0, 7)];
         voices.Play();
     }
 }
