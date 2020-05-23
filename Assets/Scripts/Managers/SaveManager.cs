@@ -148,13 +148,10 @@ public static class SaveManager
         }
     }
 
-    public static void SaveSettings(float fxVolume, float musicVolume)
+    public static void SaveSettings(SettingsSave settings_)
     {
-        SettingsSave settings = new SettingsSave
-        {
-            fxVolume_ = fxVolume,
-            musicVolume_ = musicVolume
-        };
+        SettingsSave settings = new SettingsSave();
+        settings = settings_;
 
         string settingsOut = JsonUtility.ToJson(settings);
 
@@ -168,6 +165,8 @@ public static class SaveManager
     {
         public float fxVolume_;
         public float musicVolume_;
+        public bool controller_;
+        public bool cheats_;
     }
 }
 

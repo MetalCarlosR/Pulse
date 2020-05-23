@@ -9,7 +9,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     private Slider fxSlider = null, musicSlider = null;
     [SerializeField]
-    private Toggle cheat = null;
+    private Toggle cheat = null, controller = null;
     [SerializeField]
     Button Exit = null, continueB = null, save = null;
     private bool ini;
@@ -26,16 +26,21 @@ public class MenuManager : MonoBehaviour
         {
             continueB.onClick.AddListener(delegate { GameManager.gmInstance_.Continue(); });
         }
-        if (SoundManager.smInstance_)
+        if (SettingsManager.smInstance_)
         {
-            fxSlider.value = SoundManager.smInstance_.soundSettings.fxVolume_;
-            musicSlider.value = SoundManager.smInstance_.soundSettings.musicVolume_;
-
+            fxSlider.value = SettingsManager.smInstance_.GetSettings().fxVolume_;
+            musicSlider.value = SettingsManager.smInstance_.GetSettings().musicVolume_;
             fxSlider.onValueChanged.AddListener(delegate { SoundManager.smInstance_.SetFXVolume(fxSlider.value); });
             musicSlider.onValueChanged.AddListener(delegate { SoundManager.smInstance_.SetMusicVolume(musicSlider.value); });
+
+            cheat.isOn = SettingsManager.smInstance_.GetSettings().cheats_;
+            controller.isOn = SettingsManager.smInstance_.GetSettings().controller_;
+            cheat.onValueChanged.AddListener(delegate { SettingsManager.smInstance_.ActivateCheats(cheat.isOn); });
+            controller.onValueChanged.AddListener(delegate { SettingsManager.smInstance_.ActivateController(controller.isOn); });
+
+            save.onClick.AddListener(delegate { SettingsManager.smInstance_.Save(); });
         }
-        save.onClick.AddListener(delegate { SoundManager.smInstance_.Save(); });
-        cheat.onValueChanged.AddListener(delegate { GameManager.gmInstance_.ActivateCheats(cheat.isOn); });
+
         Exit.onClick.AddListener(delegate { GameManager.gmInstance_.ExitGame(); });
     }
     public void Settings()

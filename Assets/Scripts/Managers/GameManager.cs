@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     List<Boton> botones_ = new List<Boton>();
 
     private Camera camara;
+
     public static GameManager gmInstance_;
 
     private int ammo_, startAmmo_ = 5;
@@ -40,7 +41,7 @@ public class GameManager : MonoBehaviour
     [Header("Cheats")]
     [SerializeField]
     private Transform endPoint;
-    public bool TGM = false, Uammo = false, cheats = true;
+    public bool TGM = false, Uammo = false;
     private void Awake()
     {
         if (gmInstance_ == null)
@@ -62,7 +63,7 @@ public class GameManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape)) GameManager.gmInstance_.TogglePause();
             if (Input.GetButtonDown("Reload")) GameManager.gmInstance_.ReloadScene();
-            if (cheats)
+            if (SettingsManager.smInstance_.GetSettings().cheats_)
             {
                 if (Input.GetKeyDown(KeyCode.F1)) Cheats(1);
                 if (Input.GetKeyDown(KeyCode.F2)) Cheats(2);
@@ -73,11 +74,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-    public void ActivateCheats(bool b)
-    {
-        cheats = b;
-    }
     void Cheats(int code)
     {
         SoundManager.smInstance_.PlayCLip(SoundManager.FXSounds.PULSE_END);

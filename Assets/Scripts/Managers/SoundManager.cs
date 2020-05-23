@@ -15,9 +15,6 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     private AudioMixer musicAM = null, fxSoundAM = null;
 
-
-    public SaveManager.SettingsSave soundSettings;
-
     public enum FXSounds
     {
         ENEMY_VOICE0, ENEMY_VOICE1, ENEMY_VOICE2,
@@ -32,7 +29,6 @@ public class SoundManager : MonoBehaviour
         if (smInstance_ == null)
         {
             smInstance_ = this;
-            Load();
             Debug.Log("SoundManager Set");
         }
         else if (smInstance_ != this)
@@ -43,34 +39,11 @@ public class SoundManager : MonoBehaviour
 
     }
 
-    void Load()
-    {
-        string loadString = SaveManager.LoadSettings();
 
-        if (loadString != null)
-        {
-            Debug.Log("SettingsLoaded " + loadString);
-
-            soundSettings = JsonUtility.FromJson<SaveManager.SettingsSave>(loadString);
-        }
-        else
-        {
-            soundSettings = new SaveManager.SettingsSave
-            {
-                fxVolume_ = 5,
-                musicVolume_ = 1
-            };
-        }
-    }
-
-    public void Save()
-    {
-        SaveManager.SaveSettings(soundSettings.fxVolume_, soundSettings.musicVolume_);
-    }
     public void Start()
     {
-        SetFXVolume(soundSettings.fxVolume_);
-        SetMusicVolume(soundSettings.musicVolume_);
+        SetFXVolume(SettingsManager.smInstance_.GetSettings().fxVolume_);
+        SetMusicVolume(SettingsManager.smInstance_.GetSettings().musicVolume_);
     }
 
     public void PlayCLip(FXSounds clip)
@@ -85,7 +58,7 @@ public class SoundManager : MonoBehaviour
     public void PublicSetFxVolume(bool on)
     {
         if (!on) SetFXVolume(-20);
-        else SetFXVolume(soundSettings.fxVolume_);
+        else SetFXVolume(SettingsManager.smInstance_.GetSettings().fxVolume_);
     }
     public void SetFXVolume(float volume)
     {
@@ -96,22 +69,22 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-            soundSettings.fxVolume_ = volume;
-            fxSoundAM.SetFloat("FXVolume", soundSettings.fxVolume_);
+            SettingsManager.smInstance_.GetSettings().fxVolume_ = volume;
+            fxSoundAM.SetFloat("FXVolume", SettingsManager.smInstance_.GetSettings().fxVolume_);
         }
-        PlayerPrefs.SetFloat("FXVolume", soundSettings.fxVolume_);
+        PlayerPrefs.SetFloat("FXVolume", SettingsManager.smInstance_.GetSettings().fxVolume_);
     }
 
     public void SetMusicVolume(float volume)
     {
         if (volume == -30) volume = -80;
         musicAM.SetFloat("MusicVolume", volume);
-        soundSettings.musicVolume_ = volume;
+        SettingsManager.smInstance_.GetSettings().musicVolume_ = volume;
         PlayerPrefs.SetFloat("MusicVolume", volume);
     }
     public float GetVolume(bool music_fx)
     {
-        if (music_fx) return soundSettings.musicVolume_;
-        else return soundSettings.fxVolume_;
+        if (music_fx) return SettingsManager.smInstance_.GetSettings().musicVolume_;
+        else return SettingsManager.smInstance_.GetSettings().fxVolume_;
     }
 }

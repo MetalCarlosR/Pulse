@@ -5,19 +5,21 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
-    Vector2 MouseDir;
+    Vector2 LookDir;
+    Vector3 ControllerDir;
 
-    private int speed_ = 10;
+    private int speed_ = 7;
 
     private bool pulse_ = false;
     private FieldOfView fov;
-    private float fovSet = 360, limit = 50;
+    private float fovSet = 360, limit = 50, cd = 0.15f, timeCD;
 
     [SerializeField]
     private GameObject black = null;
     private Pistola gun;
     private Daga daga;
     private AudioSource walking;
+    private float lastDir = 0;
     void Start()
     {
         gun = GetComponent<Pistola>();
@@ -25,6 +27,7 @@ public class PlayerController : MonoBehaviour
         daga = GetComponentInChildren<Daga>();
         walking = GetComponent<AudioSource>();
         black.SetActive(true);
+        timeCD = Time.time;
         if (GameManager.gmInstance_ != null)
         {
             GameManager.gmInstance_.SetPlayer(gameObject);
@@ -43,7 +46,8 @@ public class PlayerController : MonoBehaviour
     {
         if (!GameManager.gmInstance_.IsGamePaused())
         {
-            rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed_, Input.GetAxis("Vertical") * speed_);
+            if (!SettingsManager.smInstance_.GetSettings().controller_) ControlesTR();
+            else ControlesMando();
             if (rb.velocity.y != 0 || rb.velocity.x != 0)
             {
                 PlayWalking();
@@ -52,7 +56,6 @@ public class PlayerController : MonoBehaviour
             {
                 walking.Stop();
             }
-            LookAtMouse();
             if (fov != null)
             {
                 if (fovSet != 360)
@@ -61,19 +64,9 @@ public class PlayerController : MonoBehaviour
                 }
                 fov.SetOrigin(transform.position);
             }
-            if (Input.GetButtonDown("Fire1") && !pulse_)
-            {
-                daga.Attack();
-                gun.Shoot();
-            }
-            if (Input.GetButtonDown("Fire2") && !pulse_)
-            {
-                gun.Laser(true);
-            }
-            else if (Input.GetButtonUp("Fire2"))
-            {
-                gun.Laser(false);
-            }
+
+
+
         }
     }
 
@@ -85,10 +78,57 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void ControlesTR()
+    {
+        LookAtMouse();
+        rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * speed_;
+        if (Input.GetButtonDown("Fire1") && !pulse_ && Time.time > (timeCD + cd))
+        {
+            daga.Attack();
+            gun.Shoot();
+            timeCD = Time.time + cd;
+        }
+        if (Input.GetButtonDown("Fire2") && !pulse_)
+        {
+            gun.Laser(true);
+        }
+        else if (Input.GetButtonUp("Fire2"))
+        {
+            gun.Laser(false);
+        }
+    }
     void LookAtMouse()
     {
-        MouseDir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-        transform.up = MouseDir;
+        LookDir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+        transform.up = LookDir;
+    }
+
+    void ControlesMando()
+    {
+        LookAtController();
+        rb.velocity = new Vector2(Input.GetAxis("HorizontalMando"), Input.GetAxis("VerticalMando")).normalized * speed_;
+        if (Input.GetAxisRaw("Fire1Mando") == 1 && !pulse_ && Time.time > (timeCD + cd))
+        {
+            daga.Attack();
+            gun.Shoot();
+            timeCD = Time.time + cd;
+        }
+        if (Input.GetAxisRaw("Fire2Mando") == 1 && !pulse_)
+        {
+            gun.Laser(true);
+        }
+        else if (Input.GetAxisRaw("Fire2Mando") == 0)
+        {
+            gun.Laser(false);
+        }
+    }
+    void LookAtController()
+    {
+        float dir = Mathf.Atan2(Input.GetAxis("HorizontalRight"), Input.GetAxis("VerticalRight")) * Mathf.Rad2Deg;
+        if (dir == 0) dir = lastDir;
+        ControllerDir = new Vector3(0, 0, dir);
+        transform.rotation = Quaternion.Euler(ControllerDir);
+        lastDir = dir;
     }
     public void Die()
     {

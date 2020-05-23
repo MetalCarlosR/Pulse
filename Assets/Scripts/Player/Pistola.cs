@@ -15,7 +15,7 @@ public class Pistola : MonoBehaviour
     private Animator animator;
     private AudioSource fire;
 
-    private int layerMask;
+    private int layerMask ;
 
     private void Start()
     {
