@@ -32,10 +32,10 @@ RectTransform:
   m_Father: {fileID: 181375586}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 150, y: 125}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchorMin: {x: 0.023354169, y: 0.033219296}
+  m_AnchorMax: {x: 0.12947917, y: 0.24943858}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &120114254
 CanvasRenderer:
@@ -65,7 +65,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 94350bed0a143384ea5229962f538bb2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 00cced0348e513548b3a416f868e335d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -182,10 +182,10 @@ RectTransform:
   m_Father: {fileID: 181375586}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 150, y: 125}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchorMin: {x: 0.023354169, y: 0.033219296}
+  m_AnchorMax: {x: 0.12947917, y: 0.24943858}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1569495179
 CanvasRenderer:
@@ -215,7 +215,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: e09f7167730a4c849a53b726f4e008e4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7363312f4afdaa94a9b0280e43bbe6ec, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1219,13 +1219,8 @@ MonoBehaviour:
   daga: {fileID: 120114251}
   pistola: {fileID: 1569495176}
   pulse: {fileID: 1868412306}
-  audioSettings: {fileID: 0}
   background: {fileID: 4777089323375421834}
-  audioButton: {fileID: 0}
-  back: {fileID: 183448091456358446}
   Ammunition: {fileID: 2130402993}
-  fxSounds: {fileID: 0}
-  musicSounds: {fileID: 0}
 --- !u!1 &8573729024502874310
 GameObject:
   m_ObjectHideFlags: 0
