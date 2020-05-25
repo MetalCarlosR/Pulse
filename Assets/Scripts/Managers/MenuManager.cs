@@ -5,8 +5,8 @@ using UnityEngine.Audio;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject initialButtons = null, settings = null, howToPlay = null, back = null, audioPanel = null,
-        b1 = null, b2 = null, b3 = null, b4 = null;
+    GameObject initialButtons = null, settings = null, howToPlay = null, back = null, audioPanel = null, Background = null;
+    [SerializeField]
     private Slider fxSlider = null, musicSlider = null;
     [SerializeField]
     private Toggle cheat = null, controller = null;
@@ -46,7 +46,7 @@ public class MenuManager : MonoBehaviour
     public void Settings()
     {
         Clean();
-        BackgroundOn();
+        Background.SetActive(true);
         settings.SetActive(true);
         back.SetActive(true);
     }
@@ -54,7 +54,7 @@ public class MenuManager : MonoBehaviour
     public void Back()
     {
         Clean();
-        BackgroundOn();
+        Background.SetActive(true);
         if (ini)
         {
             initialButtons.SetActive(true);
@@ -86,25 +86,10 @@ public class MenuManager : MonoBehaviour
     void Clean()
     {
         settings.SetActive(false);
-        BackgroundOff();
+        Background.SetActive(false);
         initialButtons.SetActive(false);
         back.SetActive(false);
         howToPlay.SetActive(false);
         audioPanel.SetActive(false);
-    }
-
-    public void BackgroundOn()
-    {
-        b1.SetActive(true);
-        b2.SetActive(true);
-        b3.SetActive(true);
-        b4.SetActive(true);
-    }
-    public void BackgroundOff()
-    {
-        b1.SetActive(false);
-        b2.SetActive(false);
-        b3.SetActive(false);
-        b4.SetActive(false);
     }
 }
