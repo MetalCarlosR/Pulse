@@ -8,6 +8,6 @@ public class Documents : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<PlayerController>())
             if (GameManager.gmInstance_ != null)
-                GameManager.gmInstance_.ChangeScene("FinishScene");
+                GameManager.gmInstance_.ChangeScene("Nivel 2");
     }
 }

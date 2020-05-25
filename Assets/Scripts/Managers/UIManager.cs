@@ -5,48 +5,54 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("Objetos")]
     [SerializeField]
-    GameObject RespawnUI = null, pause = null, menu = null, interfaz = null, daga = null, pistola = null, pulse = null,
-        background = null;
+    GameObject settings = null, Pause = null, initialButtons = null, back = null, audioPanel = null, Background = null, pulse = null, daga = null, pistola = null, interfaz = null;
+    [Header("Botones")]
+    [SerializeField]
+    Button Menu = null, Resume = null, save = null, audioSettings = null;
+    [Header("Sliders")]
+    [SerializeField]
+    private Slider fxSlider = null, musicSlider = null;
+    [Header("Toggles")]
+    [SerializeField]
+    private Toggle cheat = null, controller = null;
     [SerializeField]
     Text Ammunition = null;
- 
+
+    private bool ini = false;
     private void Start()
     {
         if (GameManager.gmInstance_ != null)
         {
             GameManager.gmInstance_.SetUImanager(this);
-            if (menu) {
-                menu.GetComponent<Button>().onClick.AddListener(delegate { GameManager.gmInstance_.ChangeScene("Menu"); });
-            }
+            Menu.onClick.AddListener(delegate { GameManager.gmInstance_.ChangeScene("Menu"); });
+            Resume.onClick.AddListener(delegate { GameManager.gmInstance_.ResumeGame(); });
         }
-        else
-        {
-            Debug.LogError("Warnign GameManager was null when trying to access it from " + this);
-        }
-        if (RespawnUI && pause)
-        {
+        else Debug.LogError("Warnign GameManager was null when trying to access it from " + this);
 
-            interfaz.SetActive(true);
-            RespawnUI.SetActive(false);
-            pause.SetActive(false);
-            menu.SetActive(false);
-            background.SetActive(false);
-
-        }
-        else
+        if (SettingsManager.smInstance_)
         {
-            Debug.LogWarning("Warning RespawnUI or Pause is not set on " + this);
-        }
+            fxSlider.value = SettingsManager.smInstance_.GetSettings().fxVolume_;
+            musicSlider.value = SettingsManager.smInstance_.GetSettings().musicVolume_;
+            fxSlider.onValueChanged.AddListener(delegate { SoundManager.smInstance_.SetFXVolume(fxSlider.value); });
+            musicSlider.onValueChanged.AddListener(delegate { SoundManager.smInstance_.SetMusicVolume(musicSlider.value); });
 
+            cheat.isOn = SettingsManager.smInstance_.GetSettings().cheats_;
+            controller.isOn = SettingsManager.smInstance_.GetSettings().controller_;
+            cheat.onValueChanged.AddListener(delegate { SettingsManager.smInstance_.ActivateCheats(cheat.isOn); });
+            controller.onValueChanged.AddListener(delegate { SettingsManager.smInstance_.ActivateController(controller.isOn); });
+
+            save.onClick.AddListener(delegate { SettingsManager.smInstance_.Save(); });
+        }
+        audioSettings.onClick.AddListener(delegate { Audio(); });
     }
     public void RespawnMenu()
     {
-        if (RespawnUI != null)
+        if (Pause != null)
         {
-            RespawnUI.SetActive(true);
-            menu.SetActive(true);
-            background.SetActive(true);
+            Pause.SetActive(true);
+            Resume.gameObject.SetActive(false);
             interfaz.SetActive(false);
         }
         else
@@ -57,21 +63,16 @@ public class UIManager : MonoBehaviour
     }
     public void OnPause()
     {
-        Debug.Log("UI Pause menu");
-        pause.SetActive(true);
-        menu.SetActive(true);
-        background.SetActive(true);
+        ini = true;
+        Pause.SetActive(true);
         interfaz.SetActive(false);
     }
 
     public void OnResume()
     {
-        pause.SetActive(false);
-        menu.SetActive(false);
-        background.SetActive(false);
+        Pause.SetActive(false);
         interfaz.SetActive(true);
     }
-
 
     public void SetWeapon(bool activado)
     {
@@ -95,5 +96,50 @@ public class UIManager : MonoBehaviour
     public void SetAmmunition(int num)
     {
         Ammunition.text = "x " + num;
+    }
+
+
+    // MANEJO INTERNO DEL MENU DE PAUSA
+
+    public void Settings()
+    {
+        Clean();
+        Background.SetActive(true);
+        settings.SetActive(true);
+        back.SetActive(true);
+    }
+
+    public void Back()
+    {
+        Clean();
+        Background.SetActive(true);
+        if (ini)
+        {
+            initialButtons.SetActive(true);
+        }
+        else
+        {
+            settings.SetActive(true);
+            back.SetActive(true);
+            ini = true;
+        }
+    }
+
+    public void Audio()
+    {
+        Clean();
+        Debug.Log("e");
+        audioPanel.SetActive(true);
+        back.SetActive(true);
+        ini = false;
+    }
+
+    void Clean()
+    {
+        settings.SetActive(false);
+        Background.SetActive(false);
+        initialButtons.SetActive(false);
+        back.SetActive(false);
+        audioPanel.SetActive(false);
     }
 }

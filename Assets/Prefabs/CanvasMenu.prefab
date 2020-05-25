@@ -2466,8 +2466,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.75, y: 0.75}
   m_AnchorMax: {x: 0.95, y: 0.85}
-  m_AnchoredPosition: {x: -786, y: -387}
-  m_SizeDelta: {x: 364.12024, y: 113.89642}
+  m_AnchoredPosition: {x: -709, y: -379}
+  m_SizeDelta: {x: 277.3, y: 159.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7227711453072020074
 CanvasRenderer:
@@ -2802,18 +2802,6 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 3648562890854971307, guid: f1d635091723a1b4684ec1dd5e1b7731,
-          type: 3}
-        m_MethodName: ChangeScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Nivel 1
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 3648562890854971307, guid: f1d635091723a1b4684ec1dd5e1b7731,
@@ -4240,7 +4228,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 100
-    m_Alignment: 5
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -4597,6 +4585,7 @@ MonoBehaviour:
   Exit: {fileID: 7227711452894646182}
   continueB: {fileID: 4629661041913560407}
   save: {fileID: 2083706562}
+  newGame: {fileID: 7227711453180122626}
 --- !u!1 &7227711453944223382
 GameObject:
   m_ObjectHideFlags: 0

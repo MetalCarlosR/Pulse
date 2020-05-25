@@ -11,7 +11,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     private Toggle cheat = null, controller = null;
     [SerializeField]
-    Button Exit = null, continueB = null, save = null;
+    Button Exit = null, continueB = null, save = null , newGame = null;
     private bool ini;
     private float fxVolume;
     private void Start()
@@ -40,7 +40,7 @@ public class MenuManager : MonoBehaviour
 
             save.onClick.AddListener(delegate { SettingsManager.smInstance_.Save(); });
         }
-
+        newGame.onClick.AddListener(delegate { GameManager.gmInstance_.ChangeScene("Nivel 1"); });
         Exit.onClick.AddListener(delegate { GameManager.gmInstance_.ExitGame(); });
     }
     public void Settings()

@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     private UIManager UIManager_;
 
+    private LoadManager loadManager_;
+
     private GameObject FieldOfViewPool, PulsePool, player_, mueblesPadre, EnemiesPool, NodesPool, PuertaPool, BotonesPool, LaserPool;
 
     private SaveManager.GameSave saveGame = null;
@@ -36,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     private bool paused = false, continueG = false, game = false, dead = false;
 
-    private string currentScene = null;
+    private string currentScene , NexLevelLoading;
 
     [Header("Cheats")]
     [SerializeField]
@@ -268,10 +270,38 @@ public class GameManager : MonoBehaviour
         currentScene = next.name;
     }
 
+    IEnumerator LoadLevel(string scene)
+    {
+        NexLevelLoading = scene;
+
+        SceneManager.LoadScene("LoadingScreen");
+
+        yield return new WaitForSeconds(1);
+
+        float gameLoad = 0;
+        while (gameLoad < 1)
+        {
+            loadManager_.ChangeProgress(gameLoad);
+            yield return new WaitForEndOfFrame();
+            gameLoad += 0.01f;
+        }
+        loadManager_.ChangeProgress(1);
+    }
+
+    public void EndLevelChange()
+    {
+        SceneManager.LoadSceneAsync(NexLevelLoading);
+    }
+
     public void ChangeScene(string scene)
     {
         Time.timeScale = 1;
-        if (scene == "Menu" && !dead && (currentScene == "Nivel 1" || currentScene == "Nivel 2")) Save();
+        if (scene == "Menu" && !dead) Save();
+        else if (scene == "Nivel 1" || scene == "Nivel 2")
+        {
+            StartCoroutine(LoadLevel(scene));
+            return;
+        }
         SceneManager.LoadScene(scene, LoadSceneMode.Single);
     }
 
@@ -313,7 +343,6 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("PlayerNull");
             return null;
         }
     }
@@ -480,6 +509,11 @@ public class GameManager : MonoBehaviour
         LaserPool.transform.parent = escenario;
     }
 
+    public string SetLoadingManager(LoadManager loadManager) {
+        loadManager_ = loadManager;
+        return NexLevelLoading;
+    }
+
 
     //  MANEJO DEL TIEMPO
 
@@ -490,7 +524,7 @@ public class GameManager : MonoBehaviour
     }
     public void PauseGame()
     {
-        if (!paused)
+        if (!paused && !dead)
         {
             UIManager_.OnPause();
             paused = true;

@@ -14,7 +14,7 @@ public class SettingsManager : MonoBehaviour
         {
             smInstance_ = this;
             Load();
-            Debug.Log("SoundManager Set");
+            Debug.Log("SettingsManager Set");
         }
         else if (smInstance_ != this)
         {
