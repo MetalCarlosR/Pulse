@@ -7,6 +7,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     GameObject initialButtons = null, settings = null, howToPlay = null, back = null, audioPanel = null,
         b1 = null, b2 = null, b3 = null, b4 = null;
+    [SerializeField]
     private Slider fxSlider = null, musicSlider = null;
     [SerializeField]
     private Toggle cheat = null, controller = null;
