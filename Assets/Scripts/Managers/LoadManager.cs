@@ -10,9 +10,9 @@ public class LoadManager : MonoBehaviour
     [SerializeField]
     private Text Progress = null, Resumen = null, LevelName = null;
     [SerializeField]
-    Image loaderImage = null;
+    Image loaderImage = null, loaderImage2;
     [SerializeField]
-    Sprite lvl1 = null, lvl2 = null;
+    Sprite lvl1 = null, lvl2 = null , lvl1b = null, lvl2b = null;
     [SerializeField]
     GameObject loading = null;
 
@@ -52,6 +52,7 @@ public class LoadManager : MonoBehaviour
             LevelName.text = "NarcoPiso";
             Resumen.text = lvl1Description;
             loaderImage.sprite = lvl1;
+            loaderImage2.sprite = lvl1b;
         }
         else
         {
@@ -59,6 +60,7 @@ public class LoadManager : MonoBehaviour
             Resumen.text = lvl2Description;
             Resumen.fontSize = 250;
             loaderImage.sprite = lvl2;
+            loaderImage2.sprite = lvl2b;
         }
 
     }

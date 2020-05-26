@@ -79,6 +79,81 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Este es un resumen del nivel que se va a cargar a continuaci\xF3n"
+--- !u!1 &119687654525545616
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7083490563286804202}
+  - component: {fileID: 7084671896358053243}
+  - component: {fileID: 4230940871064100356}
+  m_Layer: 5
+  m_Name: ImagenObjetivo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7083490563286804202
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119687654525545616}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 663232944637260121}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 641.3, y: -123.6}
+  m_SizeDelta: {x: 325.2, y: 406.4}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7084671896358053243
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119687654525545616}
+  m_CullTransparentMesh: 0
+--- !u!114 &4230940871064100356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119687654525545616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &611457055668151596
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,7 +611,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: This game will save your progress everytime you exit to the menu
+  m_Text: "El juego guarda tu progreso de manera autom\xE1tica al salir al men\xFA"
 --- !u!1 &7348660731096704899
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,6 +652,7 @@ RectTransform:
   - {fileID: 889537158}
   - {fileID: 3719768729079021662}
   - {fileID: 3560535418731516704}
+  - {fileID: 7083490563286804202}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -663,8 +739,11 @@ MonoBehaviour:
   Resumen: {fileID: 889537159}
   LevelName: {fileID: 6219118880323509068}
   loaderImage: {fileID: 7745120523379295496}
+  loaderImage2: {fileID: 4230940871064100356}
   lvl1: {fileID: 21300000, guid: 4a859db67be987d41825551b4c1a7e4c, type: 3}
   lvl2: {fileID: 21300000, guid: 6919c1f7a7db3ee4781b4ea9e7788d2b, type: 3}
+  lvl1b: {fileID: 21300000, guid: d11ec18d5169e894186534534516fe5d, type: 3}
+  lvl2b: {fileID: 21300000, guid: d039e0614d55a8e4cba6c162d593041f, type: 3}
   loading: {fileID: 8986030900036143039}
 --- !u!1 &8642818148552261692
 GameObject:
@@ -846,7 +925,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}

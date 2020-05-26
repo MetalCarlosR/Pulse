@@ -566,42 +566,5 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7227711453821007204, guid: 95654e1245e701e4cbf8ca968e5280c7,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7227711453821007204, guid: 95654e1245e701e4cbf8ca968e5280c7,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7227711453072020072, guid: 95654e1245e701e4cbf8ca968e5280c7,
-        type: 3}
-      propertyPath: m_SpriteState.m_SelectedSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 20f45848b06c0d44595eb2d54381adb9,
-        type: 3}
-    - target: {fileID: 7227711453655099805, guid: 95654e1245e701e4cbf8ca968e5280c7,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7227711453707695364, guid: 95654e1245e701e4cbf8ca968e5280c7,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7227711453622015038, guid: 95654e1245e701e4cbf8ca968e5280c7,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5805399866453480164, guid: 95654e1245e701e4cbf8ca968e5280c7,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7227711452410477847, guid: 95654e1245e701e4cbf8ca968e5280c7, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95654e1245e701e4cbf8ca968e5280c7, type: 3}
