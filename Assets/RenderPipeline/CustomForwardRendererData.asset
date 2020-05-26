@@ -87,7 +87,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings:
     passTag: Behind
-    Event: 500
+    Event: 450
     filterSettings:
       RenderQueueType: 1
       LayerMask:
