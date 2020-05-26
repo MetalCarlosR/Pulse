@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -15891,6 +15891,7 @@ GameObject:
   - component: {fileID: 249967308}
   - component: {fileID: 249967307}
   - component: {fileID: 249967306}
+  - component: {fileID: 249967309}
   m_Layer: 0
   m_Name: suelo
   m_TagString: Untagged
@@ -53606,6 +53607,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &249967309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249967304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab96ef4d08e2334199c6522f61e9d55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &256199743
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55891,7 +55904,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -49356369
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 5349772406431203689, guid: 72584e3cafcc65942bde578a1f36a2bf,
     type: 3}
@@ -126070,6 +126083,11 @@ PrefabInstance:
       propertyPath: m_BackGroundColor.b
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8794938783682854157, guid: 4f1544e1ad48ef3459782c21558bca5a,
+        type: 3}
+      propertyPath: m_BackGroundColor.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f1544e1ad48ef3459782c21558bca5a, type: 3}
 --- !u!1001 &976379958
@@ -128803,6 +128821,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2971181452301506994, guid: f1d635091723a1b4684ec1dd5e1b7731,
+        type: 3}
+      propertyPath: m_Name
+      value: GameManager
+      objectReference: {fileID: 0}
     - target: {fileID: 3648562890854971307, guid: f1d635091723a1b4684ec1dd5e1b7731,
         type: 3}
       propertyPath: endPoint
@@ -128812,11 +128835,6 @@ PrefabInstance:
         type: 3}
       propertyPath: save
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2971181452301506994, guid: f1d635091723a1b4684ec1dd5e1b7731,
-        type: 3}
-      propertyPath: m_Name
-      value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 2971181452301506996, guid: f1d635091723a1b4684ec1dd5e1b7731,
         type: 3}

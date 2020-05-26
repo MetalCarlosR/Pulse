@@ -42,9 +42,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Paredes
-    uniqueID: 1123686471
-    locked: 0
   - name: Juego
     uniqueID: 4245610927
     locked: 0
