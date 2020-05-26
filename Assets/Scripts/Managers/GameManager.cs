@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
 
     private int ammo_, startAmmo_ = 5;
 
-    private bool paused = false, continueG = false, game = false, dead = false;
+    private bool paused = false, continueG = false, game = false, dead = false , daga = true;
 
     private string currentScene , NexLevelLoading;
 

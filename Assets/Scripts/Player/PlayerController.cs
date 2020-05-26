@@ -66,8 +66,6 @@ public class PlayerController : MonoBehaviour
                 fov.SetOrigin(transform.position);
             }
 
-
-
         }
     }
 

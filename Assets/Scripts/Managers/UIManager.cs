@@ -15,6 +15,9 @@ public class UIManager : MonoBehaviour
     [Header("Sliders")]
     [SerializeField]
     private Slider fxSlider = null, musicSlider = null;
+    [Header("UI")]
+    [SerializeField]
+    private Image Pistola = null, Daga = null;
     [Header("Toggles")]
     [SerializeField]
     private Toggle cheat = null, controller = null;
@@ -97,6 +100,16 @@ public class UIManager : MonoBehaviour
         {
             daga.SetActive(activado);
             pistola.SetActive(!activado);
+        }
+        if (activado)
+        {
+            Pistola.color = new Color(1, 1, 1, 0.12f);
+            Daga.color = new Color(1, 1, 1, 1);
+        }
+        else
+        {
+            Daga.color = new Color(1, 1, 1, 0.12f);
+            Pistola.color = new Color(1, 1, 1, 1);
         }
     }
 
