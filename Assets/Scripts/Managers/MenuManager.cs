@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Audio;
+using UnityEngine.EventSystems;
 
 public class MenuManager : MonoBehaviour
 {
@@ -11,12 +11,18 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     private Toggle cheat = null, controller = null;
     [SerializeField]
-    Button Exit = null, continueB = null, save = null , newGame = null;
+    Button Exit = null, continueB = null, save = null, newGame = null;
+    [SerializeField]
+    EventSystem eventSystem = null;
+
+    StandaloneInputModule inputModule;
     private bool ini;
     private float fxVolume;
+    private GameObject lastSelected = null;
     private void Start()
     {
         ini = true;
+
         if (!GameManager.gmInstance_.IsGameLoaded())
         {
             continueB.enabled = false;
@@ -36,34 +42,69 @@ public class MenuManager : MonoBehaviour
             cheat.isOn = SettingsManager.smInstance_.GetSettings().cheats_;
             controller.isOn = SettingsManager.smInstance_.GetSettings().controller_;
             cheat.onValueChanged.AddListener(delegate { SettingsManager.smInstance_.ActivateCheats(cheat.isOn); });
-            controller.onValueChanged.AddListener(delegate { SettingsManager.smInstance_.ActivateController(controller.isOn); });
+            controller.onValueChanged.AddListener(delegate
+            {
+                SettingsManager.smInstance_.ActivateController(controller.isOn);
+                SetController(controller.isOn);
+                if (controller.isOn) eventSystem.SetSelectedGameObject(this.controller.gameObject);
+                else eventSystem.SetSelectedGameObject(null);
+            });
 
             save.onClick.AddListener(delegate { SettingsManager.smInstance_.Save(); });
         }
         newGame.onClick.AddListener(delegate { GameManager.gmInstance_.ChangeScene("Nivel 1"); });
         Exit.onClick.AddListener(delegate { GameManager.gmInstance_.ExitGame(); });
+
+        inputModule = eventSystem.GetComponent<StandaloneInputModule>();
+        SetController(controller.isOn);
+        if (!controller.isOn) eventSystem.SetSelectedGameObject(null);
+        else eventSystem.SetSelectedGameObject(newGame.gameObject);
     }
+
+    void Update()
+    {
+        if (Input.GetButtonDown("Cancel")) Back();
+        if (SettingsManager.smInstance_.GetSettings().controller_ && eventSystem.currentSelectedGameObject == null && Input.GetAxisRaw("VerticalMando") != 0)
+        {
+            eventSystem.SetSelectedGameObject(lastSelected);
+        }
+        else if (lastSelected != eventSystem.currentSelectedGameObject && eventSystem.currentSelectedGameObject != null)
+        {
+            lastSelected = eventSystem.currentSelectedGameObject;
+        }
+        if (audioPanel.activeSelf && SettingsManager.smInstance_.GetSettings().controller_)
+        {
+            musicSlider.value += Input.GetAxis("HorizontalMando") * 0.5f;
+            fxSlider.value -= Input.GetAxis("HorizontalRight") * 0.5f;
+        }
+    }
+
     public void Settings()
     {
         Clean();
         Background.SetActive(true);
         settings.SetActive(true);
         back.SetActive(true);
+        if (SettingsManager.smInstance_.GetSettings().controller_) eventSystem.SetSelectedGameObject(back);
     }
 
     public void Back()
     {
-        Clean();
-        Background.SetActive(true);
-        if (ini)
+        if (back.activeSelf)
         {
-            initialButtons.SetActive(true);
-        }
-        else
-        {
-            settings.SetActive(true);
-            back.SetActive(true);
-            ini = true;
+            Clean();
+            Background.SetActive(true);
+            if (ini)
+            {
+                initialButtons.SetActive(true);
+                if (SettingsManager.smInstance_.GetSettings().controller_) eventSystem.SetSelectedGameObject(newGame.gameObject);
+            }
+            else
+            {
+                settings.SetActive(true);
+                back.SetActive(true);
+                ini = true;
+            }
         }
     }
 
@@ -91,5 +132,19 @@ public class MenuManager : MonoBehaviour
         back.SetActive(false);
         howToPlay.SetActive(false);
         audioPanel.SetActive(false);
+    }
+
+    void SetController(bool controller)
+    {
+        if (controller)
+        {
+            inputModule.horizontalAxis = "HorizontalMando";
+            inputModule.verticalAxis = "VerticalMando";
+        }
+        else
+        {
+            inputModule.horizontalAxis = "Horizontal";
+            inputModule.verticalAxis = "Vertical";
+        }
     }
 }

@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
     {
         if (game)
         {
-            if (Input.GetKeyDown(KeyCode.Escape)) GameManager.gmInstance_.TogglePause();
+            if (Input.GetButtonDown("Pause")) GameManager.gmInstance_.TogglePause();
             if (Input.GetButtonDown("Reload")) GameManager.gmInstance_.ReloadScene();
             if (SettingsManager.smInstance_.GetSettings().cheats_)
             {

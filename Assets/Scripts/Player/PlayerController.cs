@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     private int speed_ = 7;
 
-    private bool pulse_ = false;
+    private bool pulse_ = false , laser = false;
     private FieldOfView fov;
     private float fovSet = 360, limit = 50, cd = 0.15f, timeCD;
 
@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private Daga daga;
     private AudioSource walking;
     private float lastDir = 0;
+    
     void Start()
     {
         gun = GetComponent<Pistola>();
@@ -88,13 +89,15 @@ public class PlayerController : MonoBehaviour
             gun.Shoot();
             timeCD = Time.time + cd;
         }
-        if (Input.GetButtonDown("Fire2") && !pulse_)
+        if (Input.GetButtonDown("Fire2") && !pulse_ && !laser)
         {
             gun.Laser(true);
+            laser = true;
         }
-        else if (Input.GetButtonUp("Fire2"))
+        else if (Input.GetButtonUp("Fire2") && laser)
         {
             gun.Laser(false);
+            laser = false;
         }
     }
     void LookAtMouse()
@@ -113,13 +116,15 @@ public class PlayerController : MonoBehaviour
             gun.Shoot();
             timeCD = Time.time + cd;
         }
-        if (Input.GetAxisRaw("Fire2Mando") == 1 && !pulse_)
+        if (Input.GetAxisRaw("Fire2Mando") == 1 && !pulse_ && !laser)
         {
             gun.Laser(true);
+            laser = true;
         }
-        else if (Input.GetAxisRaw("Fire2Mando") == 0)
+        else if (Input.GetAxisRaw("Fire2Mando") == 0 && laser)
         {
             gun.Laser(false);
+            laser = false;
         }
     }
     void LookAtController()

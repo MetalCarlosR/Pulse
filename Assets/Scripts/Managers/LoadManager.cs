@@ -18,6 +18,8 @@ public class LoadManager : MonoBehaviour
 
     private Button ContinueButton = null;
 
+    private bool completed = false;
+
     private const int BulletStart = -640, BulletEnd = 685;
 
     private const string lvl1Description = "Has seguido a varios miembros de la mafia hasta un narcopiso. " +
@@ -36,6 +38,13 @@ public class LoadManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetButtonDown("Submit") && completed)
+        {
+            GameManager.gmInstance_.EndLevelChange();
+        }
+    }
     void SetLevel(string Level)
     {
         if (Level == "Nivel 1")
@@ -58,6 +67,7 @@ public class LoadManager : MonoBehaviour
     {
         if (progress == 1)
         {
+            completed = true;
             ContinueButton.enabled = true;
             loading.GetComponent<Text>().text = "CONTINUE";
         } 

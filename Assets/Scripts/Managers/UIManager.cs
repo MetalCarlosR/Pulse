@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class UIManager : MonoBehaviour
 {
@@ -19,6 +20,11 @@ public class UIManager : MonoBehaviour
     private Toggle cheat = null, controller = null;
     [SerializeField]
     Text Ammunition = null;
+    [SerializeField]
+    EventSystem eventSystem = null;
+
+    StandaloneInputModule inputModule;
+    private GameObject lastSelected = null;
 
     private bool ini = false;
     private void Start()
@@ -41,12 +47,20 @@ public class UIManager : MonoBehaviour
             cheat.isOn = SettingsManager.smInstance_.GetSettings().cheats_;
             controller.isOn = SettingsManager.smInstance_.GetSettings().controller_;
             cheat.onValueChanged.AddListener(delegate { SettingsManager.smInstance_.ActivateCheats(cheat.isOn); });
-            controller.onValueChanged.AddListener(delegate { SettingsManager.smInstance_.ActivateController(controller.isOn); });
+            controller.onValueChanged.AddListener(delegate
+            {
+                SettingsManager.smInstance_.ActivateController(controller.isOn);
+                SetController(controller.isOn);
+                if (controller.isOn) eventSystem.SetSelectedGameObject(this.controller.gameObject);
+                else eventSystem.SetSelectedGameObject(null);
+            });
 
             save.onClick.AddListener(delegate { SettingsManager.smInstance_.Save(); });
         }
         audioSettings.onClick.AddListener(delegate { Audio(); });
+        inputModule = eventSystem.GetComponent<StandaloneInputModule>();
     }
+
     public void RespawnMenu()
     {
         if (Pause != null)
@@ -65,13 +79,16 @@ public class UIManager : MonoBehaviour
     {
         ini = true;
         Pause.SetActive(true);
+        Back();
         interfaz.SetActive(false);
+        if (SettingsManager.smInstance_.GetSettings().controller_) eventSystem.SetSelectedGameObject(Resume.gameObject);
     }
 
     public void OnResume()
     {
         Pause.SetActive(false);
         interfaz.SetActive(true);
+        eventSystem.SetSelectedGameObject(null);
     }
 
     public void SetWeapon(bool activado)
@@ -101,34 +118,57 @@ public class UIManager : MonoBehaviour
 
     // MANEJO INTERNO DEL MENU DE PAUSA
 
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Cancel") && Pause.activeSelf) Back();
+        if (SettingsManager.smInstance_.GetSettings().controller_ && eventSystem.currentSelectedGameObject == null && Input.GetAxisRaw("VerticalMando") != 0 && Pause.activeSelf)
+        {
+            eventSystem.SetSelectedGameObject(lastSelected);
+        }
+        else if (lastSelected != eventSystem.currentSelectedGameObject && eventSystem.currentSelectedGameObject != null)
+        {
+            lastSelected = eventSystem.currentSelectedGameObject;
+        }
+        if (audioPanel.activeSelf && SettingsManager.smInstance_.GetSettings().controller_)
+        {
+            musicSlider.value += Input.GetAxis("HorizontalMando") * 0.5f;
+            fxSlider.value -= Input.GetAxis("HorizontalRight") * 0.5f;
+        }
+    }
+
     public void Settings()
     {
         Clean();
         Background.SetActive(true);
         settings.SetActive(true);
         back.SetActive(true);
+        if (SettingsManager.smInstance_.GetSettings().controller_) eventSystem.SetSelectedGameObject(back);
     }
 
     public void Back()
     {
-        Clean();
-        Background.SetActive(true);
-        if (ini)
+        if (back.activeSelf)
         {
-            initialButtons.SetActive(true);
-        }
-        else
-        {
-            settings.SetActive(true);
-            back.SetActive(true);
-            ini = true;
+            Clean();
+            Background.SetActive(true);
+            if (ini)
+            {
+                initialButtons.SetActive(true);
+                if (SettingsManager.smInstance_.GetSettings().controller_) eventSystem.SetSelectedGameObject(Resume.gameObject);
+            }
+            else
+            {
+                settings.SetActive(true);
+                back.SetActive(true);
+                ini = true;
+            }
         }
     }
 
     public void Audio()
     {
         Clean();
-        Debug.Log("e");
         audioPanel.SetActive(true);
         back.SetActive(true);
         ini = false;
@@ -141,5 +181,19 @@ public class UIManager : MonoBehaviour
         initialButtons.SetActive(false);
         back.SetActive(false);
         audioPanel.SetActive(false);
+    }
+
+    void SetController(bool controller)
+    {
+        if (controller)
+        {
+            inputModule.horizontalAxis = "HorizontalMando";
+            inputModule.verticalAxis = "VerticalMando";
+        }
+        else
+        {
+            inputModule.horizontalAxis = "Horizontal";
+            inputModule.verticalAxis = "Vertical";
+        }
     }
 }

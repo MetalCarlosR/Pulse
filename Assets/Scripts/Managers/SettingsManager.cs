@@ -44,6 +44,7 @@ public class SettingsManager : MonoBehaviour
                 cheats_ = false
             };
         }
+        ActivateController(gameSettings.controller_);
     }
 
     public SaveManager.SettingsSave GetSettings()
@@ -63,5 +64,9 @@ public class SettingsManager : MonoBehaviour
     public void ActivateController(bool c)
     {
         gameSettings.controller_ = c;
+        Cursor.visible = !c;
+        if(c) Cursor.lockState = CursorLockMode.Locked;
+        else Cursor.lockState = CursorLockMode.None;
+
     }
 }
