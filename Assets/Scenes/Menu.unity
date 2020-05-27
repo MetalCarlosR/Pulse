@@ -586,6 +586,56 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 222.1
       objectReference: {fileID: 0}
+    - target: {fileID: 7227711453696287486, guid: 95654e1245e701e4cbf8ca968e5280c7,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7227711453696287486, guid: 95654e1245e701e4cbf8ca968e5280c7,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7227711452922195052, guid: 95654e1245e701e4cbf8ca968e5280c7,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7227711452922195052, guid: 95654e1245e701e4cbf8ca968e5280c7,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7227711452922195052, guid: 95654e1245e701e4cbf8ca968e5280c7,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7227711453298521065, guid: 95654e1245e701e4cbf8ca968e5280c7,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7227711453298521065, guid: 95654e1245e701e4cbf8ca968e5280c7,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7227711452352144989, guid: 95654e1245e701e4cbf8ca968e5280c7,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7227711452352144989, guid: 95654e1245e701e4cbf8ca968e5280c7,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7227711452352144989, guid: 95654e1245e701e4cbf8ca968e5280c7,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7227711452894000656, guid: 95654e1245e701e4cbf8ca968e5280c7,
         type: 3}
       propertyPath: m_Sprite
