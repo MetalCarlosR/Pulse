@@ -18,7 +18,7 @@ public class CambioArma : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("WeaponChange"))
+        if (Input.GetButtonDown("WeaponChange") && !GameManager.gmInstance_.IsGamePaused())
         {
             animator.SetTrigger("Cambio arma");
             daga.gameObject.SetActive(!daga.gameObject.activeSelf);

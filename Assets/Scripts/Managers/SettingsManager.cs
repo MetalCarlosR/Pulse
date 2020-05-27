@@ -67,6 +67,5 @@ public class SettingsManager : MonoBehaviour
         Cursor.visible = !c;
         if(c) Cursor.lockState = CursorLockMode.Locked;
         else Cursor.lockState = CursorLockMode.None;
-
     }
 }
