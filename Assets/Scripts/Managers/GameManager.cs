@@ -293,6 +293,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadSceneAsync(NexLevelLoading);
     }
 
+    public void EndGame()
+    {
+        SceneManager.LoadSceneAsync("Menu");
+    }
+
     public void ChangeScene(string scene)
     {
         Time.timeScale = 1;
