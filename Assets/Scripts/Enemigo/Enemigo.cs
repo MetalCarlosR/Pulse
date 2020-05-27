@@ -241,7 +241,6 @@ public class Enemigo : MonoBehaviour
 
     public void PlayEnemyVoice()
     {
-        Debug.Log("e");
         voices.clip = EnemyVoicePool[Random.Range(0, 7)];
         voices.Play();
     }
