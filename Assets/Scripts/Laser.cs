@@ -10,13 +10,8 @@ public class Laser : MonoBehaviour
     private bool intermitencia = false;
     [SerializeField]
     private float ratio = 2f;
-    [SerializeField]
     private SpriteRenderer laserRenderer;
-    [SerializeField]
     private BoxCollider2D coll;
-    [SerializeField]
-    private PlayerController player;
-    [SerializeField]
     private AudioSource laser;
 
     void Start()

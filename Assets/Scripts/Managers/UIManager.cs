@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour
     GameObject settings = null, Pause = null, initialButtons = null, back = null, audioPanel = null, Background = null, pulse = null, daga = null, pistola = null, interfaz = null;
     [Header("Botones")]
     [SerializeField]
-    Button Menu = null, Resume = null, save = null, audioSettings = null;
+    Button Menu = null, Resume = null, save = null, audioSettings = null , settingsB = null;
     [Header("Sliders")]
     [SerializeField]
     private Slider fxSlider = null, musicSlider = null;
@@ -70,7 +70,11 @@ public class UIManager : MonoBehaviour
         {
             Pause.SetActive(true);
             Resume.gameObject.SetActive(false);
+            settingsB.gameObject.SetActive(false);
+            Back();
+            Back();
             interfaz.SetActive(false);
+            if (SettingsManager.smInstance_.GetSettings().controller_) eventSystem.SetSelectedGameObject(Menu.gameObject);
         }
         else
         {
@@ -82,6 +86,7 @@ public class UIManager : MonoBehaviour
     {
         ini = true;
         Pause.SetActive(true);
+        Back();
         Back();
         interfaz.SetActive(false);
         if (SettingsManager.smInstance_.GetSettings().controller_) eventSystem.SetSelectedGameObject(Resume.gameObject);

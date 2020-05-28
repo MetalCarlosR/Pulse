@@ -10,9 +10,9 @@ public class LoadManager : MonoBehaviour
     [SerializeField]
     private Text Progress = null, Resumen = null, LevelName = null;
     [SerializeField]
-    Image loaderImage = null, loaderImage2;
+    Image loaderImage = null, loaderImage2 = null, loaderImage3 = null;
     [SerializeField]
-    Sprite lvl1 = null, lvl2 = null , lvl1b = null, lvl2b = null;
+    Sprite lvl1 = null, lvl2 = null , lvl1b = null, lvl2b = null, lvl1c = null, lvl2c = null;
     [SerializeField]
     GameObject loading = null;
 
@@ -53,6 +53,7 @@ public class LoadManager : MonoBehaviour
             Resumen.text = lvl1Description;
             loaderImage.sprite = lvl1;
             loaderImage2.sprite = lvl1b;
+            loaderImage3.sprite = lvl1c;
         }
         else
         {
@@ -61,6 +62,7 @@ public class LoadManager : MonoBehaviour
             Resumen.fontSize = 250;
             loaderImage.sprite = lvl2;
             loaderImage2.sprite = lvl2b;
+            loaderImage3.sprite = lvl2c;
         }
 
     }

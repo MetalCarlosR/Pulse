@@ -4505,6 +4505,7 @@ MonoBehaviour:
   Resume: {fileID: 7932410701340636522}
   save: {fileID: 814232517110184075}
   audioSettings: {fileID: 5812315041252240840}
+  settingsB: {fileID: 1239811448128842130}
   fxSlider: {fileID: 5834248921393480210}
   musicSlider: {fileID: 5806532225063553074}
   Pistola: {fileID: 6578364220736361840}
