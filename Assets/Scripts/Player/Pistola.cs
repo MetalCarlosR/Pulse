@@ -26,7 +26,7 @@ public class Pistola : MonoBehaviour
     }
     public void Shoot()
     {
-        if (enabled && !GameManager.gmInstance_.EmptyGun())
+        if (enabled && (!GameManager.gmInstance_.EmptyGun() || GameManager.gmInstance_.Uammo ) )
         {
             animator.SetTrigger("Ataque");
             GameManager.gmInstance_.Shoot();
@@ -57,7 +57,7 @@ public class Pistola : MonoBehaviour
             
             Vector3 angleHit = Vector3.Reflect(pistola.up, hit.normal);
             
-            hit = Physics2D.Raycast(hit.point, angleHit , 100);
+            hit = Physics2D.Raycast(hit.point, angleHit , 100, layerMask);
             posHit[2] = hit.point;
 
             line_.SetPositions(posHit);

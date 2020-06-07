@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
                 foreach (Collider2D col in coll)
                 {
                     Enemigo enemy = col.GetComponent<Enemigo>();
-                    if (enemy)
+                    if (enemy && enemy.GetState() != Enemigo.State.Atacking)
                     {
                         enemy.SetState(Enemigo.State.Alerted);
                     }
