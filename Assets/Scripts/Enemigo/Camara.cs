@@ -25,7 +25,7 @@ public class Camara : MonoBehaviour
     void Start()
     {
         gameObject.layer = LayerMask.NameToLayer(layer_);
-        
+
         if (GameManager.gmInstance_ != null)
         {
             player = GameManager.gmInstance_.GetPlayerTransform();
@@ -70,31 +70,19 @@ public class Camara : MonoBehaviour
                 Vector3 direction = (player.position - transform.position);
                 if (Vector3.Angle(transform.up, direction) < fovSet / 2)
                 {
-                    LayerMask jugador = LayerMask.GetMask("Jugador");
-                    RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, limit,jugador);
+                    int jugador = LayerMask.GetMask("Jugador");
+                    RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, limit, jugador);
                     Debug.DrawRay(transform.position, direction, Color.green);
                     if (hit.collider != null && hit.collider.tag == "Player")
                     {
                         transform.up = direction;
-                        if (state_ != State.Alerted)
-                        {
-                            SetState(State.Alerted);
-                        }
+                        if (state_ != State.Alerted) SetState(State.Alerted);
                     }
-                    else if (state_ == State.Alerted)
-                    {
-                        SetState(State.Patrolling);
-                    }
+                    else if (state_ == State.Alerted) SetState(State.Patrolling);
                 }
-                else if (state_ == State.Alerted)
-                {
-                    SetState(State.Patrolling);
-                }
+                else if (state_ == State.Alerted) SetState(State.Patrolling);
             }
-            else if (state_ == State.Alerted)
-            {
-                SetState(State.Patrolling);
-            }
+            else if (state_ == State.Alerted) SetState(State.Patrolling);
         }
     }
 

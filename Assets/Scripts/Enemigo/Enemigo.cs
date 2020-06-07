@@ -123,8 +123,8 @@ public class Enemigo : MonoBehaviour
             {
                 if (Vector3.Angle(transform.up, direction) < fovSet / 2)
                 {
-                    LayerMask bala = LayerMask.GetMask("Enemigos");
-                    RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, limit, ~bala);
+                    int bala = ~LayerMask.GetMask("Enemigos");
+                    RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, limit, bala);
                     //Debug.DrawRay(transform.position, direction, Color.green);
                     if (hit.collider != null && hit.collider.tag == "Player")
                     {
@@ -136,24 +136,13 @@ public class Enemigo : MonoBehaviour
                         }
                         else if (state_ == State.Atacking && prevState_ == State.Alerted) movEnemigo.ChasePlayer(player.position);
                     }
-                    else if (state_ == State.Atacking)
-                    {
-                        SetState(State.Alerted);
-                    }
+                    else if (state_ == State.Atacking) SetState(State.Alerted);
                 }
-                else if (state_ == State.Atacking)
-                {
-                    SetState(State.Alerted);
-                }
+                else if (state_ == State.Atacking) SetState(State.Alerted);
             }
-            else if (state_ == State.Atacking)
-            {
-                SetState(State.Alerted);
-            }
-            if (state_ == State.Alerted)
-            {
-                movEnemigo.ChasePlayer(player.position);
-            }
+            else if (state_ == State.Atacking) SetState(State.Alerted);
+
+            if (state_ == State.Alerted) movEnemigo.ChasePlayer(player.position);
         }
 
     }

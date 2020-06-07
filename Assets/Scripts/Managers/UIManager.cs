@@ -106,15 +106,18 @@ public class UIManager : MonoBehaviour
             daga.SetActive(activado);
             pistola.SetActive(!activado);
         }
-        if (activado)
+        if (Pistola && Daga)
         {
-            Pistola.color = new Color(1, 1, 1, 0.12f);
-            Daga.color = new Color(1, 1, 1, 1);
-        }
-        else
-        {
-            Daga.color = new Color(1, 1, 1, 0.12f);
-            Pistola.color = new Color(1, 1, 1, 1);
+            if (activado)
+            {
+                Pistola.color = new Color(1, 1, 1, 0.12f);
+                Daga.color = new Color(1, 1, 1, 1);
+            }
+            else
+            {
+                Daga.color = new Color(1, 1, 1, 0.12f);
+                Pistola.color = new Color(1, 1, 1, 1);
+            }
         }
     }
 

@@ -22,7 +22,7 @@ public class Pistola : MonoBehaviour
         animator = GetComponent<Animator>();
         line_ = pistola.GetComponent<LineRenderer>();
         fire = pistola.GetComponent<AudioSource>();
-        layerMask = ~(LayerMask.GetMask("Muebles") | LayerMask.GetMask("Laser"));
+        layerMask = ~(LayerMask.GetMask("Muebles") | LayerMask.GetMask("Laser") | LayerMask.GetMask("Ignore Raycast"));
     }
     public void Shoot()
     {
@@ -52,8 +52,7 @@ public class Pistola : MonoBehaviour
             Vector3[] posHit = new Vector3[3];
 
             posHit[0] = pistola.position;
-            LayerMask boton = LayerMask.GetMask("Ignore Raycast");
-            hit = Physics2D.Raycast(pistola.position, pistola.up , 100, ~boton);
+            hit = Physics2D.Raycast(pistola.position, pistola.up , 100, layerMask);
             posHit[1] = hit.point;
             
             Vector3 angleHit = Vector3.Reflect(pistola.up, hit.normal);
