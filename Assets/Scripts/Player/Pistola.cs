@@ -52,13 +52,13 @@ public class Pistola : MonoBehaviour
             Vector3[] posHit = new Vector3[3];
 
             posHit[0] = pistola.position;
-
-            hit = Physics2D.Raycast(pistola.position, pistola.up , 100 , layerMask);
+            LayerMask boton = LayerMask.GetMask("Ignore Raycast");
+            hit = Physics2D.Raycast(pistola.position, pistola.up , 100, ~boton);
             posHit[1] = hit.point;
-
+            
             Vector3 angleHit = Vector3.Reflect(pistola.up, hit.normal);
-
-            hit = Physics2D.Raycast(hit.point, angleHit , 100 , layerMask);
+            
+            hit = Physics2D.Raycast(hit.point, angleHit , 100);
             posHit[2] = hit.point;
 
             line_.SetPositions(posHit);
