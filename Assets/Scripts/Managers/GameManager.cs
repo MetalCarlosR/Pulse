@@ -16,6 +16,10 @@ public class GameManager : MonoBehaviour
 
     private GameObject FieldOfViewPool, PulsePool, player_, mueblesPadre, EnemiesPool, NodesPool, PuertaPool, BotonesPool, LaserPool;
 
+    private Pistola scriptPistola;
+
+    private PlayerController scriptPC;
+
     private SaveManager.GameSave saveGame = null;
 
     [Header("Save")]
@@ -532,6 +536,10 @@ public class GameManager : MonoBehaviour
         if (!paused && !dead)
         {
             UIManager_.OnPause();
+            scriptPistola = player_.GetComponent<Pistola>();
+            scriptPistola.Laser(false);
+            scriptPC = player_.GetComponent<PlayerController>();
+            scriptPC.laser = false;
             paused = true;
             Time.timeScale = 0;
         }

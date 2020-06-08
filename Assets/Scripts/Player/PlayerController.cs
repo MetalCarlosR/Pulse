@@ -10,7 +10,8 @@ public class PlayerController : MonoBehaviour
 
     private int speed_ = 7;
 
-    private bool pulse_ = false , laser = false;
+    private bool pulse_ = false;
+    public bool laser = false;
     private FieldOfView fov;
     private float fovSet = 360, limit = 50, cd = 0.15f, timeCD;
 
