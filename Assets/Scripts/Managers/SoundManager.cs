@@ -62,7 +62,7 @@ public class SoundManager : MonoBehaviour
     }
     public void SetFXVolume(float volume)
     {
-        if (volume == -20)
+        if (volume == -30)
         {
             volume = -80;
             fxSoundAM.SetFloat("FXVolume", volume);
