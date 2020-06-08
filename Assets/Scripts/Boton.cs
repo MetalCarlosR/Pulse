@@ -5,7 +5,7 @@ using UnityEngine;
 public class Boton : MonoBehaviour
 {
     [SerializeField]
-    private List<GameObject> laser_ = new List<GameObject>();
+    private List<Laser> laser_ = new List<Laser>();
 
     private AudioSource source;
 
@@ -16,7 +16,7 @@ public class Boton : MonoBehaviour
         if (GameManager.gmInstance_) GameManager.gmInstance_.AddButton(this);
     }
 
-    public List<GameObject> GetLaser()
+    public List<Laser> GetLaser()
     {
         return laser_;
     }
@@ -25,7 +25,7 @@ public class Boton : MonoBehaviour
         return active;
     }
 
-    public void SetButton(List<GameObject> laser , bool activeIn)
+    public void SetButton(List<Laser> laser , bool activeIn)
     {
         laser_ = laser;
         active = activeIn;
@@ -38,9 +38,10 @@ public class Boton : MonoBehaviour
         {
             source.Play();
             active = false;
-            foreach (GameObject obj in laser_)
+            GetComponent<SpriteRenderer>().color = Color.green;
+            foreach (Laser obj in laser_)
             {
-                obj.SetActive(false);
+                obj.gameObject.SetActive(false);
             }
         }
     }

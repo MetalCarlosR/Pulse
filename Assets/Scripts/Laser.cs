@@ -24,6 +24,15 @@ public class Laser : MonoBehaviour
         else laser.Play();
     }
 
+    public bool GetIntermitencia()
+    {
+        return intermitencia;
+    }
+    public void SetIntermitencia(bool inter)
+    {
+        intermitencia = inter;
+    }
+
     IEnumerator LaserIntermitente()
     {
         coll.enabled = true;

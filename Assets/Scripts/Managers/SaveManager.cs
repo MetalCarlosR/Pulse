@@ -57,11 +57,12 @@ public static class SaveManager
             {
                 bOut.active = true;
                 List<LaserTr> laserListOut = new List<LaserTr>();
-                foreach (GameObject l in b.GetLaser())
+                foreach (Laser l in b.GetLaser())
                 {
                     LaserTr laserOut = new LaserTr();
                     laserOut.positon_ = l.transform.position;
                     laserOut.rotation_ = l.transform.localEulerAngles;
+                    laserOut.intermitencia_ = l.GetIntermitencia();
                     laserListOut.Add(laserOut);
                 }
                 bOut.laser = laserListOut;
@@ -116,6 +117,7 @@ public static class SaveManager
     {
         public Vector3 positon_;
         public Vector3 rotation_;
+        public bool intermitencia_;
     }
     [Serializable]
     public struct BotonStates

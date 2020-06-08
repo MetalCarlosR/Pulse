@@ -192,10 +192,11 @@ public class GameManager : MonoBehaviour
 
             if (b.active)
             {
-                List<GameObject> LaserIn = new List<GameObject>();
+                List<Laser> LaserIn = new List<Laser>();
                 foreach (SaveManager.LaserTr l in b.laser)
                 {
-                    GameObject laser = Instantiate(LaserPrefab, l.positon_, Quaternion.Euler(l.rotation_));
+                    Laser laser = Instantiate(LaserPrefab, l.positon_, Quaternion.Euler(l.rotation_)).GetComponent<Laser>();
+                    laser.SetIntermitencia(l.intermitencia_);
                     LaserIn.Add(laser);
                 }
                 boton.SetButton(LaserIn, true);
@@ -267,7 +268,7 @@ public class GameManager : MonoBehaviour
             if (save)
             {
                 if (continueG) loadLvl(saveGame);
-                else chooseLvl(next.name);
+                //else chooseLvl(next.name);
             }
 
         }

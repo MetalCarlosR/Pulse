@@ -126,7 +126,7 @@ public class Enemigo : MonoBehaviour
                     int bala = ~LayerMask.GetMask("Enemigos");
                     RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, limit, bala);
                     //Debug.DrawRay(transform.position, direction, Color.green);
-                    if (hit.collider != null && hit.collider.tag == "Player")
+                    if (hit.collider != null && hit.collider.CompareTag("Player"))
                     {
                         transform.up = direction;
                         if (state_ != State.Atacking)
