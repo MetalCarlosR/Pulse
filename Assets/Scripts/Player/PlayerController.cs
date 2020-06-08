@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     private int speed_ = 7;
 
     private bool pulse_ = false;
-    public bool laser = false;
+    private bool laser = false;
     private FieldOfView fov;
     private float fovSet = 360, limit = 50, cd = 0.15f, timeCD;
 
@@ -165,7 +165,16 @@ public class PlayerController : MonoBehaviour
     {
         pulse_ = pulse;
         if (!pulse) speed_ = 10;
-        else speed_ = 0;
+        else
+        {
+            speed_ = 0;
+            if (gun.enabled)
+            {
+                gun.Laser(false);
+                SetLaser(false);
+            }
+        }
+
     }
     public int GetSpeed()
     {
@@ -179,5 +188,9 @@ public class PlayerController : MonoBehaviour
         {
             door.MovPuerta(transform);
         }
+    }
+    public void SetLaser(bool laser_)
+    {
+        laser = laser_;
     }
 }
