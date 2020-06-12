@@ -8,7 +8,7 @@ public class Creditos : MonoBehaviour
     [SerializeField]
     private Text creditos;
     [SerializeField]
-    private GameObject menu, title;
+    private GameObject menu;
     private float posY, posYEnd;
     bool submit = false;
     private void Start()
@@ -24,7 +24,6 @@ public class Creditos : MonoBehaviour
             submit = true;
             creditos.rectTransform.anchoredPosition = new Vector2(0, posYEnd);
             menu.SetActive(true);
-            title.SetActive(true);
             if (Input.GetButtonDown("Submit") && submit)
                 GameManager.gmInstance_.ChangeScene("Menu");
         }
