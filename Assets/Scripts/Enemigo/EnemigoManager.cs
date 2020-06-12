@@ -11,27 +11,27 @@ public class EnemigoManager : MonoBehaviour
     private NavMeshAgent navMesh = null;
     private bool chase = false, patrol = false;
 
-    void Start()
-    {
-        if (!GameManager.gmInstance_.save)
-        {
-            navMesh = GetComponent<NavMeshAgent>();
-            navMesh.updateRotation = false;
-            navMesh.updateUpAxis = false;
-            if (nodes.Count >= 2)
-            {
-                enemigo = GetComponent<Enemigo>();
-                enemigo.StartDelay();
-                index = Random.Range(0, nodes.Count);
-                Patroll();
-            }
-            else
-            {
-                Debug.LogWarning("Error no nodes found on" + this + ". Destroying" + this);
-                Destroy(gameObject);
-            }
-        }
-    }
+    //void Start()
+    //{
+    //    if (!GameManager.gmInstance_.save)
+    //    {
+    //        navMesh = GetComponent<NavMeshAgent>();
+    //        navMesh.updateRotation = false;
+    //        navMesh.updateUpAxis = false;
+    //        if (nodes.Count >= 2)
+    //        {
+    //            enemigo = GetComponent<Enemigo>();
+    //            enemigo.StartDelay();
+    //            index = Random.Range(0, nodes.Count);
+    //            Patroll();
+    //        }
+    //        else
+    //        {
+    //            Debug.LogWarning("Error no nodes found on" + this + ". Destroying" + this);
+    //            Destroy(gameObject);
+    //        }
+    //    }
+    //}
 
     public Enemigo getEnemy()
     {
