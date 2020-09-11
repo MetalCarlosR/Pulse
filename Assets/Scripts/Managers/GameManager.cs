@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     public bool save = false;
     [Header("Json")]
     [SerializeField]
-    private TextAsset jsonlvl1 = null, jsonlvl2 = null;
+    private TextAsset jsonlvl1 = null, jsonlvl2 = null, jsonxtra = null;
 
     List<EnemigoManager> enemies = new List<EnemigoManager>();
 
@@ -145,7 +145,8 @@ public class GameManager : MonoBehaviour
     void Save()
     {
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Nivel 1")) SaveManager.Save(1, ammo_, enemies, player_.transform.position, puertas_, botones_);
-        else SaveManager.Save(2, ammo_, enemies, player_.transform.position, puertas_, botones_);
+        else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Nivel 2")) SaveManager.Save(2, ammo_, enemies, player_.transform.position, puertas_, botones_);
+        else SaveManager.Save(3, ammo_, enemies, player_.transform.position, puertas_, botones_);
     }
 
     void chooseLvl(string lvl)
@@ -153,7 +154,8 @@ public class GameManager : MonoBehaviour
         SaveManager.GameSave lvlLoader = new SaveManager.GameSave();
 
         if (lvl == "Nivel 1") lvlLoader = JsonUtility.FromJson<SaveManager.GameSave>(jsonlvl1.text);
-        else lvlLoader = JsonUtility.FromJson<SaveManager.GameSave>(jsonlvl2.text);
+        else if (lvl == "Nivel 2") lvlLoader = JsonUtility.FromJson<SaveManager.GameSave>(jsonlvl2.text);
+        else lvlLoader = JsonUtility.FromJson<SaveManager.GameSave>(jsonxtra.text);
 
         loadLvl(lvlLoader);
     }
@@ -165,6 +167,7 @@ public class GameManager : MonoBehaviour
         Instantiate(PlayerPrefab, lvlLoader_.playerPos_, Quaternion.identity);
 
         int i = 0;
+        
         foreach (SaveManager.EnemySettings e in lvlLoader_.enemies_)
         {
             EnemigoManager enemy = Instantiate(EnemigoPrefab, e.tr_, Quaternion.identity).GetComponent<EnemigoManager>();
@@ -216,7 +219,8 @@ public class GameManager : MonoBehaviour
         {
             continueG = true;
             if (saveGame.level_ == 1) SceneManager.LoadScene("Nivel 1");
-            else SceneManager.LoadScene("Nivel 2");
+            else if (saveGame.level_ == 2) SceneManager.LoadScene("Nivel 2");
+            else SceneManager.LoadScene("NivelExtra");
         }
     }
 
@@ -244,7 +248,7 @@ public class GameManager : MonoBehaviour
             LoadSave();
             continueG = false;
         }
-        else if (next.name == "Nivel 1" || next.name == "Nivel 2")
+        else if (next.name == "Nivel 1" || next.name == "Nivel 2" || next.name == "NivelExtra")
         {
             game = true;
             dead = false;
@@ -307,7 +311,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         if (scene == "Menu" && !dead) Save();
-        else if (scene == "Nivel 1" || scene == "Nivel 2")
+        else if (scene == "Nivel 1" || scene == "Nivel 2" || scene == "NivelExtra")
         {
             StartCoroutine(LoadLevel(scene));
             return;
